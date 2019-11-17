@@ -693,7 +693,7 @@ var map = {
 		6
 	],
 	"../pages/prioritization/prioritization.module": [
-		296,
+		295,
 		4
 	],
 	"../pages/questionaries-list/questionaries-list.module": [
@@ -705,7 +705,7 @@ var map = {
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
-		295,
+		296,
 		0
 	],
 	"../pages/thankyou/thankyou.module": [
@@ -2998,8 +2998,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -3429,7 +3429,7 @@ var IntroPage = /** @class */ (function () {
         this.checkTrigger();
     };
     IntroPage.prototype.checkTrigger = function () {
-        console.log("abriu por evento");
+        console.log("checkTrigger");
         var trigger = document.getElementById("trigger");
         console.log(trigger);
         if (trigger == null) {
@@ -3444,7 +3444,6 @@ var IntroPage = /** @class */ (function () {
         this.storage.set('isRuralZone', this.isRuralZone ? 1 : 0);
     };
     IntroPage.prototype.nextSlide = function (event) {
-        console.log("abriu por toque");
         this.checkTrigger();
         if (event._touches.startX > 180) {
             this.slides.slideNext();
@@ -3574,7 +3573,7 @@ var IntroPage = /** @class */ (function () {
                 _this.storage.get('respondent')
                     .then(function (respondent) {
                     if (respondent != null) {
-                        var alert = _this.alertCtrl.create({
+                        var alert_1 = _this.alertCtrl.create({
                             title: 'Já existe um usuário respondendo os questionários',
                             message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
                             buttons: [{
@@ -3589,7 +3588,7 @@ var IntroPage = /** @class */ (function () {
                                     }
                                 }]
                         });
-                        alert.present();
+                        alert_1.present();
                     }
                     else {
                         _this.removeStoredData();
@@ -3745,16 +3744,15 @@ var IntroPage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */])
     ], IntroPage.prototype, "slides", void 0);
     IntroPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer <strong>participar</strong> na requalificação do <strong>centro</strong> de\n            <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Vamos conhecer essa <strong>possibilidade</strong>?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o <strong>crescimento</strong> da cidade, a <strong>área central</strong> tem apresentado problemas como\n            desgaste da <strong>pavimentação</strong>, falta de padronização dos <strong>passeios</strong> e\n            <strong>calçadas</strong> estreitas.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Para resolver este problema as <strong>obras de requalificação</strong> tem como <strong>objetivo:</strong>\n            troca de <strong>pavimento</strong>, alargamento de <strong>calçadas</strong>,\n            instalação de <strong>equipamentos</strong> urbanos, <strong>arborização</strong>, <strong>faixas\n              elevadas</strong> e <strong>semáforos</strong>.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Assim, a <strong>requalificação</strong> pode ampliar a <strong>mobilidade urbana</strong> e tornar a\n            <strong>área central</strong> de <strong>Pouso Alegre</strong> mais <strong>atrativa</strong> para os\n            <strong>pedestres</strong> e <strong>visitantes</strong>.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua <strong>participação</strong> possui grande importância. Essa <strong>pesquisa de opinião</strong>\n            possibilitará uma analise detalhada das necessidades da <strong>população</strong> de <strong>Pouso\n              Alegre</strong>.\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <a *ngIf="!useGame" ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga <strong>pontos</strong> para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta <strong>pontos</strong> que refletem sua\n            <strong>participação</strong>!\n            <strong>Participe</strong> agora nos enviando sua <strong>opinião</strong>!\n          </p>\n        </div>\n      </div>\n      <a ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]) === "function" && _l || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]])
     ], IntroPage);
     return IntroPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 }());
 
 //# sourceMappingURL=intro.js.map
