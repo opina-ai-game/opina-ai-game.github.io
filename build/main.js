@@ -701,11 +701,11 @@ var map = {
 		3
 	],
 	"../pages/questionary/questionary.module": [
-		297,
+		296,
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
-		296,
+		297,
 		0
 	],
 	"../pages/thankyou/thankyou.module": [
@@ -2999,8 +2999,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_15__angular_common_http__["b" /* HttpClientModule */],
@@ -3454,6 +3454,7 @@ var IntroPage = /** @class */ (function () {
     };
     IntroPage.prototype.skip = function () {
         var _this = this;
+        this.checkTrigger();
         this.loader = this.loadingCtrl.create();
         this.loader.present();
         this.storage.set('intro', true).then(function () {

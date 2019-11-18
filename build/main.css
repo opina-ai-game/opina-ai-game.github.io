@@ -26182,6 +26182,10 @@ page-questionaries-list .questionary-item-list h2, page-questionaries-list p {
   margin-top: 0.3rem;
 }
 
+page-questionaries-list .questionary-item-list h2.text-questionary {
+  font-size: 1.6rem;
+}
+
 page-questionaries-list .item-md ion-thumbnail[item-start] {
   margin: 0px 5px 0px 0px;
 }
