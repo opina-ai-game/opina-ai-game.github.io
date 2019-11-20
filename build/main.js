@@ -1,5 +1,420 @@
 webpackJsonp([7],{
 
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntroPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_city_city__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_database_database__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var IntroPage = /** @class */ (function () {
+    function IntroPage(cityProvider, planProvider, questionaryProvider, loadingCtrl, navCtrl, navParams, databaseProvider, storage, alertCtrl, restProvider) {
+        var _this = this;
+        this.cityProvider = cityProvider;
+        this.planProvider = planProvider;
+        this.questionaryProvider = questionaryProvider;
+        this.loadingCtrl = loadingCtrl;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.databaseProvider = databaseProvider;
+        this.storage = storage;
+        this.alertCtrl = alertCtrl;
+        this.restProvider = restProvider;
+        this.cities = [];
+        this.userTypes = [];
+        this.plans = [];
+        this.questionaries = [];
+        this.isRuralZone = false;
+        this.useGame = false;
+        // this.storage.set('useGame', this.useGame).then(() => {
+        setTimeout(function () {
+            _this.changeZone();
+            _this.existsAppCityPlan();
+            _this.checkTrigger();
+        }, 1000);
+        // });
+    }
+    IntroPage.prototype.ionViewDidEnter = function () {
+        this.checkTrigger();
+    };
+    IntroPage.prototype.checkTrigger = function () {
+        var _this = this;
+        this.storage.get('useGame').then(function (data) {
+            console.log("checkTrigger");
+            var trigger = document.getElementById("trigger");
+            console.log(trigger);
+            if (data == null) {
+                if (trigger == null) {
+                    _this.useGamification();
+                }
+                else {
+                    _this.dontuseGamification();
+                }
+            }
+            else {
+                if (trigger == null) {
+                    _this.useGamification();
+                }
+                else {
+                    _this.useGame = data;
+                }
+            }
+        });
+    };
+    IntroPage.prototype.useGamification = function () {
+        this.useGame = true;
+        this.storage.set('useGame', this.useGame);
+    };
+    IntroPage.prototype.dontuseGamification = function () {
+        this.useGame = false;
+        this.storage.set('useGame', this.useGame);
+    };
+    IntroPage.prototype.changeZone = function () {
+        this.storage.set('isRuralZone', this.isRuralZone ? 1 : 0);
+    };
+    IntroPage.prototype.nextSlide = function (event) {
+        this.checkTrigger();
+        if (event._touches.startX > 180) {
+            this.slides.slideNext();
+        }
+        else {
+            this.slides.slidePrev();
+        }
+    };
+    IntroPage.prototype.skip = function () {
+        var _this = this;
+        this.checkTrigger();
+        this.loader = this.loadingCtrl.create();
+        this.loader.present();
+        this.storage.set('intro', true).then(function () {
+            _this.skipHome();
+        });
+    };
+    IntroPage.prototype.skipHome = function () {
+        var _this = this;
+        this.userTypes.forEach(function (u) {
+            if (u.name == "Cidadão Comum") {
+                _this.userType = u;
+                _this.storage.set('userType', _this.userType);
+            }
+        });
+        this.cityProvider.getAllCitiesWithPlan()
+            .then(function (cities) {
+            if (cities != null) {
+                _this.cities = cities;
+                _this.cities.forEach(function (c) {
+                    if (c.name == "Pouso Alegre") {
+                        _this.city = c;
+                        _this.planProvider.getAllPlansByCity(_this.city)
+                            .then(function (plans) {
+                            if (plans != null) {
+                                _this.storage.set('city', _this.city).then(function () {
+                                    // Plano temporário [x]
+                                    //----------------------------TEMPORÁRIO---------------------------------
+                                    var p = {
+                                        city: _this.city,
+                                        id: 666,
+                                        name: "Plano de Mobilidade",
+                                        usePrioritization: false
+                                    };
+                                    plans.push(p);
+                                    //----------------------------TEMPORÁRIO---------------------------------
+                                    _this.plans = plans;
+                                    _this.questionaries = [];
+                                    _this.plans.forEach(function (p) {
+                                        if (p.name == "Plano de Mobilidade") {
+                                            _this.plan = p;
+                                            _this.questionaryProvider.getAllQuestionariesByPlan(_this.plan)
+                                                .then(function (questionaries) {
+                                                if (questionaries != null) {
+                                                    _this.storage.set('plan', _this.plan);
+                                                    // Questionário temporário [x]
+                                                    //----------------------------TEMPORÁRIO---------------------------------
+                                                    var questionaryTemp1 = {
+                                                        id: 666,
+                                                        name: "Centro - Diagnóstico Geral",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    var questionaryTemp2 = {
+                                                        id: 661,
+                                                        name: "Centro - Diagnóstico Específico",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    var questionaryTemp3 = {
+                                                        id: 660,
+                                                        name: "Centro - Comerciante",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    questionaries.push(questionaryTemp1);
+                                                    questionaries.push(questionaryTemp2);
+                                                    questionaries.push(questionaryTemp3);
+                                                    //----------------------------TEMPORÁRIO---------------------------------
+                                                    _this.questionaries = _this.questionaryProvider.resolveQuestionaryIcon(questionaries);
+                                                    _this.storage.set('questionaries', _this.questionaries);
+                                                    var points = 0;
+                                                    _this.storage.set('points', points);
+                                                    _this.navigateProfilePage();
+                                                }
+                                                else {
+                                                    _this.questionaries = [];
+                                                    _this.showAlertGetAllQuestionariesByPlan();
+                                                }
+                                            })
+                                                .catch(function () {
+                                                _this.showAlertGetAllQuestionariesByPlan();
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                            else {
+                                _this.plans = [];
+                                _this.showAlertGetAllPlansByCity();
+                            }
+                        })
+                            .catch(function () {
+                            _this.showAlertGetAllPlansByCity();
+                        });
+                    }
+                });
+            }
+            else {
+                _this.cities = [];
+                _this.showAlertGetAllCitiesWithPlan();
+            }
+        })
+            .catch(function () {
+            _this.cities = [];
+            _this.showAlertGetAllCitiesWithPlan();
+        });
+    };
+    IntroPage.prototype.existsAppCityPlan = function () {
+        var _this = this;
+        var entities = ['city', 'plan', 'isRuralZone', 'questionaries'];
+        this.databaseProvider.verifyEntities(entities)
+            .then(function (data) {
+            if (data.length > 0 && data.filter(function (data) { return data == false; }).length == 0) {
+                _this.storage.get('respondent')
+                    .then(function (respondent) {
+                    if (respondent != null) {
+                        var alert = _this.alertCtrl.create({
+                            title: 'Já existe um usuário respondendo os questionários',
+                            message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
+                            buttons: [{
+                                    text: "Sim",
+                                    handler: function () {
+                                        _this.navigateQuestionaryList();
+                                    }
+                                }, {
+                                    text: "Não",
+                                    handler: function () {
+                                        _this.removeStoredData();
+                                    }
+                                }]
+                        });
+                        alert.present();
+                    }
+                    else {
+                        _this.removeStoredData();
+                    }
+                })
+                    .catch(function () {
+                    _this.removeStoredData();
+                });
+            }
+        });
+    };
+    IntroPage.prototype.navigateQuestionaryList = function () {
+        var _this = this;
+        this.storage.get('intro')
+            .then(function (data) {
+            if (data != null) {
+                _this.loader = _this.loadingCtrl.create();
+                _this.loader.present();
+                _this.navCtrl.setRoot('QuestionariesListPage', {}).then(function () { return _this.loader.dismiss(); });
+            }
+        }).catch(function () { return console.log('error setting intro'); });
+    };
+    IntroPage.prototype.removeStoredData = function () {
+        var _this = this;
+        this.storage.remove('respondent')
+            .then(function () {
+            _this.storage.remove('plan')
+                .then(function () {
+                _this.storage.remove('city')
+                    .then(function () {
+                    _this.storage.remove('isRuralZone')
+                        .then(function () {
+                        _this.storage.remove('questionaries')
+                            .then(function () {
+                            _this.storage.remove('metricItems')
+                                .then(function () {
+                                _this.storage.remove('neighborhoods')
+                                    .then(function () {
+                                    _this.storage.remove('userType')
+                                        .then(function () {
+                                        _this.storage.remove('points')
+                                            .then(function () {
+                                            _this.storage.remove('intro')
+                                                .then(function () {
+                                                // this.storage.remove('useGame')
+                                                //   .then(() => {
+                                                _this.storage.remove('helpHome')
+                                                    .then(function () {
+                                                    console.log("Remoção de dados concluída");
+                                                })
+                                                    .catch(function (error) {
+                                                    console.log(error);
+                                                });
+                                                // })
+                                                // .catch((error) => {
+                                                //   console.log(error);
+                                                // });
+                                            })
+                                                .catch(function (error) {
+                                                console.log(error);
+                                            });
+                                        })
+                                            .catch(function (error) {
+                                            console.log(error);
+                                        });
+                                    })
+                                        .catch(function (error) {
+                                        console.log(error);
+                                    });
+                                })
+                                    .catch(function (error) {
+                                    console.log(error);
+                                });
+                            })
+                                .catch(function (error) {
+                                console.log(error);
+                            });
+                        })
+                            .catch(function (error) {
+                            console.log(error);
+                        });
+                    })
+                        .catch(function (error) {
+                        console.log(error);
+                    });
+                })
+                    .catch(function (error) {
+                    console.log(error);
+                });
+            })
+                .catch(function (error) {
+                console.log(error);
+            });
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    };
+    IntroPage.prototype.navigateProfilePage = function () {
+        var _this = this;
+        this.navCtrl.setRoot('RespondentProfilePage', {}).then(function () { return _this.loader.dismiss(); });
+    };
+    IntroPage.prototype.navigateHomePage = function () {
+        var _this = this;
+        this.storage.get('intro')
+            .then(function (data) {
+            if (data != null) {
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], {});
+            }
+        }).catch(function () { return console.log('error setting intro'); });
+    };
+    IntroPage.prototype.showAlertGetAllCitiesWithPlan = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Oops!',
+            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            buttons: [{
+                    text: "Tentar novamente",
+                    handler: function () {
+                        _this.skipHome();
+                    }
+                }]
+        });
+        alert.present();
+    };
+    IntroPage.prototype.showAlertGetAllPlansByCity = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Oops!',
+            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            buttons: [{
+                    text: "Tentar novamente",
+                    handler: function () {
+                        _this.skipHome();
+                    }
+                }]
+        });
+        alert.present();
+    };
+    IntroPage.prototype.showAlertGetAllQuestionariesByPlan = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Oops!',
+            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            buttons: [{
+                    text: "Tentar novamente",
+                    handler: function () {
+                        _this.skipHome();
+                    }
+                }]
+        });
+        alert.present();
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]),
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]) === "function" && _a || Object)
+    ], IntroPage.prototype, "slides", void 0);
+    IntroPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer <strong>participar</strong> na requalificação do <strong>centro</strong> de\n            <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Vamos conhecer essa <strong>possibilidade</strong>?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o <strong>crescimento</strong> da cidade, a <strong>área central</strong> tem apresentado problemas como\n            desgaste da <strong>pavimentação</strong>, falta de padronização dos <strong>passeios</strong> e\n            <strong>calçadas</strong> estreitas.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Para resolver este problema as <strong>obras de requalificação</strong> tem como <strong>objetivo:</strong>\n            troca de <strong>pavimento</strong>, alargamento de <strong>calçadas</strong>,\n            instalação de <strong>equipamentos</strong> urbanos, <strong>arborização</strong>, <strong>faixas\n              elevadas</strong> e <strong>semáforos</strong>.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Assim, a <strong>requalificação</strong> pode ampliar a <strong>mobilidade urbana</strong> e tornar a\n            <strong>área central</strong> de <strong>Pouso Alegre</strong> mais <strong>atrativa</strong> para os\n            <strong>pedestres</strong> e <strong>visitantes</strong>.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua <strong>participação</strong> possui grande importância. Essa <strong>pesquisa de opinião</strong>\n            possibilitará uma analise detalhada das necessidades da <strong>população</strong> de <strong>Pouso\n              Alegre</strong>.\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <a *ngIf="!useGame" id="button-participate-no-game" ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga <strong>pontos</strong> para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta <strong>pontos</strong> que refletem sua\n            <strong>participação</strong>!\n            <strong>Participe</strong> agora nos enviando sua <strong>opinião</strong>!\n          </p>\n        </div>\n      </div>\n      <a id="button-participate-game" ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]) === "function" && _l || Object])
+    ], IntroPage);
+    return IntroPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+}());
+
+//# sourceMappingURL=intro.js.map
+
+/***/ }),
+
 /***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9,10 +424,10 @@ webpackJsonp([7],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_city_city__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_plan_plan__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_city_city__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_plan_plan__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_questionary_questionary__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_database_database__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_database_database__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_rest_rest__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -321,13 +736,19 @@ var HomePage = /** @class */ (function () {
                                             .then(function () {
                                             _this.storage.remove('intro')
                                                 .then(function () {
-                                                _this.storage.remove('useGame')
+                                                // this.storage.remove('useGame')
+                                                //   .then(() => {
+                                                _this.storage.remove('helpHome')
                                                     .then(function () {
                                                     console.log("Remoção de dados concluída");
                                                 })
                                                     .catch(function (error) {
                                                     console.log(error);
                                                 });
+                                                // })
+                                                // .catch((error) => {
+                                                //   console.log(error);
+                                                // });
                                             })
                                                 .catch(function (error) {
                                                 console.log(error);
@@ -404,7 +825,7 @@ var UserType = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jssha___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jssha__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_app_version__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -586,19 +1007,20 @@ var RestProvider = /** @class */ (function () {
                                             .then(function () {
                                             _this.storage.remove('intro')
                                                 .then(function () {
-                                                _this.storage.remove('useGame')
+                                                // this.storage.remove('useGame')
+                                                //   .then(() => {
+                                                _this.storage.remove('helpHome')
                                                     .then(function () {
-                                                    _this.storage.remove('helpHome')
-                                                        .then(function () {
-                                                        nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__["a" /* IntroPage */], {});
-                                                    })
-                                                        .catch(function (error) {
-                                                        console.log(error);
-                                                    });
+                                                    console.log("Remoção de dados concluída");
+                                                    nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__["a" /* IntroPage */], {});
                                                 })
                                                     .catch(function (error) {
                                                     console.log(error);
                                                 });
+                                                // })
+                                                // .catch((error) => {
+                                                //   console.log(error);
+                                                // });
                                             })
                                                 .catch(function (error) {
                                                 console.log(error);
@@ -642,9 +1064,10 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_network__["a" /* Network */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_app_version__["a" /* AppVersion */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_network__["a" /* Network */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_network__["a" /* Network */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* Platform */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_app_version__["a" /* AppVersion */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_app_version__["a" /* AppVersion */]) === "function" && _f || Object])
     ], RestProvider);
     return RestProvider;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 var APIResponse = /** @class */ (function () {
@@ -2937,11 +3360,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_database_database__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_database_database__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_city_city__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_plan_plan__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_city_city__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_plan_plan__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_questionary_questionary__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_neighborhood_neighborhood__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_question_question__ = __webpack_require__(210);
@@ -2951,7 +3374,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_answer_answer__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_network__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_app_version__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_intro_intro__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_intro_intro__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3044,7 +3467,7 @@ var AppModule = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_intro_intro__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_intro_intro__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(207);
@@ -3112,7 +3535,7 @@ var MyApp = /** @class */ (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item (click)="navigateQuestionaryList()" menuClose>\n        <ion-icon range-left name="ios-list"></ion-icon>\n        Questionários\n      </button>\n      <button ion-item (click)="navigateProfile()" menuClose>\n        <ion-icon range-left name="md-person"></ion-icon>\n        Perfil\n      </button>\n      <button ion-item (click)="navigateToAbout()" menuClose>\n        <ion-icon range-left name="md-information-circle"></ion-icon>\n        Sobre\n      </button>\n      <button ion-item (click)="refreshData()" menuClose>\n        <ion-icon range-left name="md-remove-circle"></ion-icon>\n        Limpar dados\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button id="menu-questionnary" ion-item (click)="navigateQuestionaryList()" menuClose>\n        <ion-icon range-left name="ios-list"></ion-icon>\n        Questionários\n      </button>\n      <button id="menu-profile" ion-item (click)="navigateProfile()" menuClose>\n        <ion-icon range-left name="md-person"></ion-icon>\n        Perfil\n      </button>\n      <button id="menu-about" ion-item (click)="navigateToAbout()" menuClose>\n        <ion-icon range-left name="md-information-circle"></ion-icon>\n        Sobre\n      </button>\n      <button id="menu-data-clear" ion-item (click)="refreshData()" menuClose>\n        <ion-icon range-left name="md-remove-circle"></ion-icon>\n        Limpar dados\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_rest_rest__["a" /* RestProvider */]])
     ], MyApp);
@@ -3370,400 +3793,6 @@ var AnswerNeighborhood = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntroPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_city_city__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_database_database__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__ = __webpack_require__(12);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-var IntroPage = /** @class */ (function () {
-    function IntroPage(cityProvider, planProvider, questionaryProvider, loadingCtrl, navCtrl, navParams, databaseProvider, storage, alertCtrl, restProvider) {
-        var _this = this;
-        this.cityProvider = cityProvider;
-        this.planProvider = planProvider;
-        this.questionaryProvider = questionaryProvider;
-        this.loadingCtrl = loadingCtrl;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.databaseProvider = databaseProvider;
-        this.storage = storage;
-        this.alertCtrl = alertCtrl;
-        this.restProvider = restProvider;
-        this.cities = [];
-        this.userTypes = [];
-        this.plans = [];
-        this.questionaries = [];
-        this.isRuralZone = false;
-        this.useGame = false;
-        // this.storage.set('useGame', this.useGame).then(() => {
-        this.changeZone();
-        setTimeout(function () {
-            _this.existsAppCityPlan();
-            _this.checkTrigger();
-        }, 1000);
-        // });
-    }
-    IntroPage.prototype.ionViewDidEnter = function () {
-        this.checkTrigger();
-    };
-    IntroPage.prototype.checkTrigger = function () {
-        console.log("checkTrigger");
-        var trigger = document.getElementById("trigger");
-        console.log(trigger);
-        if (trigger == null) {
-            this.useGamification();
-        }
-    };
-    IntroPage.prototype.useGamification = function () {
-        this.useGame = true;
-        this.storage.set('useGame', this.useGame);
-    };
-    IntroPage.prototype.changeZone = function () {
-        this.storage.set('isRuralZone', this.isRuralZone ? 1 : 0);
-    };
-    IntroPage.prototype.nextSlide = function (event) {
-        this.checkTrigger();
-        if (event._touches.startX > 180) {
-            this.slides.slideNext();
-        }
-        else {
-            this.slides.slidePrev();
-        }
-    };
-    IntroPage.prototype.skip = function () {
-        var _this = this;
-        this.checkTrigger();
-        this.loader = this.loadingCtrl.create();
-        this.loader.present();
-        this.storage.set('intro', true).then(function () {
-            _this.skipHome();
-        });
-    };
-    IntroPage.prototype.skipHome = function () {
-        var _this = this;
-        this.userTypes.forEach(function (u) {
-            if (u.name == "Cidadão Comum") {
-                _this.userType = u;
-                _this.storage.set('userType', _this.userType);
-            }
-        });
-        this.cityProvider.getAllCitiesWithPlan()
-            .then(function (cities) {
-            if (cities != null) {
-                _this.cities = cities;
-                _this.cities.forEach(function (c) {
-                    if (c.name == "Pouso Alegre") {
-                        _this.city = c;
-                        _this.planProvider.getAllPlansByCity(_this.city)
-                            .then(function (plans) {
-                            if (plans != null) {
-                                _this.storage.set('city', _this.city).then(function () {
-                                    // Plano temporário [x]
-                                    //----------------------------TEMPORÁRIO---------------------------------
-                                    var p = {
-                                        city: _this.city,
-                                        id: 666,
-                                        name: "Plano de Mobilidade",
-                                        usePrioritization: false
-                                    };
-                                    plans.push(p);
-                                    //----------------------------TEMPORÁRIO---------------------------------
-                                    _this.plans = plans;
-                                    _this.questionaries = [];
-                                    _this.plans.forEach(function (p) {
-                                        if (p.name == "Plano de Mobilidade") {
-                                            _this.plan = p;
-                                            _this.questionaryProvider.getAllQuestionariesByPlan(_this.plan)
-                                                .then(function (questionaries) {
-                                                if (questionaries != null) {
-                                                    _this.storage.set('plan', _this.plan);
-                                                    // Questionário temporário [x]
-                                                    //----------------------------TEMPORÁRIO---------------------------------
-                                                    var questionaryTemp1 = {
-                                                        id: 666,
-                                                        name: "Centro - Diagnóstico Geral",
-                                                        answered: false,
-                                                        plan: _this.plan,
-                                                        questions: null,
-                                                    };
-                                                    var questionaryTemp2 = {
-                                                        id: 661,
-                                                        name: "Centro - Diagnóstico Específico",
-                                                        answered: false,
-                                                        plan: _this.plan,
-                                                        questions: null,
-                                                    };
-                                                    var questionaryTemp3 = {
-                                                        id: 660,
-                                                        name: "Centro - Comerciante",
-                                                        answered: false,
-                                                        plan: _this.plan,
-                                                        questions: null,
-                                                    };
-                                                    questionaries.push(questionaryTemp1);
-                                                    questionaries.push(questionaryTemp2);
-                                                    questionaries.push(questionaryTemp3);
-                                                    //----------------------------TEMPORÁRIO---------------------------------
-                                                    _this.questionaries = _this.questionaryProvider.resolveQuestionaryIcon(questionaries);
-                                                    _this.storage.set('questionaries', _this.questionaries);
-                                                    var points = 0;
-                                                    _this.storage.set('points', points);
-                                                    _this.navigateProfilePage();
-                                                }
-                                                else {
-                                                    _this.questionaries = [];
-                                                    _this.showAlertGetAllQuestionariesByPlan();
-                                                }
-                                            })
-                                                .catch(function () {
-                                                _this.showAlertGetAllQuestionariesByPlan();
-                                            });
-                                        }
-                                    });
-                                });
-                            }
-                            else {
-                                _this.plans = [];
-                                _this.showAlertGetAllPlansByCity();
-                            }
-                        })
-                            .catch(function () {
-                            _this.showAlertGetAllPlansByCity();
-                        });
-                    }
-                });
-            }
-            else {
-                _this.cities = [];
-                _this.showAlertGetAllCitiesWithPlan();
-            }
-        })
-            .catch(function () {
-            _this.cities = [];
-            _this.showAlertGetAllCitiesWithPlan();
-        });
-    };
-    IntroPage.prototype.existsAppCityPlan = function () {
-        var _this = this;
-        var entities = ['city', 'plan', 'isRuralZone', 'questionaries'];
-        this.databaseProvider.verifyEntities(entities)
-            .then(function (data) {
-            if (data.length > 0 && data.filter(function (data) { return data == false; }).length == 0) {
-                _this.storage.get('respondent')
-                    .then(function (respondent) {
-                    if (respondent != null) {
-                        var alert_1 = _this.alertCtrl.create({
-                            title: 'Já existe um usuário respondendo os questionários',
-                            message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
-                            buttons: [{
-                                    text: "Sim",
-                                    handler: function () {
-                                        _this.navigateQuestionaryList();
-                                    }
-                                }, {
-                                    text: "Não",
-                                    handler: function () {
-                                        _this.removeStoredData();
-                                    }
-                                }]
-                        });
-                        alert_1.present();
-                    }
-                    else {
-                        _this.removeStoredData();
-                    }
-                })
-                    .catch(function () {
-                    _this.removeStoredData();
-                });
-            }
-        });
-    };
-    IntroPage.prototype.navigateQuestionaryList = function () {
-        var _this = this;
-        this.storage.get('intro')
-            .then(function (data) {
-            if (data != null) {
-                _this.loader = _this.loadingCtrl.create();
-                _this.loader.present();
-                _this.navCtrl.setRoot('QuestionariesListPage', {}).then(function () { return _this.loader.dismiss(); });
-            }
-        }).catch(function () { return console.log('error setting intro'); });
-    };
-    IntroPage.prototype.removeStoredData = function () {
-        var _this = this;
-        this.storage.remove('respondent')
-            .then(function () {
-            _this.storage.remove('plan')
-                .then(function () {
-                _this.storage.remove('city')
-                    .then(function () {
-                    _this.storage.remove('isRuralZone')
-                        .then(function () {
-                        _this.storage.remove('questionaries')
-                            .then(function () {
-                            _this.storage.remove('metricItems')
-                                .then(function () {
-                                _this.storage.remove('neighborhoods')
-                                    .then(function () {
-                                    _this.storage.remove('userType')
-                                        .then(function () {
-                                        _this.storage.remove('points')
-                                            .then(function () {
-                                            _this.storage.remove('intro')
-                                                .then(function () {
-                                                _this.storage.remove('useGame')
-                                                    .then(function () {
-                                                    _this.storage.remove('helpHome')
-                                                        .then(function () {
-                                                        console.log("Remoção de dados concluída");
-                                                    })
-                                                        .catch(function (error) {
-                                                        console.log(error);
-                                                    });
-                                                })
-                                                    .catch(function (error) {
-                                                    console.log(error);
-                                                });
-                                            })
-                                                .catch(function (error) {
-                                                console.log(error);
-                                            });
-                                        })
-                                            .catch(function (error) {
-                                            console.log(error);
-                                        });
-                                    })
-                                        .catch(function (error) {
-                                        console.log(error);
-                                    });
-                                })
-                                    .catch(function (error) {
-                                    console.log(error);
-                                });
-                            })
-                                .catch(function (error) {
-                                console.log(error);
-                            });
-                        })
-                            .catch(function (error) {
-                            console.log(error);
-                        });
-                    })
-                        .catch(function (error) {
-                        console.log(error);
-                    });
-                })
-                    .catch(function (error) {
-                    console.log(error);
-                });
-            })
-                .catch(function (error) {
-                console.log(error);
-            });
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
-    };
-    IntroPage.prototype.navigateProfilePage = function () {
-        var _this = this;
-        this.navCtrl.setRoot('RespondentProfilePage', {}).then(function () { return _this.loader.dismiss(); });
-    };
-    IntroPage.prototype.navigateHomePage = function () {
-        var _this = this;
-        this.storage.get('intro')
-            .then(function (data) {
-            if (data != null) {
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], {});
-            }
-        }).catch(function () { return console.log('error setting intro'); });
-    };
-    IntroPage.prototype.showAlertGetAllCitiesWithPlan = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
-            buttons: [{
-                    text: "Tentar novamente",
-                    handler: function () {
-                        _this.skipHome();
-                    }
-                }]
-        });
-        alert.present();
-    };
-    IntroPage.prototype.showAlertGetAllPlansByCity = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
-            buttons: [{
-                    text: "Tentar novamente",
-                    handler: function () {
-                        _this.skipHome();
-                    }
-                }]
-        });
-        alert.present();
-    };
-    IntroPage.prototype.showAlertGetAllQuestionariesByPlan = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
-            buttons: [{
-                    text: "Tentar novamente",
-                    handler: function () {
-                        _this.skipHome();
-                    }
-                }]
-        });
-        alert.present();
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */])
-    ], IntroPage.prototype, "slides", void 0);
-    IntroPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer <strong>participar</strong> na requalificação do <strong>centro</strong> de\n            <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Vamos conhecer essa <strong>possibilidade</strong>?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o <strong>crescimento</strong> da cidade, a <strong>área central</strong> tem apresentado problemas como\n            desgaste da <strong>pavimentação</strong>, falta de padronização dos <strong>passeios</strong> e\n            <strong>calçadas</strong> estreitas.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Para resolver este problema as <strong>obras de requalificação</strong> tem como <strong>objetivo:</strong>\n            troca de <strong>pavimento</strong>, alargamento de <strong>calçadas</strong>,\n            instalação de <strong>equipamentos</strong> urbanos, <strong>arborização</strong>, <strong>faixas\n              elevadas</strong> e <strong>semáforos</strong>.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Assim, a <strong>requalificação</strong> pode ampliar a <strong>mobilidade urbana</strong> e tornar a\n            <strong>área central</strong> de <strong>Pouso Alegre</strong> mais <strong>atrativa</strong> para os\n            <strong>pedestres</strong> e <strong>visitantes</strong>.</p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua <strong>participação</strong> possui grande importância. Essa <strong>pesquisa de opinião</strong>\n            possibilitará uma analise detalhada das necessidades da <strong>população</strong> de <strong>Pouso\n              Alegre</strong>.\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <a *ngIf="!useGame" ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga <strong>pontos</strong> para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta <strong>pontos</strong> que refletem sua\n            <strong>participação</strong>!\n            <strong>Participe</strong> agora nos enviando sua <strong>opinião</strong>!\n          </p>\n        </div>\n      </div>\n      <a ion-button margin-bottom (click)="skip()">\n        Participar!\n      </a>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]])
-    ], IntroPage);
-    return IntroPage;
-}());
-
-//# sourceMappingURL=intro.js.map
-
-/***/ }),
-
-/***/ 56:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatabaseProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
@@ -3825,7 +3854,7 @@ var DatabaseProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 57:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3890,7 +3919,7 @@ var City = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 58:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
