@@ -25947,6 +25947,16 @@ page-intro .grid {
   padding: 0px;
 }
 
+page-intro .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
+}
+
 page-prioritization .metric_value_default {
   font-weight: 700;
   color: #000000;
@@ -26173,6 +26183,16 @@ page-prioritization ion-item.item.item-block.item-md.item-checkbox.item-checkbox
   color: #005bff;
 }
 
+page-prioritization .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
+}
+
 page-questionaries-list .button-md {
   height: 5rem;
 }
@@ -26327,6 +26347,16 @@ page-questionaries-list .text-img {
   margin-left: 9px;
 }
 
+page-questionaries-list .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
+}
+
 page-questionary .range-md {
   padding: 0px;
   margin-top: -8px;
@@ -26461,6 +26491,16 @@ page-questionary ion-col.menu-icon-col.col {
   margin-left: 7%;
 }
 
+page-questionary .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
+}
+
 page-respondent-profile .validator-error {
   color: red;
   padding-top: 10px;
@@ -26506,6 +26546,16 @@ page-respondent-profile ion-icon.item-commerce.icon.icon-md.ion-ios-basket-outli
 
 page-respondent-profile ion-icon.menu-icon.icon.icon-md.ion-md-menu {
   color: white;
+}
+
+page-respondent-profile .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
 }
 
 page-thankyou .range-md {
