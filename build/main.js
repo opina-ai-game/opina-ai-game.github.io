@@ -692,7 +692,7 @@ webpackEmptyAsyncContext.id = 121;
 
 var map = {
 	"../pages/about/about.module": [
-		291,
+		292,
 		5
 	],
 	"../pages/intro/intro.module": [
@@ -708,15 +708,15 @@ var map = {
 		3
 	],
 	"../pages/questionary/questionary.module": [
-		297,
+		296,
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
-		296,
+		297,
 		0
 	],
 	"../pages/thankyou/thankyou.module": [
-		292,
+		291,
 		1
 	]
 };
@@ -3001,13 +3001,13 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_15__angular_common_http__["b" /* HttpClientModule */],
@@ -3119,7 +3119,7 @@ var MyApp = /** @class */ (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item (click)="navigateQuestionaryList()" menuClose>\n        <ion-icon id="menu-questionnary" range-left name="ios-list"></ion-icon>\n        Questionários\n      </button>\n      <button ion-item (click)="navigateProfile()" menuClose>\n        <ion-icon  id="menu-profile" range-left name="md-person"></ion-icon>\n        Perfil\n      </button>\n      <button ion-item (click)="navigateToAbout()" menuClose>\n        <ion-icon id="menu-about" range-left name="md-information-circle"></ion-icon>\n        Sobre\n      </button>\n      <button ion-item (click)="refreshData()" menuClose>\n        <ion-icon id="menu-data-clear" range-left name="md-remove-circle"></ion-icon>\n        Limpar dados\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button id="menu-questionnary" ion-item (click)="navigateQuestionaryList()" menuClose>\n        <ion-icon range-left name="ios-list" class="text-menu-button">\n        </ion-icon>\n        Questionários\n      </button>\n      <button id="menu-profile" ion-item (click)="navigateProfile()" menuClose>\n        <ion-icon range-left name="md-person" class="text-menu-button">\n        </ion-icon>\n        Perfil\n      </button>\n      <button id="menu-about" ion-item (click)="navigateToAbout()" menuClose>\n        <ion-icon range-left name="md-information-circle" class="text-menu-button">\n        </ion-icon>\n        Sobre\n      </button>\n      <button id="menu-data-clear" ion-item (click)="refreshData()" menuClose>\n        <ion-icon range-left name="md-remove-circle" class="text-menu-button">\n        </ion-icon>\n        Limpar dados\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_rest_rest__["a" /* RestProvider */]])
     ], MyApp);

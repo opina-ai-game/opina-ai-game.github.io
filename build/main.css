@@ -25955,6 +25955,16 @@ page-intro .text-button {
   -webkit-font-kerning: none;
   font-kerning: none;
   font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-left-width: 35px;
+  border-right-width: 35px;
+}
+
+page-intro .button-md {
+  padding: 0;
 }
 
 page-prioritization .metric_value_default {
@@ -26191,6 +26201,18 @@ page-prioritization .text-button {
   -webkit-font-kerning: none;
   font-kerning: none;
   font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+page-prioritization .button-full-md {
+  padding: 0;
 }
 
 page-questionaries-list .button-md {
@@ -26355,6 +26377,18 @@ page-questionaries-list .text-button {
   -webkit-font-kerning: none;
   font-kerning: none;
   font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  border-top-width: 7px;
+  border-bottom-width: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+page-questionaries-list .button-full-md {
+  padding: 0;
 }
 
 page-questionary .range-md {
@@ -26499,6 +26533,18 @@ page-questionary .text-button {
   -webkit-font-kerning: none;
   font-kerning: none;
   font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+page-questionary .button-full-md {
+  padding: 0;
 }
 
 page-respondent-profile .validator-error {
@@ -26556,6 +26602,18 @@ page-respondent-profile .text-button {
   -webkit-font-kerning: none;
   font-kerning: none;
   font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  width: 100%;
+  height: 100%;
+}
+
+page-respondent-profile .button-md {
+  padding: 0;
 }
 
 page-thankyou .range-md {
@@ -26619,4 +26677,26 @@ page-thankyou .progres-text-uper {
 
 page-thankyou .badge-md {
   background-color: #106fa0;
+}
+
+page-thankyou .text-button {
+  font: 400 13.3333px Arial;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  font-family: inherit;
+  border: rgba(158, 158, 158, 0);
+  border-style: solid;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  width: 100%;
+  height: 100%;
+}
+
+page-thankyou .button-md {
+  padding: 0;
 }
