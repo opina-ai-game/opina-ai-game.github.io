@@ -2116,7 +2116,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1001",
                         name: "1.	Com qual frequência você vai ao centro?",
                         description: "",
-                        question: "1.	Com qual frequência você vai ao centro? (Game)",
+                        question: "1.	Com qual frequência você costuma ir ao centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2128,7 +2128,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1002",
                         name: "2.	O que te trás ao centro?",
                         description: "",
-                        question: "2.	O que te trás ao centro? (Game)",
+                        question: "2.	O que você vem fazer no centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2140,7 +2140,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1003",
                         name: "3.	Com qual frequência você vai ao centro à noite?",
                         description: "",
-                        question: "3.	Com qual frequência você vai ao centro à noite? (Game)",
+                        question: "3.	Com qual frequência você costuma ir ao centro à noite?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2152,7 +2152,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1004",
                         name: "4.	Caso você tenha algum motivo para não ir ao centro à noite, qual seria?",
                         description: "Selecione abaixo",
-                        question: "4.	Caso você tenha algum motivo para não ir ao centro à noite, qual seria? (Game)",
+                        question: "4.	Existe um motivo para você não ir ao centro à noite?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2164,7 +2164,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1005",
                         name: "5.	O que te atrai para o centro?",
                         description: "Selecione abaixo",
-                        question: "5.	O que te atrai para o centro? (Game)",
+                        question: "5.	O que você acha legal fazer no centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2176,7 +2176,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1006",
                         name: "6.	O que falta no centro?",
                         description: "Selecione abaixo",
-                        question: "6.	O que falta no centro? (Game)",
+                        question: "6.	O que faz falta pra você no centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2188,7 +2188,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1007",
                         name: "7.	Como você qualifica os pontos comerciais no centro?",
                         description: "Selecione abaixo",
-                        question: "7.	Como você qualifica os pontos comerciais no centro? (Game)",
+                        question: "7.	O que você acha das lojas do centro da cidade?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2206,7 +2206,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1008",
                         name: "1.	Costuma usufruir dos espaços públicos no centro? (Espaços públicos entende-se como calçada, rua, praças e parques)",
                         description: "",
-                        question: "1.	Costuma usufruir dos espaços públicos no centro? (Espaços públicos entende-se como calçada, rua, praças e parques)",
+                        question: "1.	Você faz uso das praças, parques, calçadas e estacionamento no centro da cidade?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2218,7 +2218,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1009",
                         name: "2.	Como considera as obras de requalificação urbana no centro?",
                         description: "",
-                        question: "2.	Como considera as obras de requalificação urbana no centro?",
+                        question: "2.	Como você considera a necessidade reurbanização do centro da cidade?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2230,7 +2230,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1010",
                         name: "3.	Como você avalia a qualidade da calçada?",
                         description: "",
-                        question: "3.	Como você avalia a qualidade da calçada?",
+                        question: "3.	Como você avalia as calçadas do centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2254,7 +2254,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1012",
                         name: "5.	Como você avalia os pisos táteis? (Pisos táteis são faixas em alto-relevo fixadas no chão para fornecer auxílio à locomoção de pessoas com deficiência visual)",
                         description: "",
-                        question: "5.	Como você avalia os pisos táteis? (Pisos táteis são faixas em alto-relevo fixadas no chão para fornecer auxílio à locomoção de pessoas com deficiência visual)",
+                        question: "5.	Como você avalia as faixas em alto-relevo do chão para auxílio às pessoas com deficiência visual?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2276,9 +2276,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q6);
                     var q7 = {
                         id: "1014",
-                        name: "7.	Como você avalia a necessidade destes equipamentos? (Locais de descanso)",
+                        name: "7.	Como você avalia a necessidade de Locais de descanso?",
                         description: "",
-                        question: "7.	Como você avalia a necessidade destes equipamentos? (Locais de descanso)",
+                        question: "7.	Como você avalia a necessidade de Locais de descanso?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2288,9 +2288,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q7);
                     var q8 = {
                         id: "1015",
-                        name: "8.	Como você avalia a necessidade destes equipamentos? (Lixeiras)",
+                        name: "8.	Como você avalia a necessidade de lixeiras?",
                         description: "",
-                        question: "8.	Como você avalia a necessidade destes equipamentos? (Lixeiras)",
+                        question: "8.	Como você avalia a necessidade de lixeiras?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2300,9 +2300,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q8);
                     var q9 = {
                         id: "1016",
-                        name: "9.	Como você avalia a necessidade destes equipamentos? (Arborização)",
+                        name: "9.	Como você avalia a necessidade de arborização?",
                         description: "",
-                        question: "9.	Como você avalia a necessidade destes equipamentos? (Arborização)",
+                        question: "9.	Como você avalia a necessidade de arborização?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2312,9 +2312,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q9);
                     var q10 = {
                         id: "1017",
-                        name: "10.	Como você avalia a necessidade destes equipamentos? (Iluminação voltada aos pedestres)",
+                        name: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
                         description: "",
-                        question: "10.	Como você avalia a necessidade destes equipamentos? (Iluminação voltada aos pedestres)",
+                        question: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2324,9 +2324,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q10);
                     var q11 = {
                         id: "1018",
-                        name: "11.	Como você avalia a necessidade destes equipamentos? (Ponto de Ônibus)",
+                        name: "11.	Como você avalia a necessidade de ponto de Ônibus?",
                         description: "",
-                        question: "11.	Como você avalia a necessidade destes equipamentos? (Ponto de Ônibus)",
+                        question: "11.	Como você avalia a necessidade de ponto de Ônibus?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2350,7 +2350,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1020",
                         name: "13.	Você gosta das Kombis de alimentação do comércio de rua?",
                         description: "",
-                        question: "12.	Você gosta das Kombis de alimentação do comércio de rua?",
+                        question: "13. Você gosta das Kombis de alimentação?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2368,7 +2368,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1021",
                         name: "1.	Qual o ramo da sua atividade comercial?",
                         description: "",
-                        question: "1.	Qual o ramo da sua atividade comercial? (Game)",
+                        question: "1.	Você trabalha com qual atividade comercial?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2380,7 +2380,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1022",
                         name: "2.	Porque você escolheu essa rua para seu comércio?",
                         description: "",
-                        question: "2.	Porque você escolheu essa rua para seu comércio? (Game)",
+                        question: "2.	Por que você escolheu essa rua para seu comércio? ",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2392,7 +2392,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1023",
                         name: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
                         description: "",
-                        question: "3.	Quanto você está satisfeito com a infraestrutura básica da rua? (Game)",
+                        question: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2404,7 +2404,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1024",
                         name: "4.	Quais melhorias poderiam ser feitas para atender suas necessidades?",
                         description: "",
-                        question: "4.	Quais melhorias poderiam ser feitas para atender suas necessidades? (Game)",
+                        question: "4.	Quais melhorias poderiam ser feitas na sua rua para atender suas necessidades?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2416,7 +2416,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1025",
                         name: "5.	O que as pessoas costumam fazer nessa rua?",
                         description: "",
-                        question: "5.	O que as pessoas costumam fazer nessa rua? (Game)",
+                        question: "5.	O que as pessoas costumam fazer quando passam por essa rua?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2428,7 +2428,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1026",
                         name: "6.	Quais são os pontos fortes da sua rua?",
                         description: "",
-                        question: "6.	Quais são os pontos fortes da sua rua? (Game)",
+                        question: "6.	Quais pra você são os fortes da sua rua? ",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2440,7 +2440,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1027",
                         name: "7.	Quais são os pontos fracos da sua rua?",
                         description: "",
-                        question: "7.	Quais são os pontos fracos da sua rua? (Game)",
+                        question: "7.	Quais pra você são os pontos fracos da sua rua? ",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2452,7 +2452,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1028",
                         name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”",
                         description: "",
-                        question: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade” (Game)",
+                        question: "8.	O que você pensa sobre essa afirmação: “Não trocaria a rua do meu comércio por nenhum outro local da cidade”.",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2492,145 +2492,145 @@ var QuestionProvider = /** @class */ (function () {
             //----------------------------IMPORTANTE--------------------------------
             switch (quest.id) {
                 case "1001":
-                    q.narrative = "No seu dia-a-dia, você costuma ir bastante ao centro ou poucas vezes? Você passa com frequência por lá?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1002":
-                    q.narrative = "Sua casa fica no centro? Caso você não more no centro, você costuma ir para lá a trabalho, compras ou para atividades de lazer?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1003":
-                    q.narrative = "As atividades para serem feitas no centro também podem ser feitas a noite! Você costuma ir ao centro a noite com alguma frequência?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1004":
-                    q.narrative = "Você pode ter seus próprios motivos para não ir ao centro a noite, nos ajude a descobrir qual é.";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1005":
-                    q.narrative = "O centro possui serviços, comércios e espaços de lazer para a população. Quais desses tipos de atrações você leva em consideração quando esta passeando no centro da cidade?";
+                    q.narrative = "Quando você vem ao centro, você pode encontrar serviços, lojas e espaços de lazer. Algumas dessas atrações podem fazer você gostar de ir ao centro cidade, nos ajude a descobrir qual é!";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1006":
-                    q.narrative = "Conte-nos o que lhe faz falta no centro! Que tipo de benefício você sente falta quando esta passeando com sua família pelo centro? Se você mora no centro, o é preciso para atender suas necessidades?";
+                    q.narrative = "Você esta saindo em um passeio com sua família no centro da cidade. Que tipo de coisa você sente que poderia complementar esse momento?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1007":
-                    q.narrative = "Qual sua avaliação das lojas levando em consideração as suas necessidades, atendimentos dos serviços e disponibilidade? Quando você esta satisfeito quando precisa fazer compras no centro da cidade?";
+                    q.narrative = "Pense em qual avaliação você daria para o atendimento e os serviços das lojas do centro da cidade. Você está satisfeito quando precisa fazer compras e precisa entrar nas lojas?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1008":
-                    q.narrative = "Se você costuma ir ao centro por lazer, você faz passeio no parque? Você faz caminhadas pelas calçadas ou andar em veículos pelas ruas? ";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1009":
-                    q.narrative = "As obras de requalificação tem como objetivo adequar o espaço urbano do centro da cidade a mobilidade das vias com objetivo de atender a necessidade da população. Você considera esse tipo de obra necessária?";
+                    q.narrative = "A reurbanização tem como objetivo tornar o centro mais atrativo para você trabalhar, fazer compras ou passear. As obras são feitas para atender a necessidade da população e melhorar a mobilidade do trânsito. Você considera a reurbanização necessária?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1010":
-                    q.narrative = "Como você acha que estão as calçadas quando você anda pelo centro? O espaço esta adequado? Possui acessibilidade?";
+                    q.narrative = "Quando você caminha pelo centro, você percebe que as calçadas estão esburacadas e costuma esbarrar em outras pessoas por serem apertadas?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1011":
-                    q.narrative = "Você costuma deparar com as rampas de acessibilidade para cadeirantes quando esta no centro? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Você costuma encontrar rampas de acessibilidade para cadeirantes e acha que o estado de conservação dessas rampas está adequado?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1012":
-                    q.narrative = "Você costuma deparar com pisos elevados para deficientes quando esta caminhando no centro da cidade? Os pisos táteis estão em todas as calçadas, acha que são suficientes?";
+                    q.narrative = "Ao caminhar pelo centro, você costuma deparar com as faixas elevadas que auxiliam os deficientes visuais em todas as calçadas que você passa?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1013":
-                    q.narrative = "Caso você vá ao centro de carro, você encontra problemas em estacionar a ponto de ficar um tempo procurando vaga ou não encontrar quando precisa?";
+                    q.narrative = "Se você vai de centro no seu carro ou de outras pessoas, você encontra problemas em estacionar, a ponto de não encontrar uma vaga quando precisa?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1014":
-                    q.narrative = "Você costuma deparar com locais de descanço, como bancos, quando esta caminhando pelo centro? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Você costuma deparar com locais de descanço, como bancos, quando esta caminhando pelo centro e acha que estão conservados?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1015":
-                    q.narrative = "Você costuma deparar com lixeiras quando vai no centro? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Você costuma deparar com lixeiras quando vai no centro e acha que estão conservadas?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1016":
-                    q.narrative = "Você costuma deparar com ruas arborizadas quando vai no centro? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Você costuma deparar com ruas arborizadas quando vai no centro?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1017":
-                    q.narrative = "Quando você vai ao centro a noite as ruas estão bem iluminadas? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Quando você vai ao centro a noite as ruas estão bem iluminadas?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1018":
-                    q.narrative = "Você se depara com pontos de ônibus quando vai ao centro? Como você acha que esta o estado de conservação dessas rampas? Acha que  existem rampas o suficiente?";
+                    q.narrative = "Você se depara com pontos de ônibus quando vai ao centro e acha que estão conservados?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1019":
-                    q.narrative = "Você costuma comprar alguma coisa para sua casa ou presente para alguém das barracas do comércio de rua?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1020":
-                    q.narrative = "Você já parou nas kombis de alimentação durante seu passeio no centro? O que acha desse tipo de comércio?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1021":
-                    q.narrative = "Conte-nos sobre o seu negócio, qual o tipo do seu comércio? ";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1022":
-                    q.narrative = "O que te fez escolher essa rua para estabelecer seu negócio?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 case "1023":
-                    q.narrative = "A infraestrutura da rua de seu comércio como calçadas, iluminação, caçadas, lixeiras  é satisfatória para sua atividade comercial?";
+                    q.narrative = "A infraestrutura básica corresponde às calçadas, a iluminação, as lixeiras e o asfalto da rua. Na faixada da do seu comércio, a rua esta com a infraestrutura adequada ou tem que melhorar?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1024":
-                    q.narrative = "Quais melhorias apresentadas você acha que pode melhor atender as suas necessidades durante suas atividades diárias?";
+                    q.narrative = "Nós sugerimos essa lista de melhorias para você escolher quais delas podem atender suas necessidades. Conte-nos quais são essas melhorias!";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1025":
-                    q.narrative = "Quando você conversa com os clientes de seu negócio, o que as pessoas costumam dizer que as atraem para sua rua?";
+                    q.narrative = "Nas conversas com seus clientes, o que as pessoas costumam dizer que vão fazer na sua rua? Ou, por outro lado, o que você percebe que as pessoas costuma fazer?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1026":
-                    q.narrative = "Quais os pontos fortes que você acha que sua rua tem?";
+                    q.narrative = "Mostre para nós, quais os pontos forte da sua rua que te deixam satisfeito por trabalhar aí! ";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1027":
-                    q.narrative = "Quais os pontos fracos você acha que podem ser melhorado na sua rua?";
+                    q.narrative = "Mostre para nós, os pontos fracos da sua rua que precisam ser melhorados para atender as necessidades da sua empresa!";
                     q.narrative = "Você esta satisfeito com sua rua quando esta trabalhando? Ou pretendente trocar o local de seu estabelecimento se encontrar um local melhor?";
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
                     q.useNarrative = true;
                     break;
                 case "1028":
-                    q.narrative = "Você esta satisfeito com sua rua quando esta trabalhando? Ou pretendente trocar o local de seu estabelecimento se encontrar um local melhor?";
+                    q.narrative = null;
                     q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
-                    q.useNarrative = true;
+                    q.useNarrative = false;
                     break;
                 default:
                     q.narrative = null;
@@ -3776,7 +3776,7 @@ var IntroPage = /** @class */ (function () {
     ], IntroPage.prototype, "slides", void 0);
     IntroPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer <strong>participar</strong> na requalificação do <strong>centro</strong> de\n            <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Vamos conhecer essa <strong>possibilidade</strong>?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o <strong>crescimento</strong> da cidade, a <strong>área central</strong> tem apresentado problemas como\n            desgaste da <strong>pavimentação</strong>, falta de padronização dos <strong>passeios</strong> e\n            <strong>calçadas</strong> estreitas.</p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Para resolver este problema as <strong>obras de requalificação</strong> tem como <strong>objetivo:</strong>\n            troca de <strong>pavimento</strong>, alargamento de <strong>calçadas</strong>,\n            instalação de <strong>equipamentos</strong> urbanos, <strong>arborização</strong>, <strong>faixas\n              elevadas</strong> e <strong>semáforos</strong>.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Assim, a <strong>requalificação</strong> pode ampliar a <strong>mobilidade urbana</strong> e tornar a\n            <strong>área central</strong> de <strong>Pouso Alegre</strong> mais <strong>atrativa</strong> para os\n            <strong>pedestres</strong> e <strong>visitantes</strong>.</p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua <strong>participação</strong> possui grande importância. Essa <strong>pesquisa de opinião</strong>\n            possibilitará uma analise detalhada das necessidades da <strong>população</strong> de <strong>Pouso\n              Alegre</strong>.\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <button *ngIf="!useGame" ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga <strong>pontos</strong> para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta <strong>pontos</strong> que refletem sua\n            <strong>participação</strong>!\n            <strong>Participe</strong> agora nos enviando sua <strong>opinião</strong>!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
+            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a reurbanização do centro de Pouso Alegre!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a reurbanização?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o crescimento da cidade a área central tem apresentado problemas:\n          </p>\n          <p class="text-dialog">\n            Desgaste da rua, calçadas estreitas e falta de semáforos e faixas de pedestres.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização tem como objetivo:\n          </p>\n          <p class="text-dialog">\n            Asfaltamento das ruas, alargamento de calçadas, instalação de faixas de pedestres elevadas, semáforos e\n            arborização.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização pode tornar a área central mais atrativa para você trabalhar, fazer compras ou passear.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua participação tem muita importância!\n          </p>\n          <p class="text-dialog">\n            Essa pesquisa de opinião possibilitará uma analise detalhada da sua necessidade como cidadão de Pouso Alegre\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <button *ngIf="!useGame" ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga pontos para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta pontos que refletem na sua participação!\n          </p>\n          <p class="text-dialog">\n            Envie sua <strong>opinião</strong> para nós!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]])
     ], IntroPage);
