@@ -2176,7 +2176,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1006",
                         name: "6.	O que falta no centro?",
                         description: "Selecione abaixo",
-                        question: "6.	O que faz falta pra você no centro?",
+                        question: "6.	Para você, o que faz falta no centro?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2278,7 +2278,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1014",
                         name: "7.	Como você avalia a necessidade de Locais de descanso?",
                         description: "",
-                        question: "7.	Como você avalia a necessidade de Locais de descanso?",
+                        question: "7.	Como você avalia a necessidade de locais de descanso?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2378,9 +2378,9 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q1);
                     var q2 = {
                         id: "1022",
-                        name: "2.	Porque você escolheu essa rua para seu comércio?",
+                        name: "2.	Por que você escolheu essa rua para seu comércio?",
                         description: "",
-                        question: "2.	Por que você escolheu essa rua para seu comércio? ",
+                        question: "2.	Por que você escolheu essa rua para seu comércio?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2428,7 +2428,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1026",
                         name: "6.	Quais são os pontos fortes da sua rua?",
                         description: "",
-                        question: "6.	Quais pra você são os fortes da sua rua? ",
+                        question: "6.	Para você, quais são os fortes da sua rua?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2440,7 +2440,7 @@ var QuestionProvider = /** @class */ (function () {
                         id: "1027",
                         name: "7.	Quais são os pontos fracos da sua rua?",
                         description: "",
-                        question: "7.	Quais pra você são os pontos fracos da sua rua? ",
+                        question: "7.	Para você, quais são os pontos fracos da sua rua?",
                         contextArea: "Requalificação do Centro",
                         contextAreaIcon: "city-icon.png",
                         position: "1",
@@ -2450,7 +2450,7 @@ var QuestionProvider = /** @class */ (function () {
                     questions.push(q7);
                     var q8 = {
                         id: "1028",
-                        name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”",
+                        name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”.",
                         description: "",
                         question: "8.	O que você pensa sobre essa afirmação: “Não trocaria a rua do meu comércio por nenhum outro local da cidade”.",
                         contextArea: "Requalificação do Centro",
@@ -2866,7 +2866,8 @@ var RespondentProvider = /** @class */ (function () {
                 "age_range": respondent.ageRange,
                 "gender": respondent.gender,
                 "name": respondent.name,
-                "phone": respondent.phone
+                "phone": respondent.phone,
+                "type": respondent.type
                 //-----------------NOVOS CAMPOS-----------------
             };
             // this.http.post("https://api.neiru.org/update-respondent.php", data, {headers: this.restProvider.headers})
@@ -2896,6 +2897,7 @@ var RespondentProvider = /** @class */ (function () {
                 "gender": respondent.gender,
                 "name": respondent.name,
                 "phone": respondent.phone,
+                "type": respondent.type,
                 //-----------------NOVOS CAMPOS-----------------
                 "token": token
             };
@@ -3424,13 +3426,11 @@ var IntroPage = /** @class */ (function () {
         this.questionaries = [];
         this.isRuralZone = false;
         this.useGame = false;
-        // this.storage.set('useGame', this.useGame).then(() => {
         setTimeout(function () {
             _this.changeZone();
             _this.existsAppCityPlan();
             _this.checkTrigger();
         }, 1000);
-        // });
     }
     IntroPage.prototype.ionViewDidEnter = function () {
         this.checkTrigger();
@@ -3601,7 +3601,7 @@ var IntroPage = /** @class */ (function () {
                 _this.storage.get('respondent')
                     .then(function (respondent) {
                     if (respondent != null) {
-                        var alert_1 = _this.alertCtrl.create({
+                        var alert = _this.alertCtrl.create({
                             title: 'Já existe um usuário respondendo os questionários',
                             message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
                             buttons: [{
@@ -3616,7 +3616,7 @@ var IntroPage = /** @class */ (function () {
                                     }
                                 }]
                         });
-                        alert_1.present();
+                        alert.present();
                     }
                     else {
                         _this.removeStoredData();
@@ -3772,15 +3772,16 @@ var IntroPage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Slides */]) === "function" && _a || Object)
     ], IntroPage.prototype, "slides", void 0);
     IntroPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a reurbanização do centro de Pouso Alegre!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a reurbanização?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é requalificação urbana?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o crescimento da cidade a área central tem apresentado problemas:\n          </p>\n          <p class="text-dialog">\n            Desgaste da rua, calçadas estreitas e falta de semáforos e faixas de pedestres.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização tem como objetivo:\n          </p>\n          <p class="text-dialog">\n            Asfaltamento das ruas, alargamento de calçadas, instalação de faixas de pedestres elevadas, semáforos e\n            arborização.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h3 class="title-box">A requalificação da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização pode tornar a área central mais atrativa para você trabalhar, fazer compras ou passear.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="!useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <div class="slide-header" *ngIf="useGame">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding>\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua participação tem muita importância!\n          </p>\n          <p class="text-dialog">\n            Essa pesquisa de opinião possibilitará uma analise detalhada da sua necessidade como cidadão de Pouso Alegre\n          </p>\n        </div>\n      </div>\n      <div *ngIf="useGame" class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n      <button *ngIf="!useGame" ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga pontos para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta pontos que refletem na sua participação!\n          </p>\n          <p class="text-dialog">\n            Envie sua <strong>opinião</strong> para nós!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
+            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 0 -->\n    <ion-slide padding *ngIf="!useGame">\n      <div class="slide-header">\n        <h1 class="title-box">Reurbanização do centro de Pouso Alegre</h1>\n      </div>\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Bem vindo a <strong>pesquisa de opinião</strong> sobre a reurbanização do centro de <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Responda os questionários para que nós possamos entender suas necessidades.\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 0 -->\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a reurbanização do centro de Pouso Alegre!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a reurbanização?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é reurbanização?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o crescimento da cidade a área central tem apresentado problemas:\n          </p>\n          <p class="text-dialog">\n            Desgaste da rua, calçadas estreitas e falta de semáforos e faixas de pedestres.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">A reurbanização da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A <strong>reurbanização</strong>\n            é um processo de organização da infraestrutura de uma região para garantir o desenvolvimento humano das\n            cidades.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">A reurbanização da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização pode tornar a área central mais atrativa para você trabalhar, fazer compras ou passear.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua participação tem muita importância!\n          </p>\n          <p class="text-dialog">\n            Essa pesquisa de opinião possibilitará uma analise detalhada da sua necessidade como cidadão de Pouso Alegre\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga pontos para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta pontos que refletem na sua participação!\n          </p>\n          <p class="text-dialog">\n            Envie sua <strong>opinião</strong> para nós!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* QuestionaryProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]) === "function" && _l || Object])
     ], IntroPage);
     return IntroPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 }());
 
 //# sourceMappingURL=intro.js.map

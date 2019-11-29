@@ -26628,6 +26628,16 @@ page-respondent-profile .button-md {
   padding: 0;
 }
 
+page-respondent-profile .range-md .range-tick {
+  top: 17px;
+  height: 10px;
+  background: #bdbdbd;
+}
+
+page-respondent-profile .range-md .range-tick-active {
+  background: #488aff;
+}
+
 page-thankyou .range-md {
   padding: 0px;
   margin-top: -8px;

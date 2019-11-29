@@ -150,10 +150,7 @@ var QuestionariesListPage = /** @class */ (function () {
                             //--------------Temporario--------------
                             // Verificação do tipo de questionário [x]
                             //--------------IMPORTANTE---------------
-                            if (_this.respondent.type == "comerciante") {
-                                data = data.filter(function (item) { return item.id === 660; });
-                            }
-                            else {
+                            if (_this.respondent.type != "comerciante") {
                                 data = data.filter(function (item) { return item.id === 666 || item.id === 661; });
                             }
                             //--------------IMPORTANTE---------------
