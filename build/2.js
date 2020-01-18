@@ -201,16 +201,12 @@ var QuestionaryPage = /** @class */ (function () {
                 _this.totalQuestions = _this.questions.length;
                 //------------------------MUITO IMPORTANTE------------------------
                 //-----------OCULTANDO O DONT NOW PARA DETERMINADAS PERGUNTAS-------------------
-                // let id = this.currentQuestion.id;
-                // if (id == "1003" || id == "1008" || id == "1019" || id == "1020") {
-                //   this.showDontNow = false;
-                // }
+                var id = _this.currentQuestion.id;
+                if (id == "1003" || id == "1008" || id == "1019" || id == "1020") {
+                    _this.showDontNow = false;
+                }
                 //-----------OCULTANDO O DONT NOW PARA DETERMINADAS PERGUNTAS-------------------
                 //------------------------MUITO IMPORTANTE------------------------
-                if (_this.currentQuestion.showDontNow == "0")
-                    _this.showDontNow = false;
-                else
-                    _this.showDontNow = true;
             }
             else {
                 var alert_1 = _this.alertCtrl.create({

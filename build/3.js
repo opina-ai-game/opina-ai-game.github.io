@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 293:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -152,8 +152,7 @@ var QuestionariesListPage = /** @class */ (function () {
                             // Verificação do tipo de questionário [x]
                             //--------------IMPORTANTE---------------
                             if (_this.respondent.type != "comerciante") {
-                                // data = data.filter(item => item.id === 666 || item.id === 661);
-                                data = data.filter(function (item) { return item.id == 14 || item.id == 15; });
+                                data = data.filter(function (item) { return item.id === 666 || item.id === 661; });
                             }
                             //--------------IMPORTANTE---------------
                             for (var i = 0; i < data.length; i++) {
@@ -164,13 +163,12 @@ var QuestionariesListPage = /** @class */ (function () {
                             _this.answeredQuestionaries = _this.progress;
                             _this.progress = _this.progress / data.length;
                             _this.progress = _this.progress * 100;
-                            // this.questionaries = this.questionaryProvider.resolveQuestionaryIcon(data);
-                            _this.questionaries = data;
+                            _this.questionaries = _this.questionaryProvider.resolveQuestionaryIcon(data);
                             _this.loader.dismiss();
                         }
                         else {
                             _this.questionaries = [];
-                            var alert_1 = _this.alertCtrl.create({
+                            var alert = _this.alertCtrl.create({
                                 title: 'Oops!',
                                 message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
                                 buttons: [{
@@ -180,7 +178,7 @@ var QuestionariesListPage = /** @class */ (function () {
                                         }
                                     }]
                             });
-                            alert_1.present();
+                            alert.present();
                         }
                     })
                         .catch(function () {
@@ -258,8 +256,7 @@ var QuestionariesListPage = /** @class */ (function () {
         this.loader.present();
         // Ajuste de priorização do plano [x]
         //----------------MUITO IMPORTANTE--------------------
-        // if (this.plan.id == 666 && (this.questionary.id == 666 || this.questionary.id == 660 || this.questionary.id == 661)) {
-        if (this.plan.id == 7 && (this.questionary.id == 14 || this.questionary.id == 15 || this.questionary.id == 16)) {
+        if (this.plan.id == 666 && (this.questionary.id == 666 || this.questionary.id == 660 || this.questionary.id == 661)) {
             this.plan.usePrioritization = "0";
         }
         else {
@@ -282,7 +279,7 @@ var QuestionariesListPage = /** @class */ (function () {
                     }
                 }
                 else {
-                    var alert_2 = _this.alertCtrl.create({
+                    var alert = _this.alertCtrl.create({
                         title: 'Oops!',
                         message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
                         buttons: [{
@@ -292,7 +289,7 @@ var QuestionariesListPage = /** @class */ (function () {
                                 }
                             }]
                     });
-                    alert_2.present();
+                    alert.present();
                 }
             })
                 .catch(function () {
@@ -420,7 +417,7 @@ var QuestionariesListPage = /** @class */ (function () {
                 _this.questions = result;
             }
             else {
-                var alert_3 = _this.alertCtrl.create({
+                var alert = _this.alertCtrl.create({
                     title: 'Oops!',
                     message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
                     buttons: [{
@@ -430,7 +427,7 @@ var QuestionariesListPage = /** @class */ (function () {
                             }
                         }]
                 });
-                alert_3.present();
+                alert.present();
             }
         })
             .catch(function () {
@@ -491,11 +488,12 @@ var QuestionariesListPage = /** @class */ (function () {
     };
     QuestionariesListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-questionaries-list',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionaries-list\questionaries-list.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col offset-1 col-2 class="menu-icon-col">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6>\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-2 *ngIf="useGame">\n        <button ion-button clear (click)="help()" class="button-help-questionary-list">\n          <ion-icon class="icon-help button-help-questionary-list" name="help-circle"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-grid>\n    <ion-row *ngIf="useGame">\n      <h1 class="text-questionary-list" text-center>Questionários - {{plan.name}}</h1>\n      <ion-col col-3 class="text-questionary-list">\n        <img class="text-img" src="assets/imgs/person1b.png">\n      </ion-col>\n      <ion-col col-9 class="text-questionary-list">\n        <h5>Responda os questionários para conseguir <strong>pontos</strong> para aumentar seu <strong>nível</strong> de\n          participação!</h5>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <h1 class="text-questionary-list" text-center>Questionários - {{plan.name}}</h1>\n      <ion-col col-12 class="text-questionary-list">\n        <h5>Escolha um questionário abaixo para nos contar sua opinião sobre a requalificação do centro de Pouso Alegre.\n        </h5>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n        <!-- Lista de questionários -->\n        <ion-list radio-group>\n          <!-- Item da lista -->\n          <ion-item *ngFor="let questionary of questionaries" class="questionary-item-list">\n            <ion-thumbnail *ngIf="useGame" item-start>\n              <img *ngIf="questionary.answered" class="questionary-img-list" src="assets/imgs/{{questionary.icon}}-selected.png">\n              <img *ngIf="!questionary.answered" class="questionary-img-list" src="assets/imgs/{{questionary.icon}}.png">\n            </ion-thumbnail>\n            <ion-label text-wrap text-left>\n              <h2 class="text-questionary" *ngIf="!useGame">{{questionary.name}}</h2>\n              <h2 *ngIf="useGame">{{questionary.name}}</h2>\n              <div *ngIf="questionary.answered && useGame">\n                <p>Respondido!</p>\n              </div>\n            </ion-label>\n            <ion-radio disabled="{{questionary.answered}}" (ionSelect)="setQuestionary(questionary)"></ion-radio>\n          </ion-item>\n          <!-- Item da lista -->\n        </ion-list>\n        <!-- Lista de questionários -->\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row *ngIf="useGame">\n      <button ion-button full class="button-background" (click)="navigate()" [disabled]="btnContinueDisabled">\n        <ion-icon id="button-questionary-list-game-{{questionary.id}}" class="text-button">\n          Continuar\n        </ion-icon>\n      </button>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <button ion-button full class="button-background" (click)="navigate()" [disabled]="btnContinueDisabled">\n        <ion-icon id="button-questionary-list-not-game-{{questionary.id}}" class="text-button">\n          Continuar\n        </ion-icon>\n      </button>\n    </ion-row>\n  </ion-grid>\n  <ion-navbar class="toolbar-progress">\n    <ion-title *ngIf="useGame" text-center class="toolbar-point">\n      <ion-icon range-right name="md-ribbon"></ion-icon>\n      {{points}} pontos\n    </ion-title>\n    <ion-range *ngIf="useGame" class="progress-bar" [min]="0" [max]="100" [step]="1" [(ngModel)]="progress" disabled>\n      <ion-icon range-left name="logo-buffer"></ion-icon>\n      <ion-icon range-right></ion-icon>\n    </ion-range>\n    <div *ngIf="useGame" text-center class="progres-text-uper">{{answeredQuestionaries}} de {{totalQuestionaries}}\n      questionários respondidos</div>\n  </ion-navbar>\n</ion-footer>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionaries-list\questionaries-list.html"*/,
+            selector: 'page-questionaries-list',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionaries-list\questionaries-list.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col offset-1 col-2 class="menu-icon-col">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6>\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-2 *ngIf="useGame">\n        <button ion-button clear (click)="help()" class="button-help-questionary-list">\n          <ion-icon class="icon-help button-help-questionary-list" name="help-circle"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-grid>\n    <ion-row *ngIf="useGame">\n      <h1 class="text-questionary-list" text-center>Questionários - {{plan.name}}</h1>\n      <ion-col col-3 class="text-questionary-list">\n        <img class="text-img" src="assets/imgs/person1b.png">\n      </ion-col>\n      <ion-col col-9 class="text-questionary-list">\n        <h5>Responda os questionários para conseguir <strong>pontos</strong> para aumentar seu <strong>nível</strong> de\n          participação!</h5>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <h1 class="text-questionary-list" text-center>Questionários - {{plan.name}}</h1>\n      <ion-col col-12 class="text-questionary-list">\n        <h5>Escolha um questionário abaixo para nos contar sua opinião sobre a requalificação do centro de Pouso Alegre.\n        </h5>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n        <!-- Lista de questionários -->\n        <ion-list radio-group>\n          <!-- Item da lista -->\n          <ion-item *ngFor="let questionary of questionaries" class="questionary-item-list">\n            <ion-thumbnail *ngIf="useGame" item-start>\n              <img class="questionary-img-list" src="assets/imgs/{{questionary.icon}}">\n            </ion-thumbnail>\n            <ion-label text-wrap text-left>\n              <h2 class="text-questionary" *ngIf="!useGame">{{questionary.name}}</h2>\n              <h2 *ngIf="useGame">{{questionary.name}}</h2>\n              <div *ngIf="questionary.answered && useGame">\n                <p>Respondido!</p>\n              </div>\n            </ion-label>\n            <ion-radio disabled="{{questionary.answered}}" (ionSelect)="setQuestionary(questionary)"></ion-radio>\n          </ion-item>\n          <!-- Item da lista -->\n        </ion-list>\n        <!-- Lista de questionários -->\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row *ngIf="useGame">\n      <button ion-button full class="button-background" (click)="navigate()" [disabled]="btnContinueDisabled">\n        <ion-icon id="button-questionary-list-game-{{questionary.id}}" class="text-button">\n          Continuar\n        </ion-icon>\n      </button>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <button ion-button full class="button-background" (click)="navigate()" [disabled]="btnContinueDisabled">\n        <ion-icon id="button-questionary-list-not-game-{{questionary.id}}" class="text-button">\n          Continuar\n        </ion-icon>\n      </button>\n    </ion-row>\n  </ion-grid>\n  <ion-navbar class="toolbar-progress">\n    <ion-title *ngIf="useGame" text-center class="toolbar-point">\n      <ion-icon range-right name="md-ribbon"></ion-icon>\n      {{points}} pontos\n    </ion-title>\n    <ion-range *ngIf="useGame" class="progress-bar" [min]="0" [max]="100" [step]="1" [(ngModel)]="progress" disabled>\n      <ion-icon range-left name="logo-buffer"></ion-icon>\n      <ion-icon range-right></ion-icon>\n    </ion-range>\n    <div *ngIf="useGame" text-center class="progres-text-uper">{{answeredQuestionaries}} de {{totalQuestionaries}}\n      questionários respondidos</div>\n  </ion-navbar>\n</ion-footer>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionaries-list\questionaries-list.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["o" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* MenuController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_8__providers_question_question__["b" /* QuestionProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["d" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_9__providers_prioritization_prioritization__["a" /* PrioritizationProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["o" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["o" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* MenuController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_database_database__["a" /* DatabaseProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_8__providers_question_question__["b" /* QuestionProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_question_question__["b" /* QuestionProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["d" /* QuestionaryProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["d" /* QuestionaryProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_9__providers_prioritization_prioritization__["a" /* PrioritizationProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__providers_prioritization_prioritization__["a" /* PrioritizationProvider */]) === "function" && _k || Object])
     ], QuestionariesListPage);
     return QuestionariesListPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 }());
 
 //# sourceMappingURL=questionaries-list.js.map

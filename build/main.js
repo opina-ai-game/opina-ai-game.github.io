@@ -202,32 +202,32 @@ var HomePage = /** @class */ (function () {
                 _this.storage.set('plan', plan);
                 // Questionário temporário [x]
                 //----------------------------TEMPORÁRIO---------------------------------
-                // let questionaryTemp1: Questionary = {
-                //   id: 666,
-                //   name: "Centro - Diagnóstico Geral",
-                //   answered: false,
-                //   plan: plan,
-                //   questions: null,
-                // }
-                // let questionaryTemp2: Questionary = {
-                //   id: 661,
-                //   name: "Centro - Diagnóstico Específico",
-                //   answered: false,
-                //   plan: plan,
-                //   questions: null,
-                // }
-                // let questionaryTemp3: Questionary = {
-                //   id: 660,
-                //   name: "Centro - Comerciante",
-                //   answered: false,
-                //   plan: plan,
-                //   questions: null,
-                // }
-                // questionaries.push(questionaryTemp1);
-                // questionaries.push(questionaryTemp2);
-                // questionaries.push(questionaryTemp3);
-                // this.questionaries = this.questionaryProvider.resolveQuestionaryIcon(questionaries);
+                var questionaryTemp1 = {
+                    id: 666,
+                    name: "Centro - Diagnóstico Geral",
+                    answered: false,
+                    plan: plan,
+                    questions: null,
+                };
+                var questionaryTemp2 = {
+                    id: 661,
+                    name: "Centro - Diagnóstico Específico",
+                    answered: false,
+                    plan: plan,
+                    questions: null,
+                };
+                var questionaryTemp3 = {
+                    id: 660,
+                    name: "Centro - Comerciante",
+                    answered: false,
+                    plan: plan,
+                    questions: null,
+                };
+                questionaries.push(questionaryTemp1);
+                questionaries.push(questionaryTemp2);
+                questionaries.push(questionaryTemp3);
                 //----------------------------TEMPORÁRIO---------------------------------
+                _this.questionaries = _this.questionaryProvider.resolveQuestionaryIcon(questionaries);
                 _this.storage.set('questionaries', _this.questionaries);
                 var points = 0;
                 _this.storage.set('points', points);
@@ -429,7 +429,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var RestProvider = /** @class */ (function () {
-    // API_URL: string = "http://localhost/neiru-surveys-api/";
     function RestProvider(http, network, alertCtrl, platform, storage, appVersionControl) {
         this.http = http;
         this.network = network;
@@ -438,8 +437,6 @@ var RestProvider = /** @class */ (function () {
         this.storage = storage;
         this.appVersionControl = appVersionControl;
         this.isConnected = true;
-        // API_URL: string = "https://api.neiru.org/";
-        this.API_URL = "http://opina-ai-api.atwebpages.com/";
         this.createHeader();
         this.connectSubscription();
         this.disconnectSubscription();
@@ -454,7 +451,7 @@ var RestProvider = /** @class */ (function () {
         else {
             if (this.network.type == 'wifi') {
                 new Promise(function (resolve) {
-                    _this.http.get(_this.API_URL + "check-connection.php", { headers: _this.headers })
+                    _this.http.get("https://api.neiru.org/check-connection.php", { headers: _this.headers })
                         .subscribe(function (data) {
                         resolve(data);
                     }, function (error) {
@@ -481,7 +478,7 @@ var RestProvider = /** @class */ (function () {
         else {
             if (this.network.type == 'wifi') {
                 new Promise(function (resolve) {
-                    _this.http.get(_this.API_URL + "check-connection.php", { headers: _this.headers })
+                    _this.http.get("https://api.neiru.org/check-connection.php", { headers: _this.headers })
                         .subscribe(function (data) {
                         resolve(data);
                     }, function (error) {
@@ -699,7 +696,7 @@ var map = {
 		5
 	],
 	"../pages/intro/intro.module": [
-		294,
+		293,
 		6
 	],
 	"../pages/prioritization/prioritization.module": [
@@ -707,7 +704,7 @@ var map = {
 		4
 	],
 	"../pages/questionaries-list/questionaries-list.module": [
-		293,
+		294,
 		3
 	],
 	"../pages/questionary/questionary.module": [
@@ -769,183 +766,183 @@ var PrioritizationProvider = /** @class */ (function () {
         var _this = this;
         return new Promise(function (resolve) {
             //metricID : 1 - GUT | 2 - Escala qualitativa | (3-18) - Métricas do questionário de teste
-            _this.http.get(_this.restProvider.API_URL + "get-metric-items-by-metric.php?metric=" + metricId, { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-metric-items-by-metric.php?metric=" + metricId, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 // Metric Itens temporários [x]
                 //------------------TEMPORÁRIO-------------------
-                // let itens: any[] = [];
-                // switch (metricId) {
-                //   case "3":
-                //     let item2 = {
-                //       id: "5",
-                //       name: "Frequência Semanal",
-                //       metric_id: "3",
-                //       metricValues: []
-                //     }
-                //     itens.push(item2);
-                //     data = itens;
-                //     break;
-                //   case "4":
-                //     let item3 = {
-                //       id: "6",
-                //       name: "Atrações do Centro",
-                //       metric_id: "4",
-                //       metricValues: []
-                //     }
-                //     itens.push(item3);
-                //     data = itens;
-                //     break;
-                //   case "5":
-                //     let item4 = {
-                //       id: "7",
-                //       name: "Motivos de não ir ao centro",
-                //       metric_id: "5",
-                //       metricValues: []
-                //     }
-                //     itens.push(item4);
-                //     data = itens;
-                //     break;
-                //   case "6":
-                //     let item5 = {
-                //       id: "8",
-                //       name: "Atrações do Centro 2",
-                //       metric_id: "6",
-                //       metricValues: []
-                //     }
-                //     itens.push(item5);
-                //     data = itens;
-                //     break;
-                //   case "7":
-                //     let item6 = {
-                //       id: "9",
-                //       name: "Necessidades do Centro",
-                //       metric_id: "7",
-                //       metricValues: []
-                //     }
-                //     itens.push(item6);
-                //     data = itens;
-                //     break;
-                //   case "8":
-                //     let item7 = {
-                //       id: "10",
-                //       name: "Escala de Satisfação",
-                //       metric_id: "8",
-                //       metricValues: []
-                //     }
-                //     itens.push(item7);
-                //     data = itens;
-                //     break;
-                //   case "9":
-                //     let item8 = {
-                //       id: "11",
-                //       name: "Necessidade de Requalificação",
-                //       metric_id: "9",
-                //       metricValues: []
-                //     }
-                //     itens.push(item8);
-                //     data = itens;
-                //     break;
-                //   case "10":
-                //     let item9 = {
-                //       id: "12",
-                //       name: "Avaliação do comerciante",
-                //       metric_id: "10",
-                //       metricValues: []
-                //     }
-                //     itens.push(item9);
-                //     data = itens;
-                //     break;
-                //   case "11":
-                //     let item10 = {
-                //       id: "13",
-                //       name: "Melhorias para o comerciante",
-                //       metric_id: "11",
-                //       metricValues: []
-                //     }
-                //     itens.push(item10);
-                //     data = itens;
-                //     break;
-                //   case "12":
-                //     let item11 = {
-                //       id: "14",
-                //       name: "Atividades exercidas pelos pedestres",
-                //       metric_id: "12",
-                //       metricValues: []
-                //     }
-                //     itens.push(item11);
-                //     data = itens;
-                //     break;
-                //   case "13":
-                //     let item12 = {
-                //       id: "15",
-                //       name: "Pontos fortes para o comerciante",
-                //       metric_id: "13",
-                //       metricValues: []
-                //     }
-                //     itens.push(item12);
-                //     data = itens;
-                //     break;
-                //   case "14":
-                //     let item13 = {
-                //       id: "16",
-                //       name: "Pontos fracos para o comerciante",
-                //       metric_id: "14",
-                //       metricValues: []
-                //     }
-                //     itens.push(item13);
-                //     data = itens;
-                //     break;
-                //   case "15":
-                //     let item14 = {
-                //       id: "17",
-                //       name: "Atividades dos pedestres no Centro",
-                //       metric_id: "15",
-                //       metricValues: []
-                //     }
-                //     itens.push(item14);
-                //     data = itens;
-                //     break;
-                //   case "16":
-                //     let item15 = {
-                //       id: "18",
-                //       name: "Pontos fortes da rua",
-                //       metric_id: "16",
-                //       metricValues: []
-                //     }
-                //     itens.push(item15);
-                //     data = itens;
-                //     break;
-                //   case "17":
-                //     let item16 = {
-                //       id: "19",
-                //       name: "Pontos fracos da rua",
-                //       metric_id: "17",
-                //       metricValues: []
-                //     }
-                //     itens.push(item16);
-                //     data = itens;
-                //     break;
-                //   case "18":
-                //     let item17 = {
-                //       id: "20",
-                //       name: "Escala de concordancia",
-                //       metric_id: "18",
-                //       metricValues: []
-                //     }
-                //     itens.push(item17);
-                //     data = itens;
-                //     break;
-                //   case "19":
-                //     let item18 = {
-                //       id: "21",
-                //       name: "Frequência de uso dos espaços públicos",
-                //       metric_id: "19",
-                //       metricValues: []
-                //     }
-                //     itens.push(item18);
-                //     data = itens;
-                //     break;
-                // }
+                var itens = [];
+                switch (metricId) {
+                    case "3":
+                        var item2 = {
+                            id: "5",
+                            name: "Frequência Semanal",
+                            metric_id: "3",
+                            metricValues: []
+                        };
+                        itens.push(item2);
+                        data = itens;
+                        break;
+                    case "4":
+                        var item3 = {
+                            id: "6",
+                            name: "Atrações do Centro",
+                            metric_id: "4",
+                            metricValues: []
+                        };
+                        itens.push(item3);
+                        data = itens;
+                        break;
+                    case "5":
+                        var item4 = {
+                            id: "7",
+                            name: "Motivos de não ir ao centro",
+                            metric_id: "5",
+                            metricValues: []
+                        };
+                        itens.push(item4);
+                        data = itens;
+                        break;
+                    case "6":
+                        var item5 = {
+                            id: "8",
+                            name: "Atrações do Centro 2",
+                            metric_id: "6",
+                            metricValues: []
+                        };
+                        itens.push(item5);
+                        data = itens;
+                        break;
+                    case "7":
+                        var item6 = {
+                            id: "9",
+                            name: "Necessidades do Centro",
+                            metric_id: "7",
+                            metricValues: []
+                        };
+                        itens.push(item6);
+                        data = itens;
+                        break;
+                    case "8":
+                        var item7 = {
+                            id: "10",
+                            name: "Escala de Satisfação",
+                            metric_id: "8",
+                            metricValues: []
+                        };
+                        itens.push(item7);
+                        data = itens;
+                        break;
+                    case "9":
+                        var item8 = {
+                            id: "11",
+                            name: "Necessidade de Requalificação",
+                            metric_id: "9",
+                            metricValues: []
+                        };
+                        itens.push(item8);
+                        data = itens;
+                        break;
+                    case "10":
+                        var item9 = {
+                            id: "12",
+                            name: "Avaliação do comerciante",
+                            metric_id: "10",
+                            metricValues: []
+                        };
+                        itens.push(item9);
+                        data = itens;
+                        break;
+                    case "11":
+                        var item10 = {
+                            id: "13",
+                            name: "Melhorias para o comerciante",
+                            metric_id: "11",
+                            metricValues: []
+                        };
+                        itens.push(item10);
+                        data = itens;
+                        break;
+                    case "12":
+                        var item11 = {
+                            id: "14",
+                            name: "Atividades exercidas pelos pedestres",
+                            metric_id: "12",
+                            metricValues: []
+                        };
+                        itens.push(item11);
+                        data = itens;
+                        break;
+                    case "13":
+                        var item12 = {
+                            id: "15",
+                            name: "Pontos fortes para o comerciante",
+                            metric_id: "13",
+                            metricValues: []
+                        };
+                        itens.push(item12);
+                        data = itens;
+                        break;
+                    case "14":
+                        var item13 = {
+                            id: "16",
+                            name: "Pontos fracos para o comerciante",
+                            metric_id: "14",
+                            metricValues: []
+                        };
+                        itens.push(item13);
+                        data = itens;
+                        break;
+                    case "15":
+                        var item14 = {
+                            id: "17",
+                            name: "Atividades dos pedestres no Centro",
+                            metric_id: "15",
+                            metricValues: []
+                        };
+                        itens.push(item14);
+                        data = itens;
+                        break;
+                    case "16":
+                        var item15 = {
+                            id: "18",
+                            name: "Pontos fortes da rua",
+                            metric_id: "16",
+                            metricValues: []
+                        };
+                        itens.push(item15);
+                        data = itens;
+                        break;
+                    case "17":
+                        var item16 = {
+                            id: "19",
+                            name: "Pontos fracos da rua",
+                            metric_id: "17",
+                            metricValues: []
+                        };
+                        itens.push(item16);
+                        data = itens;
+                        break;
+                    case "18":
+                        var item17 = {
+                            id: "20",
+                            name: "Escala de concordancia",
+                            metric_id: "18",
+                            metricValues: []
+                        };
+                        itens.push(item17);
+                        data = itens;
+                        break;
+                    case "19":
+                        var item18 = {
+                            id: "21",
+                            name: "Frequência de uso dos espaços públicos",
+                            metric_id: "19",
+                            metricValues: []
+                        };
+                        itens.push(item18);
+                        data = itens;
+                        break;
+                }
                 //------------------TEMPORÁRIO-------------------
                 resolve(data);
             }, function (error) {
@@ -957,17 +954,1115 @@ var PrioritizationProvider = /** @class */ (function () {
     PrioritizationProvider.prototype.getMetricValues = function () {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-metric-values.php", { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-metric-values.php", { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 // Metric values temporários [x]
                 //------------------TEMPORÁRIO-------------------
-                // data = this.resolveItens(data);
+                data = _this.resolveItens(data);
                 //------------------TEMPORÁRIO-------------------
                 resolve(data);
             }, function (error) {
                 resolve(error);
             });
         });
+    };
+    //Adição de itens em tempo de execução
+    //------------------TEMPORÁRIO-------------------
+    PrioritizationProvider.prototype.resolveItens = function (data) {
+        var metrics = [];
+        for (var i = 0; i < data.length; i++) {
+            metrics.push(data[i]);
+        }
+        var m21 = {
+            id: "21",
+            name: "1 vez por semana",
+            value: "1",
+            metricItemId: "5",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m21);
+        var m22 = {
+            id: "22",
+            name: "De 2 a 3 vezes por semana",
+            value: "2",
+            metricItemId: "5",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m22);
+        var m23 = {
+            id: "23",
+            name: "De 4 a 5 vezes por semana",
+            value: "3",
+            metricItemId: "5",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m23);
+        var m24 = {
+            id: "24",
+            name: "De 6 a 7 vezes por semana",
+            value: "4",
+            metricItemId: "5",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m24);
+        var m25 = {
+            id: "25",
+            name: "Mais de 7 vezes por semana",
+            value: "5",
+            metricItemId: "5",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m25);
+        var m26 = {
+            id: "26",
+            name: "Moro aqui",
+            value: "1",
+            metricItemId: "6",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m26);
+        var m27 = {
+            id: "27",
+            name: "Trabalho aqui",
+            value: "2",
+            metricItemId: "6",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m27);
+        var m28 = {
+            id: "28",
+            name: "Venho fazer compras",
+            value: "3",
+            metricItemId: "6",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m28);
+        var m29 = {
+            id: "29",
+            name: "Venho por lazer",
+            value: "4",
+            metricItemId: "6",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m29);
+        var m30 = {
+            id: "30",
+            name: "Nenhuma das anteriores",
+            value: "5",
+            metricItemId: "6",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m30);
+        var m31 = {
+            id: "31",
+            name: "Falta de segurança",
+            value: "1",
+            metricItemId: "7",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m31);
+        var m32 = {
+            id: "32",
+            name: "Faltam opções de lazer à noite",
+            value: "2",
+            metricItemId: "7",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m32);
+        var m33 = {
+            id: "33",
+            name: "Não moro no centro e não tem transporte público adequado para me locomover até lá",
+            value: "3",
+            metricItemId: "7",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m33);
+        var m132 = {
+            id: "131",
+            name: "Nenhuma das anteriores",
+            value: "4",
+            metricItemId: "7",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m132);
+        var m34 = {
+            id: "34",
+            name: "Parques e Praças",
+            value: "1",
+            metricItemId: "8",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m34);
+        var m35 = {
+            id: "35",
+            name: "Equipamentos desportivos",
+            value: "2",
+            metricItemId: "8",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m35);
+        var m36 = {
+            id: "36",
+            name: "Serviços de saúde",
+            value: "3",
+            metricItemId: "8",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m36);
+        var m37 = {
+            id: "37",
+            name: "Serviços públicos",
+            value: "4",
+            metricItemId: "8",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m37);
+        var m38 = {
+            id: "38",
+            name: "Atrações culturais",
+            value: "5",
+            metricItemId: "8",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m38);
+        var m39 = {
+            id: "39",
+            name: "Comércio de primeira necessidade: Mercado, Padaria e Farmácia",
+            value: "6",
+            metricItemId: "8",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m39);
+        var m40 = {
+            id: "40",
+            name: "Comércio de menor necessidade: Lojas de roupas e eletrodomésticos",
+            value: "7",
+            metricItemId: "8",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m40);
+        var m41 = {
+            id: "41",
+            name: "Cafés, restaurantes ou bares",
+            value: "8",
+            metricItemId: "8",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m41);
+        var m42 = {
+            id: "42",
+            name: "Nenhuma das anteriores",
+            value: "9",
+            metricItemId: "8",
+            icon: "9.png",
+            iconSelected: "9-selected.png"
+        };
+        metrics.push(m42);
+        var m43 = {
+            id: "43",
+            name: "Habitação",
+            value: "1",
+            metricItemId: "9",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m43);
+        var m44 = {
+            id: "44",
+            name: "Emprego",
+            value: "2",
+            metricItemId: "9",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m44);
+        var m45 = {
+            id: "45",
+            name: "Cultura e lazer",
+            value: "3",
+            metricItemId: "9",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m45);
+        var m46 = {
+            id: "46",
+            name: "Segurança",
+            value: "4",
+            metricItemId: "9",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m46);
+        var m47 = {
+            id: "47",
+            name: "Infraestruturas básicas",
+            value: "5",
+            metricItemId: "9",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m47);
+        var m48 = {
+            id: "48",
+            name: "Serviços de Saúde",
+            value: "6",
+            metricItemId: "9",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m48);
+        var m49 = {
+            id: "49",
+            name: "Comércio e Serviços",
+            value: "7",
+            metricItemId: "9",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m49);
+        var m50 = {
+            id: "50",
+            name: "Vagas e locais de estacionamento",
+            value: "8",
+            metricItemId: "9",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m50);
+        var m51 = {
+            id: "51",
+            name: "Nenhuma das anteriores",
+            value: "9",
+            metricItemId: "9",
+            icon: "9.png",
+            iconSelected: "9-selected.png"
+        };
+        metrics.push(m51);
+        var m52 = {
+            id: "52",
+            name: "Muito satisfeito",
+            value: "1",
+            metricItemId: "10",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m52);
+        var m53 = {
+            id: "53",
+            name: "Satisfeito",
+            value: "2",
+            metricItemId: "10",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m53);
+        var m54 = {
+            id: "54",
+            name: "Indiferente",
+            value: "3",
+            metricItemId: "10",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m54);
+        var m55 = {
+            id: "55",
+            name: "Insatisfeito",
+            value: "4",
+            metricItemId: "10",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m55);
+        var m56 = {
+            id: "56",
+            name: "Muito insatisfeito",
+            value: "5",
+            metricItemId: "10",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m56);
+        var m57 = {
+            id: "57",
+            name: "Muito necessárias",
+            value: "1",
+            metricItemId: "11",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m57);
+        var m58 = {
+            id: "58",
+            name: "Medianamente necessárias",
+            value: "2",
+            metricItemId: "11",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m58);
+        var m59 = {
+            id: "59",
+            name: "Indiferente",
+            value: "3",
+            metricItemId: "11",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m59);
+        var m60 = {
+            id: "60",
+            name: "Pouco necessárias",
+            value: "4",
+            metricItemId: "11",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m60);
+        var m61 = {
+            id: "61",
+            name: "Não são necessárias",
+            value: "5",
+            metricItemId: "11",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m61);
+        var m62 = {
+            id: "62",
+            name: "Muito bom",
+            value: "1",
+            metricItemId: "12",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m62);
+        var m63 = {
+            id: "63",
+            name: "Bom",
+            value: "2",
+            metricItemId: "12",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m63);
+        var m64 = {
+            id: "64",
+            name: "Indiferente",
+            value: "3",
+            metricItemId: "12",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m64);
+        var m65 = {
+            id: "65",
+            name: "Ruim",
+            value: "4",
+            metricItemId: "12",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m65);
+        var m66 = {
+            id: "66",
+            name: "Péssima",
+            value: "5",
+            metricItemId: "12",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m66);
+        var m67 = {
+            id: "67",
+            name: "Não existem",
+            value: "6",
+            metricItemId: "12",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m67);
+        var m68 = {
+            id: "68",
+            name: "Muito necessário",
+            value: "1",
+            metricItemId: "13",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m68);
+        var m69 = {
+            id: "69",
+            name: "Necessário",
+            value: "2",
+            metricItemId: "13",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m69);
+        var m70 = {
+            id: "70",
+            name: "Indiferente",
+            value: "3",
+            metricItemId: "13",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m70);
+        var m71 = {
+            id: "71",
+            name: "Não necessário",
+            value: "4",
+            metricItemId: "13",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m71);
+        var m72 = {
+            id: "72",
+            name: "Comércio atacadista",
+            value: "1",
+            metricItemId: "14",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m72);
+        var m73 = {
+            id: "73",
+            name: "Comércio varejista",
+            value: "2",
+            metricItemId: "14",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m73);
+        var m74 = {
+            id: "74",
+            name: "Restaurante",
+            value: "3",
+            metricItemId: "14",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m74);
+        var m75 = {
+            id: "75",
+            name: "Supermercado",
+            value: "4",
+            metricItemId: "14",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m75);
+        var m76 = {
+            id: "76",
+            name: "Centro de saúde",
+            value: "5",
+            metricItemId: "14",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m76);
+        var m77 = {
+            id: "77",
+            name: "Escola",
+            value: "6",
+            metricItemId: "14",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m77);
+        var m137 = {
+            id: "137",
+            name: "Prestação de serviços",
+            value: "7",
+            metricItemId: "14",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m137);
+        var m138 = {
+            id: "138",
+            name: "Agencia bancária",
+            value: "8",
+            metricItemId: "14",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m138);
+        var m78 = {
+            id: "78",
+            name: "Segurança",
+            value: "1",
+            metricItemId: "15",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m78);
+        var m79 = {
+            id: "79",
+            name: "Infraestrutura básica",
+            value: "2",
+            metricItemId: "15",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m79);
+        var m80 = {
+            id: "80",
+            name: "Circulação de pedestres",
+            value: "3",
+            metricItemId: "15",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m80);
+        var m81 = {
+            id: "81",
+            name: "Circulação de veículos e estacionamento",
+            value: "4",
+            metricItemId: "15",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m81);
+        var m82 = {
+            id: "82",
+            name: "Conservação das fachadas",
+            value: "5",
+            metricItemId: "15",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m82);
+        var m83 = {
+            id: "83",
+            name: "Identidade cultural e histórica",
+            value: "6",
+            metricItemId: "15",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m83);
+        var m84 = {
+            id: "84",
+            name: "Disponibilidade de local",
+            value: "7",
+            metricItemId: "15",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m84);
+        var m85 = {
+            id: "85",
+            name: "Padronização de fachadas comerciais",
+            value: "1",
+            metricItemId: "16",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m85);
+        var m86 = {
+            id: "86",
+            name: "Incentivo à circulação de pedestres",
+            value: "2",
+            metricItemId: "16",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m86);
+        var m87 = {
+            id: "87",
+            name: "Melhora nas vias de circulação de veículos e ciclovias",
+            value: "3",
+            metricItemId: "16",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m87);
+        var m88 = {
+            id: "88",
+            name: "Conservação/recuperação das fachadas dos edifícios",
+            value: "4",
+            metricItemId: "16",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m88);
+        var m89 = {
+            id: "89",
+            name: "Aumento/criação de espaços de cultura e lazer",
+            value: "5",
+            metricItemId: "16",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m89);
+        var m90 = {
+            id: "90",
+            name: "Aumento/criação de espaços verdes",
+            value: "6",
+            metricItemId: "16",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m90);
+        var m91 = {
+            id: "91",
+            name: "Estacionamento",
+            value: "7",
+            metricItemId: "16",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m91);
+        var m92 = {
+            id: "92",
+            name: "Trânsito",
+            value: "8",
+            metricItemId: "16",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m92);
+        var m93 = {
+            id: "93",
+            name: "Limpeza das ruas",
+            value: "9",
+            metricItemId: "16",
+            icon: "9.png",
+            iconSelected: "9-selected.png"
+        };
+        metrics.push(m93);
+        var m94 = {
+            id: "94",
+            name: "Coleta de lixo ",
+            value: "10",
+            metricItemId: "16",
+            icon: "10.png",
+            iconSelected: "10-selected.png"
+        };
+        metrics.push(m94);
+        var m95 = {
+            id: "95",
+            name: "Iluminação",
+            value: "11",
+            metricItemId: "16",
+            icon: "11.png",
+            iconSelected: "11-selected.png"
+        };
+        metrics.push(m95);
+        var m96 = {
+            id: "96",
+            name: "Saneamento básico",
+            value: "12",
+            metricItemId: "16",
+            icon: "12.png",
+            iconSelected: "12-selected.png"
+        };
+        metrics.push(m96);
+        var m97 = {
+            id: "97",
+            name: "Comprar itens de primeira necessidade: medicamentos, alimentos",
+            value: "1",
+            metricItemId: "17",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m97);
+        var m98 = {
+            id: "98",
+            name: "Comprar itens de menor necessidade: roupas, eletrodomésticos",
+            value: "2",
+            metricItemId: "17",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m98);
+        var m99 = {
+            id: "99",
+            name: "Participar de atividades culturais e lazer",
+            value: "3",
+            metricItemId: "17",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m99);
+        var m100 = {
+            id: "100",
+            name: "Frequentar ambientes de permanência: parques e praças",
+            value: "4",
+            metricItemId: "17",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m100);
+        var m101 = {
+            id: "101",
+            name: "Nenhum dos anteriores",
+            value: "5",
+            metricItemId: "17",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m101);
+        var m102 = {
+            id: "102",
+            name: "Fachadas e edifícios conservados",
+            value: "1",
+            metricItemId: "18",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m102);
+        var m103 = {
+            id: "103",
+            name: "Trânsito fluido",
+            value: "2",
+            metricItemId: "18",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m103);
+        var m104 = {
+            id: "104",
+            name: "Vagas e locais de estacionamento",
+            value: "3",
+            metricItemId: "18",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m104);
+        var m105 = {
+            id: "105",
+            name: "Limpeza das ruas",
+            value: "4",
+            metricItemId: "18",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m105);
+        var m106 = {
+            id: "106",
+            name: "Coleta de lixo",
+            value: "5",
+            metricItemId: "18",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m106);
+        var m107 = {
+            id: "107",
+            name: "Saneamento básico",
+            value: "6",
+            metricItemId: "18",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m107);
+        var m108 = {
+            id: "108",
+            name: "Iluminação",
+            value: "7",
+            metricItemId: "18",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m108);
+        var m109 = {
+            id: "109",
+            name: "Espaços verdes",
+            value: "8",
+            metricItemId: "18",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m109);
+        var m110 = {
+            id: "110",
+            name: "Áreas de cultura e lazer",
+            value: "9",
+            metricItemId: "18",
+            icon: "9.png",
+            iconSelected: "9-selected.png"
+        };
+        metrics.push(m110);
+        var m111 = {
+            id: "111",
+            name: "Ciclovias",
+            value: "10",
+            metricItemId: "18",
+            icon: "10.png",
+            iconSelected: "10-selected.png"
+        };
+        metrics.push(m111);
+        var m112 = {
+            id: "112",
+            name: "Boas relações entre a vizinhança",
+            value: "11",
+            metricItemId: "18",
+            icon: "11.png",
+            iconSelected: "11-selected.png"
+        };
+        metrics.push(m112);
+        var m113 = {
+            id: "113",
+            name: "Circulação de pedestres",
+            value: "12",
+            metricItemId: "18",
+            icon: "12.png",
+            iconSelected: "12-selected.png"
+        };
+        metrics.push(m113);
+        var m114 = {
+            id: "114",
+            name: "Localização e acesso",
+            value: "13",
+            metricItemId: "18",
+            icon: "13.png",
+            iconSelected: "13-selected.png"
+        };
+        metrics.push(m114);
+        var m115 = {
+            id: "115",
+            name: "Fiação excessiva",
+            value: "1",
+            metricItemId: "19",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m115);
+        var m116 = {
+            id: "116",
+            name: "Degradação de fachadas e edifícios",
+            value: "2",
+            metricItemId: "19",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m116);
+        var m117 = {
+            id: "117",
+            name: "Trânsito congestionado",
+            value: "3",
+            metricItemId: "19",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m117);
+        var m118 = {
+            id: "118",
+            name: "Limpeza das ruas insuficiente",
+            value: "5",
+            metricItemId: "19",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m118);
+        var m119 = {
+            id: "119",
+            name: "Saneamento básico insuficiente",
+            value: "6",
+            metricItemId: "19",
+            icon: "6.png",
+            iconSelected: "6-selected.png"
+        };
+        metrics.push(m119);
+        var m120 = {
+            id: "120",
+            name: "Iluminação precária",
+            value: "7",
+            metricItemId: "19",
+            icon: "7.png",
+            iconSelected: "7-selected.png"
+        };
+        metrics.push(m120);
+        var m121 = {
+            id: "121",
+            name: "Espaços verdes insuficientes",
+            value: "8",
+            metricItemId: "19",
+            icon: "8.png",
+            iconSelected: "8-selected.png"
+        };
+        metrics.push(m121);
+        var m122 = {
+            id: "122",
+            name: "Áreas de cultura e lazer insuficientes",
+            value: "9",
+            metricItemId: "19",
+            icon: "9.png",
+            iconSelected: "9-selected.png"
+        };
+        metrics.push(m122);
+        var m123 = {
+            id: "123",
+            name: "Ciclovias insuficientes",
+            value: "10",
+            metricItemId: "19",
+            icon: "10.png",
+            iconSelected: "10-selected.png"
+        };
+        metrics.push(m123);
+        var m124 = {
+            id: "124",
+            name: "Más relações entre a vizinhança",
+            value: "11",
+            metricItemId: "19",
+            icon: "11.png",
+            iconSelected: "11-selected.png"
+        };
+        metrics.push(m124);
+        var m125 = {
+            id: "125",
+            name: "Falta de circulação de pedestres ",
+            value: "12",
+            metricItemId: "19",
+            icon: "12.png",
+            iconSelected: "12-selected.png"
+        };
+        metrics.push(m125);
+        var m126 = {
+            id: "126",
+            name: "Localização e acesso",
+            value: "13",
+            metricItemId: "19",
+            icon: "13.png",
+            iconSelected: "13-selected.png"
+        };
+        metrics.push(m126);
+        var m139 = {
+            id: "139",
+            name: "Vagas e locais de estacionamento insuficientes",
+            value: "14",
+            metricItemId: "19",
+            icon: "14.png",
+            iconSelected: "14-selected.png"
+        };
+        metrics.push(m139);
+        var m140 = {
+            id: "140",
+            name: "Coleta de lixo insuficiente",
+            value: "15",
+            metricItemId: "19",
+            icon: "15.png",
+            iconSelected: "15-selected.png"
+        };
+        metrics.push(m140);
+        var m127 = {
+            id: "127",
+            name: "Concordo Totalmente",
+            value: "1",
+            metricItemId: "20",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(m127);
+        var m128 = {
+            id: "128",
+            name: "Concordo",
+            value: "2",
+            metricItemId: "20",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m128);
+        var m129 = {
+            id: "129",
+            name: "Nem concordo nem discordo",
+            value: "3",
+            metricItemId: "20",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m129);
+        var m130 = {
+            id: "130",
+            name: "Discordo",
+            value: "4",
+            metricItemId: "20",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m130);
+        var m131 = {
+            id: "131",
+            name: "Discordo Totalmente",
+            value: "5",
+            metricItemId: "20",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m131);
+        var me132 = {
+            id: "132",
+            name: "Uso sempre",
+            value: "1",
+            metricItemId: "21",
+            icon: "1.png",
+            iconSelected: "1-selected.png"
+        };
+        metrics.push(me132);
+        var m133 = {
+            id: "133",
+            name: "Uso bastante",
+            value: "2",
+            metricItemId: "21",
+            icon: "2.png",
+            iconSelected: "2-selected.png"
+        };
+        metrics.push(m133);
+        var m134 = {
+            id: "134",
+            name: "Uso moderadamente",
+            value: "3",
+            metricItemId: "21",
+            icon: "3.png",
+            iconSelected: "3-selected.png"
+        };
+        metrics.push(m134);
+        var m135 = {
+            id: "135",
+            name: "Uso pouco",
+            value: "4",
+            metricItemId: "21",
+            icon: "4.png",
+            iconSelected: "4-selected.png"
+        };
+        metrics.push(m135);
+        var m136 = {
+            id: "136",
+            name: "Não uso",
+            value: "5",
+            metricItemId: "21",
+            icon: "5.png",
+            iconSelected: "5-selected.png"
+        };
+        metrics.push(m136);
+        return metrics;
     };
     PrioritizationProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
@@ -1010,364 +2105,364 @@ var QuestionProvider = /** @class */ (function () {
         var _this = this;
         return new Promise(function (resolve) {
             //Essa api que vai ser alterada para vir com atributo Answered (true, false)
-            _this.http.get(_this.restProvider.API_URL + "get-all-questions-by-questionary.php?questionary=" + questionary.id + "&isRuralZone=" + isRuralZone, { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-questions-by-questionary.php?questionary=" + questionary.id + "&isRuralZone=" + isRuralZone, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 // Questões temporárias [x]
                 //-----------------TEMPORÁRIO-------------------
                 //Diagnóstico Geral
-                // if (questionary.id == 666) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1001",
-                //     name: "1.	Com qual frequência você vai ao centro?",
-                //     description: "",
-                //     question: "1.	Com qual frequência você costuma ir ao centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "3"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1002",
-                //     name: "2.	O que te trás ao centro?",
-                //     description: "",
-                //     question: "2.	O que você vem fazer no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "4"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1003",
-                //     name: "3.	Com qual frequência você vai ao centro à noite?",
-                //     description: "",
-                //     question: "3.	Com qual frequência você costuma ir ao centro à noite?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "3"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1004",
-                //     name: "4.	Caso você tenha algum motivo para não ir ao centro à noite, qual seria?",
-                //     description: "Selecione abaixo",
-                //     question: "4.	Existe um motivo para você não ir ao centro à noite?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "5"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1005",
-                //     name: "5.	O que te atrai para o centro?",
-                //     description: "Selecione abaixo",
-                //     question: "5.	O que você acha legal fazer no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "6"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1006",
-                //     name: "6.	O que falta no centro?",
-                //     description: "Selecione abaixo",
-                //     question: "6.	Para você, o que faz falta no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "7"
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1007",
-                //     name: "7.	Como você qualifica os pontos comerciais no centro?",
-                //     description: "Selecione abaixo",
-                //     question: "7.	O que você acha das lojas do centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "8"
-                //   }
-                //   questions.push(q7);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
+                if (questionary.id == 666) {
+                    var questions = [];
+                    var q1 = {
+                        id: "1001",
+                        name: "1.	Com qual frequência você vai ao centro?",
+                        description: "",
+                        question: "1.	Com qual frequência você costuma ir ao centro?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "3"
+                    };
+                    questions.push(q1);
+                    var q2 = {
+                        id: "1002",
+                        name: "2.	O que te trás ao centro?",
+                        description: "",
+                        question: "2.	O que você vem fazer no centro?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "4"
+                    };
+                    questions.push(q2);
+                    var q3 = {
+                        id: "1003",
+                        name: "3.	Com qual frequência você vai ao centro à noite?",
+                        description: "",
+                        question: "3.	Com qual frequência você costuma ir ao centro à noite?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "3"
+                    };
+                    questions.push(q3);
+                    var q4 = {
+                        id: "1004",
+                        name: "4.	Caso você tenha algum motivo para não ir ao centro à noite, qual seria?",
+                        description: "Selecione abaixo",
+                        question: "4.	Existe um motivo para você não ir ao centro à noite?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "5"
+                    };
+                    questions.push(q4);
+                    var q5 = {
+                        id: "1005",
+                        name: "5.	O que te atrai para o centro?",
+                        description: "Selecione abaixo",
+                        question: "5.	O que você acha legal fazer no centro?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "6"
+                    };
+                    questions.push(q5);
+                    var q6 = {
+                        id: "1006",
+                        name: "6.	O que falta no centro?",
+                        description: "Selecione abaixo",
+                        question: "6.	Para você, o que faz falta no centro?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "7"
+                    };
+                    questions.push(q6);
+                    var q7 = {
+                        id: "1007",
+                        name: "7.	Como você qualifica os pontos comerciais no centro?",
+                        description: "Selecione abaixo",
+                        question: "7.	O que você acha das lojas do centro da cidade?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "8"
+                    };
+                    questions.push(q7);
+                    questions = _this.resolveNarrative(questions);
+                    data = questions;
+                }
                 //Diagnóstico Específico
-                // if (questionary.id == 661) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1008",
-                //     name: "1.	Costuma usufruir dos espaços públicos no centro? (Espaços públicos entende-se como calçada, rua, praças e parques)",
-                //     description: "",
-                //     question: "1.	Você faz uso das praças, parques, calçadas e estacionamento no centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "19"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1009",
-                //     name: "2.	Como considera as obras de requalificação urbana no centro?",
-                //     description: "",
-                //     question: "2.	Como você considera a necessidade reurbanização do centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "9"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1010",
-                //     name: "3.	Como você avalia a qualidade da calçada?",
-                //     description: "",
-                //     question: "3.	Como você avalia as calçadas do centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1011",
-                //     name: "4.	Como você avalia as rampas de acessibilidade?",
-                //     description: "",
-                //     question: "4.	Como você avalia as rampas de acessibilidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1012",
-                //     name: "5.	Como você avalia os pisos táteis? (Pisos táteis são faixas em alto-relevo fixadas no chão para fornecer auxílio à locomoção de pessoas com deficiência visual)",
-                //     description: "",
-                //     question: "5.	Como você avalia as faixas em alto-relevo do chão para auxílio às pessoas com deficiência visual?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1013",
-                //     name: "6.	Você acha que existem vagas de estacionamento suficientes?",
-                //     description: "",
-                //     question: "6.	Você acha que existem vagas de estacionamento suficientes?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1014",
-                //     name: "7.	Como você avalia a necessidade de Locais de descanso?",
-                //     description: "",
-                //     question: "7.	Como você avalia a necessidade de locais de descanso?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q7);
-                //   let q8 = {
-                //     id: "1015",
-                //     name: "8.	Como você avalia a necessidade de lixeiras?",
-                //     description: "",
-                //     question: "8.	Como você avalia a necessidade de lixeiras?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q8);
-                //   let q9 = {
-                //     id: "1016",
-                //     name: "9.	Como você avalia a necessidade de arborização?",
-                //     description: "",
-                //     question: "9.	Como você avalia a necessidade de arborização?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q9);
-                //   let q10 = {
-                //     id: "1017",
-                //     name: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
-                //     description: "",
-                //     question: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q10);
-                //   let q11 = {
-                //     id: "1018",
-                //     name: "11.	Como você avalia a necessidade de ponto de Ônibus?",
-                //     description: "",
-                //     question: "11.	Como você avalia a necessidade de ponto de Ônibus?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q11);
-                //   let q12 = {
-                //     id: "1019",
-                //     name: "12.	Você gosta das barracas do comércio de rua?",
-                //     description: "",
-                //     question: "12.	Você gosta das barracas do comércio de rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q12);
-                //   let q13 = {
-                //     id: "1020",
-                //     name: "13.	Você gosta das Kombis de alimentação do comércio de rua?",
-                //     description: "",
-                //     question: "13. Você gosta das Kombis de alimentação?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q13);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
+                if (questionary.id == 661) {
+                    var questions = [];
+                    var q1 = {
+                        id: "1008",
+                        name: "1.	Costuma usufruir dos espaços públicos no centro? (Espaços públicos entende-se como calçada, rua, praças e parques)",
+                        description: "",
+                        question: "1.	Você faz uso das praças, parques, calçadas e estacionamento no centro da cidade?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "19"
+                    };
+                    questions.push(q1);
+                    var q2 = {
+                        id: "1009",
+                        name: "2.	Como considera as obras de requalificação urbana no centro?",
+                        description: "",
+                        question: "2.	Como você considera a necessidade reurbanização do centro da cidade?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "9"
+                    };
+                    questions.push(q2);
+                    var q3 = {
+                        id: "1010",
+                        name: "3.	Como você avalia a qualidade da calçada?",
+                        description: "",
+                        question: "3.	Como você avalia as calçadas do centro?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "10"
+                    };
+                    questions.push(q3);
+                    var q4 = {
+                        id: "1011",
+                        name: "4.	Como você avalia as rampas de acessibilidade?",
+                        description: "",
+                        question: "4.	Como você avalia as rampas de acessibilidade?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "10"
+                    };
+                    questions.push(q4);
+                    var q5 = {
+                        id: "1012",
+                        name: "5.	Como você avalia os pisos táteis? (Pisos táteis são faixas em alto-relevo fixadas no chão para fornecer auxílio à locomoção de pessoas com deficiência visual)",
+                        description: "",
+                        question: "5.	Como você avalia as faixas em alto-relevo do chão para auxílio às pessoas com deficiência visual?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "10"
+                    };
+                    questions.push(q5);
+                    var q6 = {
+                        id: "1013",
+                        name: "6.	Você acha que existem vagas de estacionamento suficientes?",
+                        description: "",
+                        question: "6.	Você acha que existem vagas de estacionamento suficientes?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: null
+                    };
+                    questions.push(q6);
+                    var q7 = {
+                        id: "1014",
+                        name: "7.	Como você avalia a necessidade de Locais de descanso?",
+                        description: "",
+                        question: "7.	Como você avalia a necessidade de locais de descanso?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "11"
+                    };
+                    questions.push(q7);
+                    var q8 = {
+                        id: "1015",
+                        name: "8.	Como você avalia a necessidade de lixeiras?",
+                        description: "",
+                        question: "8.	Como você avalia a necessidade de lixeiras?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "11"
+                    };
+                    questions.push(q8);
+                    var q9 = {
+                        id: "1016",
+                        name: "9.	Como você avalia a necessidade de arborização?",
+                        description: "",
+                        question: "9.	Como você avalia a necessidade de arborização?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "11"
+                    };
+                    questions.push(q9);
+                    var q10 = {
+                        id: "1017",
+                        name: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
+                        description: "",
+                        question: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "11"
+                    };
+                    questions.push(q10);
+                    var q11 = {
+                        id: "1018",
+                        name: "11.	Como você avalia a necessidade de ponto de Ônibus?",
+                        description: "",
+                        question: "11.	Como você avalia a necessidade de ponto de Ônibus?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "11"
+                    };
+                    questions.push(q11);
+                    var q12 = {
+                        id: "1019",
+                        name: "12.	Você gosta das barracas do comércio de rua?",
+                        description: "",
+                        question: "12.	Você gosta das barracas do comércio de rua?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: null
+                    };
+                    questions.push(q12);
+                    var q13 = {
+                        id: "1020",
+                        name: "13.	Você gosta das Kombis de alimentação do comércio de rua?",
+                        description: "",
+                        question: "13. Você gosta das Kombis de alimentação?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: null
+                    };
+                    questions.push(q13);
+                    questions = _this.resolveNarrative(questions);
+                    data = questions;
+                }
                 //Questionário comerciante
-                // if (questionary.id == 660) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1021",
-                //     name: "1.	Qual o ramo da sua atividade comercial?",
-                //     description: "",
-                //     question: "1.	Você trabalha com qual atividade comercial?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "12"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1022",
-                //     name: "2.	Por que você escolheu essa rua para seu comércio?",
-                //     description: "",
-                //     question: "2.	Por que você escolheu essa rua para seu comércio?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "13"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1023",
-                //     name: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
-                //     description: "",
-                //     question: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "8"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1024",
-                //     name: "4.	Quais melhorias poderiam ser feitas para atender suas necessidades?",
-                //     description: "",
-                //     question: "4.	Quais melhorias poderiam ser feitas na sua rua para atender suas necessidades?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "14"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1025",
-                //     name: "5.	O que as pessoas costumam fazer nessa rua?",
-                //     description: "",
-                //     question: "5.	O que as pessoas costumam fazer quando passam por essa rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "15"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1026",
-                //     name: "6.	Quais são os pontos fortes da sua rua?",
-                //     description: "",
-                //     question: "6.	Para você, quais são os fortes da sua rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "16"
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1027",
-                //     name: "7.	Quais são os pontos fracos da sua rua?",
-                //     description: "",
-                //     question: "7.	Para você, quais são os pontos fracos da sua rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "17"
-                //   }
-                //   questions.push(q7);
-                //   let q8 = {
-                //     id: "1028",
-                //     name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”.",
-                //     description: "",
-                //     question: "8.	O que você pensa sobre essa afirmação: “Não trocaria a rua do meu comércio por nenhum outro local da cidade”.",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "18"
-                //   }
-                //   questions.push(q8);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
+                if (questionary.id == 660) {
+                    var questions = [];
+                    var q1 = {
+                        id: "1021",
+                        name: "1.	Qual o ramo da sua atividade comercial?",
+                        description: "",
+                        question: "1.	Você trabalha com qual atividade comercial?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "12"
+                    };
+                    questions.push(q1);
+                    var q2 = {
+                        id: "1022",
+                        name: "2.	Por que você escolheu essa rua para seu comércio?",
+                        description: "",
+                        question: "2.	Por que você escolheu essa rua para seu comércio?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "13"
+                    };
+                    questions.push(q2);
+                    var q3 = {
+                        id: "1023",
+                        name: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
+                        description: "",
+                        question: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "8"
+                    };
+                    questions.push(q3);
+                    var q4 = {
+                        id: "1024",
+                        name: "4.	Quais melhorias poderiam ser feitas para atender suas necessidades?",
+                        description: "",
+                        question: "4.	Quais melhorias poderiam ser feitas na sua rua para atender suas necessidades?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "14"
+                    };
+                    questions.push(q4);
+                    var q5 = {
+                        id: "1025",
+                        name: "5.	O que as pessoas costumam fazer nessa rua?",
+                        description: "",
+                        question: "5.	O que as pessoas costumam fazer quando passam por essa rua?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "15"
+                    };
+                    questions.push(q5);
+                    var q6 = {
+                        id: "1026",
+                        name: "6.	Quais são os pontos fortes da sua rua?",
+                        description: "",
+                        question: "6.	Para você, quais são os fortes da sua rua?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "16"
+                    };
+                    questions.push(q6);
+                    var q7 = {
+                        id: "1027",
+                        name: "7.	Quais são os pontos fracos da sua rua?",
+                        description: "",
+                        question: "7.	Para você, quais são os pontos fracos da sua rua?",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "17"
+                    };
+                    questions.push(q7);
+                    var q8 = {
+                        id: "1028",
+                        name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”.",
+                        description: "",
+                        question: "8.	O que você pensa sobre essa afirmação: “Não trocaria a rua do meu comércio por nenhum outro local da cidade”.",
+                        contextArea: "Requalificação do Centro",
+                        contextAreaIcon: "city-icon.png",
+                        position: "1",
+                        isRuralZone: "0",
+                        metricId: "18"
+                    };
+                    questions.push(q8);
+                    questions = _this.resolveNarrative(questions);
+                    data = questions;
+                }
                 //-----------------TEMPORÁRIO-------------------
                 // data = this.resolveNarrative(data);
                 resolve(data);
@@ -1375,6 +2470,179 @@ var QuestionProvider = /** @class */ (function () {
                 resolve(error);
             });
         });
+    };
+    QuestionProvider.prototype.resolveNarrative = function (questions) {
+        var newQuestions = [];
+        questions.forEach(function (quest) {
+            var q = {
+                id: quest.id,
+                name: quest.name,
+                description: quest.description,
+                question: quest.question,
+                position: quest.position,
+                contextArea: quest.contextArea,
+                contextAreaIcon: quest.contextAreaIcon,
+                isRuralZone: quest.isRuralZone,
+                metricId: quest.metricId,
+                narrative: null,
+                sound: null,
+                useNarrative: false
+            };
+            //-------------------------APLICAÇÃO DA NARRATIVA-------------------------
+            //----------------------------IMPORTANTE--------------------------------
+            switch (quest.id) {
+                case "1001":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1002":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1003":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1004":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1005":
+                    q.narrative = "Quando você vem ao centro, você pode encontrar serviços, lojas e espaços de lazer. Algumas dessas atrações podem fazer você gostar de ir ao centro cidade, nos ajude a descobrir qual é!";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1006":
+                    q.narrative = "Você esta saindo em um passeio com sua família no centro da cidade. Que tipo de coisa você sente que poderia complementar esse momento?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1007":
+                    q.narrative = "Pense em qual avaliação você daria para o atendimento e os serviços das lojas do centro da cidade. Você está satisfeito quando precisa fazer compras e precisa entrar nas lojas?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1008":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1009":
+                    q.narrative = "A reurbanização tem como objetivo tornar o centro mais atrativo para você trabalhar, fazer compras ou passear. As obras são feitas para atender a necessidade da população e melhorar a mobilidade do trânsito. Você considera a reurbanização necessária?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1010":
+                    q.narrative = "Quando você caminha pelo centro, você percebe que as calçadas estão esburacadas e costuma esbarrar em outras pessoas por serem apertadas?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1011":
+                    q.narrative = "Você costuma encontrar rampas de acessibilidade para cadeirantes e acha que o estado de conservação dessas rampas está adequado?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1012":
+                    q.narrative = "Ao caminhar pelo centro, você costuma deparar com as faixas elevadas que auxiliam os deficientes visuais em todas as calçadas que você passa?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1013":
+                    q.narrative = "Se você vai de centro no seu carro ou de outras pessoas, você encontra problemas em estacionar, a ponto de não encontrar uma vaga quando precisa?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1014":
+                    q.narrative = "Você costuma deparar com locais de descanço, como bancos, quando esta caminhando pelo centro e acha que estão conservados?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1015":
+                    q.narrative = "Você costuma deparar com lixeiras quando vai no centro e acha que estão conservadas?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1016":
+                    q.narrative = "Você costuma deparar com ruas arborizadas quando vai no centro?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1017":
+                    q.narrative = "Quando você vai ao centro a noite as ruas estão bem iluminadas?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1018":
+                    q.narrative = "Você se depara com pontos de ônibus quando vai ao centro e acha que estão conservados?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1019":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1020":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1021":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1022":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                case "1023":
+                    q.narrative = "A infraestrutura básica corresponde às calçadas, a iluminação, as lixeiras e o asfalto da rua. Na faixada da do seu comércio, a rua esta com a infraestrutura adequada ou tem que melhorar?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1024":
+                    q.narrative = "Nós sugerimos essa lista de melhorias para você escolher quais delas podem atender suas necessidades. Conte-nos quais são essas melhorias!";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1025":
+                    q.narrative = "Nas conversas com seus clientes, o que as pessoas costumam dizer que vão fazer na sua rua? Ou, por outro lado, o que você percebe que as pessoas costuma fazer?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1026":
+                    q.narrative = "Mostre para nós, quais os pontos forte da sua rua que te deixam satisfeito por trabalhar aí! ";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1027":
+                    q.narrative = "Mostre para nós, os pontos fracos da sua rua que precisam ser melhorados para atender as necessidades da sua empresa!";
+                    q.narrative = "Você esta satisfeito com sua rua quando esta trabalhando? Ou pretendente trocar o local de seu estabelecimento se encontrar um local melhor?";
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = true;
+                    break;
+                case "1028":
+                    q.narrative = null;
+                    q.sound = "https://soundcloud.com/kito-1/stone-temple-pilots-interstate-love-song_kito-mp3";
+                    q.useNarrative = false;
+                    break;
+                default:
+                    q.narrative = null;
+                    q.sound = null;
+                    q.useNarrative = false;
+                    break;
+            }
+            newQuestions.push(q);
+            //-------------------------APLICAÇÃO DA NARRATIVA-------------------------
+            //----------------------------IMPORTANTE----------------------------------
+        });
+        return newQuestions;
     };
     QuestionProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
@@ -1393,7 +2661,7 @@ var Question = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 213:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1418,7 +2686,7 @@ var AnswerProvider = /** @class */ (function () {
         this.http = http;
         this.restProvider = restProvider;
     }
-    AnswerProvider.prototype.insertAnswersData = function (answers, answersNeighborhoods, prioritizations, userType, useGame) {
+    AnswerProvider.prototype.insertAnswersData = function (answers, answersNeighborhoods, prioritizations, userType) {
         var _this = this;
         return new Promise(function (resolve) {
             var token = _this.restProvider.cryptography(answers[0].plan.id + answers[0].questionary.id + answers[0].question.id + answers[0].respondent.id + answers[0].answer + answers[0].created_at);
@@ -1431,8 +2699,7 @@ var AnswerProvider = /** @class */ (function () {
                     "respondent_id": answer.respondent.id,
                     "answer": answer.answer,
                     "user_id": userType.id,
-                    "created_at": answer.created_at,
-                    "use_game": useGame
+                    "created_at": answer.created_at
                 };
                 answersParsed.push(item);
             });
@@ -1467,12 +2734,12 @@ var AnswerProvider = /** @class */ (function () {
                 "prioritizations": JSON.parse(JSON.stringify(prioritizationsParsed)),
                 "token": token
             };
-            _this.http.post(_this.restProvider.API_URL + "insert-answers-data.php", data, { headers: _this.restProvider.headers })
-                .subscribe(function (data) {
-                resolve(data);
-            }, function (error) {
-                resolve(error);
-            });
+            // this.http.post("https://api.neiru.org/insert-answers-data.php", data, {headers: this.restProvider.headers})
+            //   .subscribe(data => {
+            resolve(data);
+            //   }, error => {
+            //     resolve(error);
+            //   });
         });
     };
     AnswerProvider = __decorate([
@@ -1515,7 +2782,7 @@ var NeighborhoodProvider = /** @class */ (function () {
     NeighborhoodProvider.prototype.getAllNeighborhoodsByCity = function (city) {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-neighborhoods-by-city.php?city=" + city.id, { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-neighborhoods-by-city.php?city=" + city.id, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
@@ -1571,7 +2838,7 @@ var RespondentProvider = /** @class */ (function () {
             var data = {
                 "cpf": cpf
             };
-            _this.http.post(_this.restProvider.API_URL + "get-respondent-by-cpf.php", data, { headers: _this.restProvider.headers })
+            _this.http.post("https://api.neiru.org/get-respondent-by-cpf.php", data, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
@@ -1603,17 +2870,12 @@ var RespondentProvider = /** @class */ (function () {
                 "type": respondent.type
                 //-----------------NOVOS CAMPOS-----------------
             };
-            //-----------------INSERÇÃO API-----------------
-            _this.http.post(_this.restProvider.API_URL + "update-respondent.php", data, { headers: _this.restProvider.headers })
-                .subscribe(function (data) {
-                //-----------------INSERÇÃO API-----------------
-                resolve(data);
-                //-----------------INSERÇÃO API-----------------
-            }, function (error) {
-                console.log(error);
-                resolve(error);
-            });
-            //-----------------INSERÇÃO API-----------------
+            // this.http.post("https://api.neiru.org/update-respondent.php", data, {headers: this.restProvider.headers})
+            //   .subscribe(data => {
+            resolve(data);
+            //   }, error => {
+            //     resolve(error);
+            //   });
         });
     };
     RespondentProvider.prototype.insertRespondent = function (respondent) {
@@ -1639,16 +2901,12 @@ var RespondentProvider = /** @class */ (function () {
                 //-----------------NOVOS CAMPOS-----------------
                 "token": token
             };
-            //-----------------INSERÇÃO API-----------------
-            _this.http.post(_this.restProvider.API_URL + "insert-respondent.php", data, { headers: _this.restProvider.headers })
-                .subscribe(function (data) {
-                //-----------------INSERÇÃO API-----------------
-                resolve(data);
-                //-----------------INSERÇÃO API-----------------
-            }, function (error) {
-                resolve(error);
-            });
-            //-----------------INSERÇÃO API-----------------
+            // this.http.post("https://api.neiru.org/insert-respondent.php", data, {headers: this.restProvider.headers})
+            //   .subscribe(data => {
+            resolve(data);
+            //   }, error => {
+            //     resolve(error);
+            //   });
         });
     };
     RespondentProvider = __decorate([
@@ -1699,7 +2957,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_common_http__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_respondent_respondent__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_prioritization_prioritization__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_answer_answer__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_answer_answer__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_network__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_app_version__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_intro_intro__ = __webpack_require__(55);
@@ -1747,8 +3005,8 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
@@ -1905,7 +3163,7 @@ var QuestionaryProvider = /** @class */ (function () {
     QuestionaryProvider.prototype.getAllQuestionariesByPlan = function (plan) {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-questionaries-by-plan.php?plan=" + plan.id, { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-questionaries-by-plan.php?plan=" + plan.id, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
@@ -1926,8 +3184,7 @@ var QuestionaryProvider = /** @class */ (function () {
             questionaries.forEach(function (questionary) {
                 var item = {
                     "questionary_id": questionary.id,
-                    "questionary_name": questionary.name,
-                    "questionary_icon": questionary.icon
+                    "questionary_name": questionary.name
                 };
                 questionariesJson.push(item);
             });
@@ -1936,13 +3193,156 @@ var QuestionaryProvider = /** @class */ (function () {
                 "questionaries": JSON.parse(JSON.stringify(questionariesJson)),
                 "respondent": respondentJson
             };
-            _this.http.post(_this.restProvider.API_URL + "get-all-plan-questionaries-answered-by-respondent.php", data, { headers: _this.restProvider.headers })
+            _this.http.post("https://api.neiru.org/get-all-plan-questionaries-answered-by-respondent.php", data, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
                 resolve(error);
             });
         });
+    };
+    //-------------------AJUSTE NO ÍCONE DO QUESTIONÁRIO-------------------
+    //-----------------------------IMPORTANTE------------------------------
+    QuestionaryProvider.prototype.resolveQuestionaryIcon = function (questionaries) {
+        var questionariesParse = [];
+        questionaries.forEach(function (questionary) {
+            var item = {
+                "id": questionary.id,
+                "name": questionary.name,
+                "answered": questionary.answered,
+                "icon": "city-icon.png"
+            };
+            switch (item.name) {
+                case "Segurança Pública": {
+                    if (item.answered) {
+                        item.icon = "security-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "security-icon.png";
+                    }
+                    break;
+                }
+                case "Mobilidade e Transporte": {
+                    if (item.answered) {
+                        item.icon = "urban_traffic-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "urban_traffic-icon.png";
+                    }
+                    break;
+                }
+                case "Uso e Ocupação do Solo": {
+                    if (item.answered) {
+                        item.icon = "environment-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "environment-icon.png";
+                    }
+                    break;
+                }
+                case "Saúde": {
+                    if (item.answered) {
+                        item.icon = "health-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "health-icon.png";
+                    }
+                    break;
+                }
+                case "Lazer Cultura e Turismo": {
+                    if (item.answered) {
+                        item.icon = "culture-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "culture-icon.png";
+                    }
+                    break;
+                }
+                case "Saneamento": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Educação": {
+                    if (item.answered) {
+                        item.icon = "education-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "education-icon.png";
+                    }
+                    break;
+                }
+                case "Meio Ambiente": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Abastecimento de água": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Esgotamento Sanitário": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Drenagem Urbana": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Resíduos Sólidos": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                case "Informações Adicionais": {
+                    if (item.answered) {
+                        item.icon = "water_residues-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "water_residues-icon.png";
+                    }
+                    break;
+                }
+                default: {
+                    if (item.answered) {
+                        item.icon = "city-icon-selected.png";
+                    }
+                    else {
+                        item.icon = "city-icon.png";
+                    }
+                    break;
+                }
+            }
+            questionariesParse.push(item);
+        });
+        return questionariesParse;
     };
     QuestionaryProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
@@ -1951,8 +3351,8 @@ var QuestionaryProvider = /** @class */ (function () {
     return QuestionaryProvider;
 }());
 
-//-------------------AJUSTE NO ÍCONE DO QUESTIONÁRIO---------------------
-//-----------------------------TEMPORÁRIO--------------------------------
+//-------------------AJUSTE NO ÍCONE DO QUESTIONÁRIO-------------------
+//-------------------------IMPORTANTE-------------------------
 var Questionary = /** @class */ (function () {
     function Questionary() {
     }
@@ -2109,18 +3509,18 @@ var IntroPage = /** @class */ (function () {
                                 _this.storage.set('city', _this.city).then(function () {
                                     // Plano temporário [x]
                                     //----------------------------TEMPORÁRIO---------------------------------
-                                    // let p: Plan = {
-                                    //   city: this.city,
-                                    //   id: 666,
-                                    //   name: "Plano de Mobilidade de Pouso Alegre",
-                                    //   usePrioritization: false
-                                    // }
-                                    // plans.push(p);
+                                    var p = {
+                                        city: _this.city,
+                                        id: 666,
+                                        name: "Plano de Mobilidade",
+                                        usePrioritization: false
+                                    };
+                                    plans.push(p);
                                     //----------------------------TEMPORÁRIO---------------------------------
                                     _this.plans = plans;
                                     _this.questionaries = [];
                                     _this.plans.forEach(function (p) {
-                                        if (p.name == "Plano de Mobilidade de Pouso Alegre") {
+                                        if (p.name == "Plano de Mobilidade") {
                                             _this.plan = p;
                                             _this.questionaryProvider.getAllQuestionariesByPlan(_this.plan)
                                                 .then(function (questionaries) {
@@ -2128,33 +3528,32 @@ var IntroPage = /** @class */ (function () {
                                                     _this.storage.set('plan', _this.plan);
                                                     // Questionário temporário [x]
                                                     //----------------------------TEMPORÁRIO---------------------------------
-                                                    // let questionaryTemp1: Questionary = {
-                                                    //   id: 666,
-                                                    //   name: "Centro - Diagnóstico Geral",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // let questionaryTemp2: Questionary = {
-                                                    //   id: 661,
-                                                    //   name: "Centro - Diagnóstico Específico",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // let questionaryTemp3: Questionary = {
-                                                    //   id: 660,
-                                                    //   name: "Centro - Comerciante",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // questionaries.push(questionaryTemp1);
-                                                    // questionaries.push(questionaryTemp2);
-                                                    // questionaries.push(questionaryTemp3);
-                                                    // this.questionaries = this.questionaryProvider.resolveQuestionaryIcon(questionaries);
+                                                    var questionaryTemp1 = {
+                                                        id: 666,
+                                                        name: "Centro - Diagnóstico Geral",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    var questionaryTemp2 = {
+                                                        id: 661,
+                                                        name: "Centro - Diagnóstico Específico",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    var questionaryTemp3 = {
+                                                        id: 660,
+                                                        name: "Centro - Comerciante",
+                                                        answered: false,
+                                                        plan: _this.plan,
+                                                        questions: null,
+                                                    };
+                                                    questionaries.push(questionaryTemp1);
+                                                    questionaries.push(questionaryTemp2);
+                                                    questionaries.push(questionaryTemp3);
                                                     //----------------------------TEMPORÁRIO---------------------------------
-                                                    _this.questionaries = questionaries;
+                                                    _this.questionaries = _this.questionaryProvider.resolveQuestionaryIcon(questionaries);
                                                     _this.storage.set('questionaries', _this.questionaries);
                                                     var points = 0;
                                                     _this.storage.set('points', points);
@@ -2482,7 +3881,7 @@ var CityProvider = /** @class */ (function () {
     CityProvider.prototype.getAllCities = function () {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-cities.php", { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-cities.php", { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
@@ -2493,7 +3892,7 @@ var CityProvider = /** @class */ (function () {
     CityProvider.prototype.getAllCitiesWithPlan = function () {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-cities-with-plan.php", { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-cities-with-plan.php", { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
@@ -2547,7 +3946,7 @@ var PlanProvider = /** @class */ (function () {
     PlanProvider.prototype.getAllPlansByCity = function (city) {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.restProvider.API_URL + "get-all-plans-by-city.php?city=" + city.id, { headers: _this.restProvider.headers })
+            _this.http.get("https://api.neiru.org/get-all-plans-by-city.php?city=" + city.id, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
                 resolve(data);
             }, function (error) {
