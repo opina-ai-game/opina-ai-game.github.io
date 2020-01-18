@@ -46,7 +46,7 @@ var ThankyouPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_questionary_questionary__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_answer_answer__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_answer_answer__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -137,14 +137,14 @@ var ThankyouPage = /** @class */ (function () {
         var _this = this;
         this.loader = this.loadingCtrl.create();
         this.loader.present();
-        this.answerProvider.insertAnswersData(this.answers, this.answersNeighborhoods, this.prioritizations, this.userType)
+        this.answerProvider.insertAnswersData(this.answers, this.answersNeighborhoods, this.prioritizations, this.userType, this.useGame)
             .then(function (data) {
             if (data != null) {
                 _this.storage.set('points', _this.points);
                 _this.navCtrl.setRoot('QuestionariesListPage', {}).then(_this.loader.dismiss());
             }
             else {
-                var alert = _this.alertCtrl.create({
+                var alert_1 = _this.alertCtrl.create({
                     title: 'Oops!',
                     message: 'Não foi possível enviar os dados para o servidor. Por favor, tente novamente.',
                     buttons: [{
@@ -154,7 +154,7 @@ var ThankyouPage = /** @class */ (function () {
                             }
                         }]
                 });
-                alert.present();
+                alert_1.present();
                 _this.loader.dismiss();
             }
         })
@@ -177,10 +177,9 @@ var ThankyouPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-thankyou',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\thankyou\thankyou.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col offset-2 col-6>\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col offset-1 col-2>\n        <button class="button-help-thankyou" *ngIf="useGame" ion-button clear (click)="help()">\n          <ion-icon class="icon-help button-help-thankyou" name="alert" ></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6 offset-3>\n        <img src="assets/imgs/thank-you.png" class="img-responsive">\n      </ion-col>\n      <ion-col *ngIf="useGame" col-12>\n        <!-- Pontuação -->\n        <ion-item *ngIf="points > 0">\n          <ion-thumbnail item-start>\n            <img *ngIf="level == \'Ouro\'" class="img-responsive" src="assets/imgs/level3.png" />\n            <img *ngIf="level == \'Prata\'" class="img-responsive" src="assets/imgs/level2.png" />\n            <img *ngIf="level == \'Bronze\'" class="img-responsive" src="assets/imgs/level1.png" />\n          </ion-thumbnail>\n          <h2>Você esta no nível {{level}}</h2>\n          <h2>de participação!</h2>\n          <p>Sua pontuação</p>\n          <ion-badge>{{points}} pontos</ion-badge>\n        </ion-item>\n        <!-- Pontuação -->\n        <!-- Pontuação -->\n        <ion-item *ngIf="points == 0">\n          <ion-thumbnail item-start>\n            <img class="img-responsive" src="assets/imgs/level0.png" />\n          </ion-thumbnail>\n          <h2>Responda os questionários</h2>\n          <h2>para aumentar seu nível</h2>\n          <h2>de participação!</h2>\n          <p>Sua pontuação</p>\n          <ion-badge>{{points}} pontos</ion-badge>\n        </ion-item>\n        <!-- Pontuação -->\n      </ion-col>\n      <ion-col col-12 text-center>\n        <img src="assets/imgs/intro4.jpg" />\n        <h2 >Continue participando!</h2>\n        <p style="font-size: 15px">\n          Você pode continuar participando respondendo outros <strong>questionários</strong>!\n        </p>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="useGame">\n      <ion-col col-12 text-center class="margin-top-10">\n        <button  ion-button full class="button-background" (click)="finishQuestionary()">\n            <ion-icon id="button-finish-game-{{questionary.id}}" class="text-button">\n                Vamos lá!\n              </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <ion-col col-12 text-center class="margin-top-10">\n        <button  ion-button full class="button-background" (click)="finishQuestionary()">\n            <ion-icon id="button-finish-{{questionary.id}}" class="text-button">\n              Vamos lá!\n            </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n<ion-footer>\n  <ion-navbar class="toolbar-progress">\n    <ion-title *ngIf="useGame" text-center>\n      <ion-icon range-right name="md-ribbon"></ion-icon>\n      {{points}} pontos\n    </ion-title>\n    <ion-range *ngIf="useGame" class="progress-bar" [min]="0" [max]="100" [step]="1" [(ngModel)]="progress" disabled>\n      <ion-icon range-left name="md-clipboard"></ion-icon>\n      <ion-icon range-right></ion-icon>\n    </ion-range>\n    <div *ngIf="useGame" text-center class="progres-text-uper">{{totalQuestions}} de {{totalQuestions}} questões</div>\n  </ion-navbar>\n</ion-footer>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\thankyou\thankyou.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_answer_answer__["a" /* AnswerProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_answer_answer__["a" /* AnswerProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_answer_answer__["a" /* AnswerProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
     ], ThankyouPage);
     return ThankyouPage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=thankyou.js.map
