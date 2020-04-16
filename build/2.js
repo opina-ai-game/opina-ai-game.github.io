@@ -46,10 +46,12 @@ var QuestionaryPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_questionary_questionary__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_question_question__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_question_question__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_database_database__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_prioritization_prioritization__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_answer_answer__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -101,8 +103,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
+
 var QuestionaryPage = /** @class */ (function () {
-    function QuestionaryPage(toastCtrl, menuCtrl, navCtrl, navParams, questionProvider, storage, databaseProvider, loadingCtrl, alertCtrl, priorizationProvider) {
+    function QuestionaryPage(toastCtrl, menuCtrl, navCtrl, navParams, questionProvider, storage, databaseProvider, loadingCtrl, alertCtrl, priorizationProvider, answerProvider) {
         var _this = this;
         this.toastCtrl = toastCtrl;
         this.menuCtrl = menuCtrl;
@@ -114,6 +118,7 @@ var QuestionaryPage = /** @class */ (function () {
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.priorizationProvider = priorizationProvider;
+        this.answerProvider = answerProvider;
         this.neighborhoodsSelected = [];
         this.questionAnswer = -1;
         this.showNeighborhoodList = false;
@@ -122,7 +127,10 @@ var QuestionaryPage = /** @class */ (function () {
         this.isDontKnowSelected = false;
         this.btnContinueDisabled = true;
         this.showDontNow = true;
+        this.showAnswerText = false;
+        this.answerText = "";
         this.useGame = false;
+        this.endQuestion = false;
         this.NO = 0;
         this.YES = 1;
         this.DONT_KNOW = 2;
@@ -130,6 +138,7 @@ var QuestionaryPage = /** @class */ (function () {
         this.CITY_PROBLEM = 1;
         this.RESPONDENT_NEIGHBORHOOD_PROBLEM = 2;
         this.storage.get('useGame').then(function (data) { return _this.useGame = data; });
+        this.getUserType();
         this.progress = 0;
         this.answers = navParams.get('answers');
         this.answersNeighborhoods = navParams.get('answersNeighborhoods');
@@ -151,6 +160,27 @@ var QuestionaryPage = /** @class */ (function () {
         })
             .catch(function () { return _this.navigateBack(); });
     }
+    QuestionaryPage.prototype.getUserType = function () {
+        var _this = this;
+        this.storage.get('userType')
+            .then(function (data) {
+            if (data != null) {
+                _this.userType = data;
+            }
+            else {
+                var userType = new __WEBPACK_IMPORTED_MODULE_8__home_home__["b" /* UserType */]();
+                userType.id = null;
+                userType.name = null;
+                _this.userType = userType;
+            }
+        })
+            .catch(function () {
+            var userType = new __WEBPACK_IMPORTED_MODULE_8__home_home__["b" /* UserType */]();
+            userType.id = null;
+            userType.name = null;
+            _this.userType = userType;
+        });
+    };
     QuestionaryPage.prototype.presentToast = function () {
         var toast = this.toastCtrl.create({
             message: 'Clique no icone em caso de dúvidas!',
@@ -199,18 +229,20 @@ var QuestionaryPage = /** @class */ (function () {
                 _this.currentQuestion = _this.questions[currentIndex];
                 _this.progress = ((currentIndex + 1) / _this.questions.length) * 100;
                 _this.totalQuestions = _this.questions.length;
-                //------------------------MUITO IMPORTANTE------------------------
-                //-----------OCULTANDO O DONT NOW PARA DETERMINADAS PERGUNTAS-------------------
-                // let id = this.currentQuestion.id;
-                // if (id == "1003" || id == "1008" || id == "1019" || id == "1020") {
-                //   this.showDontNow = false;
-                // }
-                //-----------OCULTANDO O DONT NOW PARA DETERMINADAS PERGUNTAS-------------------
-                //------------------------MUITO IMPORTANTE------------------------
                 if (_this.currentQuestion.showDontNow == "0")
                     _this.showDontNow = false;
                 else
                     _this.showDontNow = true;
+                if (_this.currentQuestion.useAnswerText == "0")
+                    _this.showAnswerText = false;
+                else {
+                    _this.showAnswerText = true;
+                    _this.questionAnswer = _this.YES;
+                    _this.btnContinueDisabled = false;
+                }
+                if (_this.currentQuestionIndex + 1 >= _this.questions.length) {
+                    _this.endQuestion = true;
+                }
             }
             else {
                 var alert_1 = _this.alertCtrl.create({
@@ -316,6 +348,7 @@ var QuestionaryPage = /** @class */ (function () {
         answer.answer = questionAnswer;
         answer.created_at = new Date().toISOString();
         answer.isCompleted = false;
+        answer.answer_text = this.answerText;
         this.answers.push(answer);
     };
     QuestionaryPage.prototype.createAnswersNeighborhoods = function () {
@@ -398,7 +431,45 @@ var QuestionaryPage = /** @class */ (function () {
         this.createAnswer(this.plan, this.questionary, this.questions[this.currentQuestionIndex + 1], this.respondent, this.YES);
         this.navigatePrioritizationPage(this.plan, this.respondent, this.questionary, this.neighborhoods, this.questions, this.metricItems, this.metricItems[0], 0, this.currentQuestionIndex + 1, this.questions[this.currentQuestionIndex + 1], this.answers, this.answersNeighborhoods, this.prioritizations);
     };
+    QuestionaryPage.prototype.finishQuestionary = function () {
+        var _this = this;
+        this.answerProvider.insertAnswersData(this.answers, this.answersNeighborhoods, this.prioritizations, this.userType, this.useGame, this.points)
+            .then(function (data) {
+            if (data != null) {
+                _this.storage.set('points', _this.points);
+            }
+            else {
+                var alert_2 = _this.alertCtrl.create({
+                    title: 'Oops!',
+                    message: 'Não foi possível enviar os dados para o servidor. Por favor, tente novamente.',
+                    buttons: [{
+                            text: "Tentar novamente",
+                            handler: function () {
+                                _this.finishQuestionary();
+                            }
+                        }]
+                });
+                alert_2.present();
+                _this.loader.dismiss();
+            }
+        })
+            .catch(function () {
+            var alert = _this.alertCtrl.create({
+                title: 'Oops!',
+                message: 'Não foi possível enviar os dados para o servidor. Por favor, tente novamente.',
+                buttons: [{
+                        text: "Tentar novamente",
+                        handler: function () {
+                            _this.finishQuestionary();
+                        }
+                    }]
+            });
+            alert.present();
+            _this.loader.dismiss();
+        });
+    };
     QuestionaryPage.prototype.navigateThankYouPage = function () {
+        this.finishQuestionary();
         //Navegação para pagina de agradecimento
         this.navCtrl.push('ThankyouPage', {
             questions: this.questions,
@@ -529,9 +600,9 @@ var QuestionaryPage = /** @class */ (function () {
     ], QuestionaryPage.prototype, "content", void 0);
     QuestionaryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-questionary',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionary\questionary.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col col-2 class="menu-icon-col">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6>\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-2>\n        <button class="button-help-question" *ngIf="currentQuestion.useNarrative && useGame" ion-button clear (click)="help()">\n          <ion-icon  class="icon-help button-help-question" name="alert"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row class="context-area">\n      <ion-col col-12 class="context-area-container">\n        <img class="context-area-icon" src="assets/imgs/{{currentQuestion.contextAreaIcon}}" />\n        <ion-label class="context-area-title">\n          {{currentQuestion.contextArea}}\n        </ion-label>\n      </ion-col>\n    </ion-row>\n    <div class="hr"></div>\n    <ion-row class="margin-top-30">\n      <ion-col *ngIf="!useGame" col-12 text-justify class="question">\n        <h1>{{currentQuestion.name}}</h1>\n        <h3>{{currentQuestion.description}}</h3>\n      </ion-col>\n      <ion-col *ngIf="useGame" col-12 text-justify class="question">\n        <h1>{{currentQuestion.question}}</h1>\n        <h3>{{currentQuestion.description}}</h3>\n      </ion-col>\n    </ion-row>\n    <ion-row class="margin-top-30" *ngIf="showDontNow">\n      <ion-col col-4 text-center>\n        <div *ngIf="!isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes.png"\n            (click)="answerToQuestion(1)" /></div>\n        <div *ngIf="isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes-selected.png"\n            (click)="answerToQuestion(1)" /></div>\n        <p><b>Sim</b></p>\n      </ion-col>\n      <ion-col col-4 text-center>\n        <div *ngIf="!isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no.png"\n            (click)="answerToQuestion(0)" /></div>\n        <div *ngIf="isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no-selected.png"\n            (click)="answerToQuestion(0)" /></div>\n        <p><b>Não</b></p>\n      </ion-col>\n      <ion-col col-4 text-center>\n        <div *ngIf="!isDontKnowSelected"><img class="img-responsive max-width-200" src="assets/imgs/question-mark.png"\n            (click)="answerToQuestion(2)" /></div>\n        <div *ngIf="isDontKnowSelected"><img class="img-responsive max-width-200"\n            src="assets/imgs/question-mark-selected.png" (click)="answerToQuestion(2)" /></div>\n        <p><b>Não sei</b></p>\n      </ion-col>\n    </ion-row>\n    <ion-row class="margin-top-30" *ngIf="!showDontNow">\n      <ion-col col-6 text-center>\n        <div *ngIf="!isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes.png"\n            (click)="answerToQuestion(1)" /></div>\n        <div *ngIf="isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes-selected.png"\n            (click)="answerToQuestion(1)" /></div>\n        <p><b>Sim</b></p>\n      </ion-col>\n      <ion-col col-6 text-center>\n        <div *ngIf="!isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no.png"\n            (click)="answerToQuestion(0)" /></div>\n        <div *ngIf="isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no-selected.png"\n            (click)="answerToQuestion(0)" /></div>\n        <p><b>Não</b></p>\n      </ion-col>\n    </ion-row>\n    <!-- <ion-row class="margin-top-30" *ngIf="isYesSelected">\n      <ion-col col-12 text-center>\n        <h3>Você acredita que mais algum bairro também tem esse problema?</h3>\n        <ion-list radio-group>\n          <ion-item>\n            <ion-label>Sim/citar (quais bairros?)</ion-label>\n            <ion-radio value="0" (ionSelect)="neighborhoodRadioSelected(0)"></ion-radio>\n          </ion-item>\n          <ion-item>\n            <ion-label>Sim/todos (cidade)</ion-label>\n            <ion-radio value="1" (ionSelect)="neighborhoodRadioSelected(1)"></ion-radio>\n          </ion-item>\n          <ion-item>\n            <ion-label>Não (somente o meu bairro)</ion-label>\n            <ion-radio value="2" (ionSelect)="neighborhoodRadioSelected(2)"></ion-radio>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row> -->\n    <ion-row *ngIf="showNeighborhoodList && isYesSelected">\n      <ion-col col-12 text-center>\n        <h4>Selecione os bairros abaixo</h4>\n        <ion-item>\n          <ion-label floating>Bairros</ion-label>\n          <ion-select [(ngModel)]="neighborhoodsSelected" multiple="true" (ionChange)="enableContinueButton()">\n            <ion-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">{{neighborhood.name}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="useGame">\n      <ion-col col-12 text-center>\n        <button ion-button full class="button-background-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-question-game-{{currentQuestion.id}}" class="text-button">\n            Continuar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame">\n      <ion-col col-12 text-center>\n        <button ion-button full class="button-background-no-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-question-{{currentQuestion.id}}" class="text-button">\n            Continuar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n<ion-footer>\n  <ion-navbar class="toolbar-progress">\n    <ion-title *ngIf="useGame" text-center class="toolbar-point">\n      <ion-icon range-right name="md-ribbon"></ion-icon>\n      {{points}} pontos\n    </ion-title>\n    <ion-range *ngIf="useGame" class="progress-bar" [min]="0" [max]="100" [step]="1" [(ngModel)]="progress" disabled>\n      <ion-icon range-left name="md-clipboard"></ion-icon>\n      <ion-icon range-right></ion-icon>\n    </ion-range>\n    <div *ngIf="useGame" text-center class="progres-text-uper">{{currentQuestionIndex + 1}} de {{totalQuestions}}\n      questões</div>\n  </ion-navbar>\n</ion-footer>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionary\questionary.html"*/,
+            selector: 'page-questionary',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionary\questionary.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col col-2 class="menu-icon-col">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6>\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-2>\n        <button class="button-help-question" *ngIf="currentQuestion.useNarrative && useGame" ion-button clear\n          (click)="help()">\n          <ion-icon class="icon-help button-help-question" name="alert"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row class="context-area">\n      <ion-col col-4 class="context-area-img">\n        <img class="context-area-icon" src="assets/imgs/{{currentQuestion.contextAreaIcon}}" />\n      </ion-col>\n      <ion-col col-8 class="context-area-container">\n        <h1>\n          {{currentQuestion.contextArea}}\n        </h1>\n      </ion-col>\n    </ion-row>\n    <div class="hr"></div>\n    <ion-row class="margin-top-30">\n      <ion-col *ngIf="!useGame" col-12 text-justify class="question">\n        <h1>{{currentQuestion.name}}</h1>\n        <h3>{{currentQuestion.description}}</h3>\n      </ion-col>\n      <ion-col *ngIf="useGame" col-12 text-justify class="question">\n        <h1>{{currentQuestion.question}}</h1>\n        <h3>{{currentQuestion.description}}</h3>\n      </ion-col>\n    </ion-row>\n    <ion-grid class="grid-questionary">\n      <ion-row *ngIf="showDontNow && !showAnswerText">\n        <ion-col col-4 text-center>\n          <div *ngIf="!isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes.png"\n              (click)="answerToQuestion(1)" /></div>\n          <div *ngIf="isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes-selected.png"\n              (click)="answerToQuestion(1)" /></div>\n          <p><b>Sim</b></p>\n        </ion-col>\n        <ion-col col-4 text-center>\n          <div *ngIf="!isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no.png"\n              (click)="answerToQuestion(0)" /></div>\n          <div *ngIf="isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no-selected.png"\n              (click)="answerToQuestion(0)" /></div>\n          <p><b>Não</b></p>\n        </ion-col>\n        <ion-col col-4 text-center>\n          <div *ngIf="!isDontKnowSelected"><img class="img-responsive max-width-200" src="assets/imgs/question-mark.png"\n              (click)="answerToQuestion(2)" /></div>\n          <div *ngIf="isDontKnowSelected"><img class="img-responsive max-width-200"\n              src="assets/imgs/question-mark-selected.png" (click)="answerToQuestion(2)" /></div>\n          <p><b>Não sei</b></p>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="!showDontNow && !showAnswerText">\n        <ion-col col-6 text-center>\n          <div *ngIf="!isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes.png"\n              (click)="answerToQuestion(1)" /></div>\n          <div *ngIf="isYesSelected"><img class="img-responsive max-width-200" src="assets/imgs/yes-selected.png"\n              (click)="answerToQuestion(1)" /></div>\n          <p><b>Sim</b></p>\n        </ion-col>\n        <ion-col col-6 text-center>\n          <div *ngIf="!isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no.png"\n              (click)="answerToQuestion(0)" /></div>\n          <div *ngIf="isNoSelected"><img class="img-responsive max-width-200" src="assets/imgs/no-selected.png"\n              (click)="answerToQuestion(0)" /></div>\n          <p><b>Não</b></p>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="showAnswerText" class="row-text-area">\n        <ion-col col-12 text-center>\n          <ion-item>\n            <ion-textarea class="text-area-questionary" placeholder="Comente aqui" [(ngModel)]="answerText"\n              name="answerText" autocomplete="on" autocorrect="on">\n            </ion-textarea>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <!-- <ion-row class="margin-top-30" *ngIf="isYesSelected">\n      <ion-col col-12 text-center>\n        <h3>Você acredita que mais algum bairro também tem esse problema?</h3>\n        <ion-list radio-group>\n          <ion-item>\n            <ion-label>Sim/citar (quais bairros?)</ion-label>\n            <ion-radio value="0" (ionSelect)="neighborhoodRadioSelected(0)"></ion-radio>\n          </ion-item>\n          <ion-item>\n            <ion-label>Sim/todos (cidade)</ion-label>\n            <ion-radio value="1" (ionSelect)="neighborhoodRadioSelected(1)"></ion-radio>\n          </ion-item>\n          <ion-item>\n            <ion-label>Não (somente o meu bairro)</ion-label>\n            <ion-radio value="2" (ionSelect)="neighborhoodRadioSelected(2)"></ion-radio>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row> -->\n    <ion-row *ngIf="showNeighborhoodList && isYesSelected">\n      <ion-col col-12 text-center>\n        <h4>Selecione os bairros abaixo</h4>\n        <ion-item>\n          <ion-label floating>Bairros</ion-label>\n          <ion-select [(ngModel)]="neighborhoodsSelected" multiple="true" (ionChange)="enableContinueButton()">\n            <ion-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">{{neighborhood.name}}\n            </ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="useGame && !endQuestion">\n      <ion-col col-12 text-center>\n        <button ion-button full class="button-background-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-question-game-{{currentQuestion.id}}" class="text-button">\n            Continuar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame && !endQuestion">\n      <ion-col col-12 text-center>\n        <button ion-button full class="button-background-no-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-question-{{currentQuestion.id}}" class="text-button">\n            Continuar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="useGame && endQuestion">\n      <ion-col col-12 text-center class="margin-top-10">\n        <button ion-button full class="button-background-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-finish-game-{{questionary.id}}" class="text-button">\n            Finalizar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="!useGame && endQuestion">\n      <ion-col col-12 text-center class="margin-top-10">\n        <button ion-button full class="button-background-no-game" (click)="nextStep()" [disabled]="btnContinueDisabled">\n          <ion-icon id="button-finish-{{questionary.id}}" class="text-button">\n            Finalizar\n          </ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n<ion-footer>\n  <ion-navbar class="toolbar-progress">\n    <ion-title *ngIf="useGame" text-center class="toolbar-point">\n      <ion-icon range-right name="md-ribbon"></ion-icon>\n      {{points}} pontos\n    </ion-title>\n    <ion-range *ngIf="useGame" class="progress-bar" [min]="0" [max]="100" [step]="1" [(ngModel)]="progress" disabled>\n      <ion-icon range-left name="md-clipboard"></ion-icon>\n      <ion-icon range-right></ion-icon>\n    </ion-range>\n    <div *ngIf="useGame" text-center class="progres-text-uper">{{currentQuestionIndex + 1}} de {{totalQuestions}}\n      questões</div>\n  </ion-navbar>\n</ion-footer>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\questionary\questionary.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_question_question__["b" /* QuestionProvider */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__providers_prioritization_prioritization__["a" /* PrioritizationProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_question_question__["b" /* QuestionProvider */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__providers_prioritization_prioritization__["a" /* PrioritizationProvider */], __WEBPACK_IMPORTED_MODULE_7__providers_answer_answer__["a" /* AnswerProvider */]])
     ], QuestionaryPage);
     return QuestionaryPage;
 }());

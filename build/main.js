@@ -321,19 +321,19 @@ var HomePage = /** @class */ (function () {
                                             .then(function () {
                                             _this.storage.remove('intro')
                                                 .then(function () {
-                                                // this.storage.remove('useGame')
-                                                //   .then(() => {
-                                                _this.storage.remove('helpHome')
+                                                _this.storage.remove('useGame')
                                                     .then(function () {
-                                                    console.log("Remoção de dados concluída");
+                                                    _this.storage.remove('helpHome')
+                                                        .then(function () {
+                                                        console.log("Remoção de dados concluída");
+                                                    })
+                                                        .catch(function (error) {
+                                                        console.log(error);
+                                                    });
                                                 })
                                                     .catch(function (error) {
                                                     console.log(error);
                                                 });
-                                                // })
-                                                // .catch((error) => {
-                                                //   console.log(error);
-                                                // });
                                             })
                                                 .catch(function (error) {
                                                 console.log(error);
@@ -429,7 +429,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var RestProvider = /** @class */ (function () {
-    //API_URL: string = "http://localhost/neiru-surveys-api/";
+    // API_URL: string = "http://localhost/neiru-surveys-api/";
     function RestProvider(http, network, alertCtrl, platform, storage, appVersionControl) {
         this.http = http;
         this.network = network;
@@ -439,7 +439,8 @@ var RestProvider = /** @class */ (function () {
         this.appVersionControl = appVersionControl;
         this.isConnected = true;
         // API_URL: string = "https://api.neiru.org/";
-        this.API_URL = "https://opina-ai-api.000webhostapp.com/";
+        // API_URL: string = "https://opina-ai-api.000webhostapp.com/";
+        this.API_URL = "https://opina-ai-api.com/";
         this.createHeader();
         this.connectSubscription();
         this.disconnectSubscription();
@@ -595,20 +596,20 @@ var RestProvider = /** @class */ (function () {
                                             .then(function () {
                                             _this.storage.remove('intro')
                                                 .then(function () {
-                                                // this.storage.remove('useGame')
-                                                //   .then(() => {
-                                                _this.storage.remove('helpHome')
+                                                _this.storage.remove('useGame')
                                                     .then(function () {
-                                                    console.log("Remoção de dados concluída");
-                                                    nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__["a" /* IntroPage */], {});
+                                                    _this.storage.remove('helpHome')
+                                                        .then(function () {
+                                                        console.log("Remoção de dados concluída");
+                                                        nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_intro_intro__["a" /* IntroPage */], {});
+                                                    })
+                                                        .catch(function (error) {
+                                                        console.log(error);
+                                                    });
                                                 })
                                                     .catch(function (error) {
                                                     console.log(error);
                                                 });
-                                                // })
-                                                // .catch((error) => {
-                                                //   console.log(error);
-                                                // });
                                             })
                                                 .catch(function (error) {
                                                 console.log(error);
@@ -771,182 +772,6 @@ var PrioritizationProvider = /** @class */ (function () {
             //metricID : 1 - GUT | 2 - Escala qualitativa | (3-18) - Métricas do questionário de teste
             _this.http.get(_this.restProvider.API_URL + "get-metric-items-by-metric.php?metric=" + metricId, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
-                // Metric Itens temporários [x]
-                //------------------TEMPORÁRIO-------------------
-                // let itens: any[] = [];
-                // switch (metricId) {
-                //   case "3":
-                //     let item2 = {
-                //       id: "5",
-                //       name: "Frequência Semanal",
-                //       metric_id: "3",
-                //       metricValues: []
-                //     }
-                //     itens.push(item2);
-                //     data = itens;
-                //     break;
-                //   case "4":
-                //     let item3 = {
-                //       id: "6",
-                //       name: "Atrações do Centro",
-                //       metric_id: "4",
-                //       metricValues: []
-                //     }
-                //     itens.push(item3);
-                //     data = itens;
-                //     break;
-                //   case "5":
-                //     let item4 = {
-                //       id: "7",
-                //       name: "Motivos de não ir ao centro",
-                //       metric_id: "5",
-                //       metricValues: []
-                //     }
-                //     itens.push(item4);
-                //     data = itens;
-                //     break;
-                //   case "6":
-                //     let item5 = {
-                //       id: "8",
-                //       name: "Atrações do Centro 2",
-                //       metric_id: "6",
-                //       metricValues: []
-                //     }
-                //     itens.push(item5);
-                //     data = itens;
-                //     break;
-                //   case "7":
-                //     let item6 = {
-                //       id: "9",
-                //       name: "Necessidades do Centro",
-                //       metric_id: "7",
-                //       metricValues: []
-                //     }
-                //     itens.push(item6);
-                //     data = itens;
-                //     break;
-                //   case "8":
-                //     let item7 = {
-                //       id: "10",
-                //       name: "Escala de Satisfação",
-                //       metric_id: "8",
-                //       metricValues: []
-                //     }
-                //     itens.push(item7);
-                //     data = itens;
-                //     break;
-                //   case "9":
-                //     let item8 = {
-                //       id: "11",
-                //       name: "Necessidade de Requalificação",
-                //       metric_id: "9",
-                //       metricValues: []
-                //     }
-                //     itens.push(item8);
-                //     data = itens;
-                //     break;
-                //   case "10":
-                //     let item9 = {
-                //       id: "12",
-                //       name: "Avaliação do comerciante",
-                //       metric_id: "10",
-                //       metricValues: []
-                //     }
-                //     itens.push(item9);
-                //     data = itens;
-                //     break;
-                //   case "11":
-                //     let item10 = {
-                //       id: "13",
-                //       name: "Melhorias para o comerciante",
-                //       metric_id: "11",
-                //       metricValues: []
-                //     }
-                //     itens.push(item10);
-                //     data = itens;
-                //     break;
-                //   case "12":
-                //     let item11 = {
-                //       id: "14",
-                //       name: "Atividades exercidas pelos pedestres",
-                //       metric_id: "12",
-                //       metricValues: []
-                //     }
-                //     itens.push(item11);
-                //     data = itens;
-                //     break;
-                //   case "13":
-                //     let item12 = {
-                //       id: "15",
-                //       name: "Pontos fortes para o comerciante",
-                //       metric_id: "13",
-                //       metricValues: []
-                //     }
-                //     itens.push(item12);
-                //     data = itens;
-                //     break;
-                //   case "14":
-                //     let item13 = {
-                //       id: "16",
-                //       name: "Pontos fracos para o comerciante",
-                //       metric_id: "14",
-                //       metricValues: []
-                //     }
-                //     itens.push(item13);
-                //     data = itens;
-                //     break;
-                //   case "15":
-                //     let item14 = {
-                //       id: "17",
-                //       name: "Atividades dos pedestres no Centro",
-                //       metric_id: "15",
-                //       metricValues: []
-                //     }
-                //     itens.push(item14);
-                //     data = itens;
-                //     break;
-                //   case "16":
-                //     let item15 = {
-                //       id: "18",
-                //       name: "Pontos fortes da rua",
-                //       metric_id: "16",
-                //       metricValues: []
-                //     }
-                //     itens.push(item15);
-                //     data = itens;
-                //     break;
-                //   case "17":
-                //     let item16 = {
-                //       id: "19",
-                //       name: "Pontos fracos da rua",
-                //       metric_id: "17",
-                //       metricValues: []
-                //     }
-                //     itens.push(item16);
-                //     data = itens;
-                //     break;
-                //   case "18":
-                //     let item17 = {
-                //       id: "20",
-                //       name: "Escala de concordancia",
-                //       metric_id: "18",
-                //       metricValues: []
-                //     }
-                //     itens.push(item17);
-                //     data = itens;
-                //     break;
-                //   case "19":
-                //     let item18 = {
-                //       id: "21",
-                //       name: "Frequência de uso dos espaços públicos",
-                //       metric_id: "19",
-                //       metricValues: []
-                //     }
-                //     itens.push(item18);
-                //     data = itens;
-                //     break;
-                // }
-                //------------------TEMPORÁRIO-------------------
                 resolve(data);
             }, function (error) {
                 resolve(error);
@@ -959,10 +784,6 @@ var PrioritizationProvider = /** @class */ (function () {
         return new Promise(function (resolve) {
             _this.http.get(_this.restProvider.API_URL + "get-all-metric-values.php", { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
-                // Metric values temporários [x]
-                //------------------TEMPORÁRIO-------------------
-                // data = this.resolveItens(data);
-                //------------------TEMPORÁRIO-------------------
                 resolve(data);
             }, function (error) {
                 resolve(error);
@@ -981,419 +802,6 @@ var PrioritizationProvider = /** @class */ (function () {
 /***/ }),
 
 /***/ 210:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return QuestionProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Question; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rest_rest__ = __webpack_require__(12);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var QuestionProvider = /** @class */ (function () {
-    function QuestionProvider(http, restProvider) {
-        this.http = http;
-        this.restProvider = restProvider;
-    }
-    QuestionProvider.prototype.getAllQuestionsByQuestionary = function (questionary, isRuralZone) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            //Essa api que vai ser alterada para vir com atributo Answered (true, false)
-            _this.http.get(_this.restProvider.API_URL + "get-all-questions-by-questionary.php?questionary=" + questionary.id + "&isRuralZone=" + isRuralZone, { headers: _this.restProvider.headers })
-                .subscribe(function (data) {
-                // Questões temporárias [x]
-                //-----------------TEMPORÁRIO-------------------
-                //Diagnóstico Geral
-                // if (questionary.id == 666) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1001",
-                //     name: "1.	Com qual frequência você vai ao centro?",
-                //     description: "",
-                //     question: "1.	Com qual frequência você costuma ir ao centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "3"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1002",
-                //     name: "2.	O que te trás ao centro?",
-                //     description: "",
-                //     question: "2.	O que você vem fazer no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "4"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1003",
-                //     name: "3.	Com qual frequência você vai ao centro à noite?",
-                //     description: "",
-                //     question: "3.	Com qual frequência você costuma ir ao centro à noite?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "3"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1004",
-                //     name: "4.	Caso você tenha algum motivo para não ir ao centro à noite, qual seria?",
-                //     description: "Selecione abaixo",
-                //     question: "4.	Existe um motivo para você não ir ao centro à noite?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "5"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1005",
-                //     name: "5.	O que te atrai para o centro?",
-                //     description: "Selecione abaixo",
-                //     question: "5.	O que você acha legal fazer no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "6"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1006",
-                //     name: "6.	O que falta no centro?",
-                //     description: "Selecione abaixo",
-                //     question: "6.	Para você, o que faz falta no centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "7"
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1007",
-                //     name: "7.	Como você qualifica os pontos comerciais no centro?",
-                //     description: "Selecione abaixo",
-                //     question: "7.	O que você acha das lojas do centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "8"
-                //   }
-                //   questions.push(q7);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
-                //Diagnóstico Específico
-                // if (questionary.id == 661) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1008",
-                //     name: "1.	Costuma usufruir dos espaços públicos no centro? (Espaços públicos entende-se como calçada, rua, praças e parques)",
-                //     description: "",
-                //     question: "1.	Você faz uso das praças, parques, calçadas e estacionamento no centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "19"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1009",
-                //     name: "2.	Como considera as obras de requalificação urbana no centro?",
-                //     description: "",
-                //     question: "2.	Como você considera a necessidade reurbanização do centro da cidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "9"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1010",
-                //     name: "3.	Como você avalia a qualidade da calçada?",
-                //     description: "",
-                //     question: "3.	Como você avalia as calçadas do centro?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1011",
-                //     name: "4.	Como você avalia as rampas de acessibilidade?",
-                //     description: "",
-                //     question: "4.	Como você avalia as rampas de acessibilidade?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1012",
-                //     name: "5.	Como você avalia os pisos táteis? (Pisos táteis são faixas em alto-relevo fixadas no chão para fornecer auxílio à locomoção de pessoas com deficiência visual)",
-                //     description: "",
-                //     question: "5.	Como você avalia as faixas em alto-relevo do chão para auxílio às pessoas com deficiência visual?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "10"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1013",
-                //     name: "6.	Você acha que existem vagas de estacionamento suficientes?",
-                //     description: "",
-                //     question: "6.	Você acha que existem vagas de estacionamento suficientes?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1014",
-                //     name: "7.	Como você avalia a necessidade de Locais de descanso?",
-                //     description: "",
-                //     question: "7.	Como você avalia a necessidade de locais de descanso?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q7);
-                //   let q8 = {
-                //     id: "1015",
-                //     name: "8.	Como você avalia a necessidade de lixeiras?",
-                //     description: "",
-                //     question: "8.	Como você avalia a necessidade de lixeiras?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q8);
-                //   let q9 = {
-                //     id: "1016",
-                //     name: "9.	Como você avalia a necessidade de arborização?",
-                //     description: "",
-                //     question: "9.	Como você avalia a necessidade de arborização?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q9);
-                //   let q10 = {
-                //     id: "1017",
-                //     name: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
-                //     description: "",
-                //     question: "10.	Como você avalia a necessidade de iluminação voltada aos pedestres?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q10);
-                //   let q11 = {
-                //     id: "1018",
-                //     name: "11.	Como você avalia a necessidade de ponto de Ônibus?",
-                //     description: "",
-                //     question: "11.	Como você avalia a necessidade de ponto de Ônibus?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "11"
-                //   }
-                //   questions.push(q11);
-                //   let q12 = {
-                //     id: "1019",
-                //     name: "12.	Você gosta das barracas do comércio de rua?",
-                //     description: "",
-                //     question: "12.	Você gosta das barracas do comércio de rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q12);
-                //   let q13 = {
-                //     id: "1020",
-                //     name: "13.	Você gosta das Kombis de alimentação do comércio de rua?",
-                //     description: "",
-                //     question: "13. Você gosta das Kombis de alimentação?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: null
-                //   }
-                //   questions.push(q13);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
-                //Questionário comerciante
-                // if (questionary.id == 660) {
-                //   let questions = [];
-                //   let q1 = {
-                //     id: "1021",
-                //     name: "1.	Qual o ramo da sua atividade comercial?",
-                //     description: "",
-                //     question: "1.	Você trabalha com qual atividade comercial?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "12"
-                //   }
-                //   questions.push(q1);
-                //   let q2 = {
-                //     id: "1022",
-                //     name: "2.	Por que você escolheu essa rua para seu comércio?",
-                //     description: "",
-                //     question: "2.	Por que você escolheu essa rua para seu comércio?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "13"
-                //   }
-                //   questions.push(q2);
-                //   let q3 = {
-                //     id: "1023",
-                //     name: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
-                //     description: "",
-                //     question: "3.	Quanto você está satisfeito com a infraestrutura básica da rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "8"
-                //   }
-                //   questions.push(q3);
-                //   let q4 = {
-                //     id: "1024",
-                //     name: "4.	Quais melhorias poderiam ser feitas para atender suas necessidades?",
-                //     description: "",
-                //     question: "4.	Quais melhorias poderiam ser feitas na sua rua para atender suas necessidades?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "14"
-                //   }
-                //   questions.push(q4);
-                //   let q5 = {
-                //     id: "1025",
-                //     name: "5.	O que as pessoas costumam fazer nessa rua?",
-                //     description: "",
-                //     question: "5.	O que as pessoas costumam fazer quando passam por essa rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "15"
-                //   }
-                //   questions.push(q5);
-                //   let q6 = {
-                //     id: "1026",
-                //     name: "6.	Quais são os pontos fortes da sua rua?",
-                //     description: "",
-                //     question: "6.	Para você, quais são os fortes da sua rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "16"
-                //   }
-                //   questions.push(q6);
-                //   let q7 = {
-                //     id: "1027",
-                //     name: "7.	Quais são os pontos fracos da sua rua?",
-                //     description: "",
-                //     question: "7.	Para você, quais são os pontos fracos da sua rua?",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "17"
-                //   }
-                //   questions.push(q7);
-                //   let q8 = {
-                //     id: "1028",
-                //     name: "8.	O que você pensa sobre a seguinte afirmação: “Não trocaria a minha rua por nenhum outro local da cidade”.",
-                //     description: "",
-                //     question: "8.	O que você pensa sobre essa afirmação: “Não trocaria a rua do meu comércio por nenhum outro local da cidade”.",
-                //     contextArea: "Requalificação do Centro",
-                //     contextAreaIcon: "city-icon.png",
-                //     position: "1",
-                //     isRuralZone: "0",
-                //     metricId: "18"
-                //   }
-                //   questions.push(q8);
-                //   questions = this.resolveNarrative(questions);
-                //   data = questions;
-                // }
-                //-----------------TEMPORÁRIO-------------------
-                // data = this.resolveNarrative(data);
-                resolve(data);
-            }, function (error) {
-                resolve(error);
-            });
-        });
-    };
-    QuestionProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__rest_rest__["a" /* RestProvider */]])
-    ], QuestionProvider);
-    return QuestionProvider;
-}());
-
-var Question = /** @class */ (function () {
-    function Question() {
-    }
-    return Question;
-}());
-
-//# sourceMappingURL=question.js.map
-
-/***/ }),
-
-/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1418,7 +826,7 @@ var AnswerProvider = /** @class */ (function () {
         this.http = http;
         this.restProvider = restProvider;
     }
-    AnswerProvider.prototype.insertAnswersData = function (answers, answersNeighborhoods, prioritizations, userType, useGame) {
+    AnswerProvider.prototype.insertAnswersData = function (answers, answersNeighborhoods, prioritizations, userType, useGame, points) {
         var _this = this;
         return new Promise(function (resolve) {
             var token = _this.restProvider.cryptography(answers[0].plan.id + answers[0].questionary.id + answers[0].question.id + answers[0].respondent.id + answers[0].answer + answers[0].created_at);
@@ -1430,6 +838,7 @@ var AnswerProvider = /** @class */ (function () {
                     "question_id": answer.question.id,
                     "respondent_id": answer.respondent.id,
                     "answer": answer.answer,
+                    "answer_text": answer.answer_text ? answer.answer_text : null,
                     "user_id": userType.id,
                     "created_at": answer.created_at,
                     "use_game": useGame
@@ -1466,6 +875,8 @@ var AnswerProvider = /** @class */ (function () {
                 "answers": JSON.parse(JSON.stringify(answersParsed)),
                 "answersNeighborhoods": JSON.parse(JSON.stringify(answersNeighborhoodsParsed)),
                 "prioritizations": JSON.parse(JSON.stringify(prioritizationsParsed)),
+                "user_id": answers[0].respondent.id,
+                "points": points ? points : 0,
                 "token": token
             };
             var data = JSON.stringify(json);
@@ -1485,6 +896,61 @@ var AnswerProvider = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=answer.js.map
+
+/***/ }),
+
+/***/ 211:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return QuestionProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Question; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rest_rest__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var QuestionProvider = /** @class */ (function () {
+    function QuestionProvider(http, restProvider) {
+        this.http = http;
+        this.restProvider = restProvider;
+    }
+    QuestionProvider.prototype.getAllQuestionsByQuestionary = function (questionary, isRuralZone) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            //Essa api que vai ser alterada para vir com atributo Answered (true, false)
+            _this.http.get(_this.restProvider.API_URL + "get-all-questions-by-questionary.php?questionary=" + questionary.id + "&isRuralZone=" + isRuralZone, { headers: _this.restProvider.headers })
+                .subscribe(function (data) {
+                resolve(data);
+            }, function (error) {
+                resolve(error);
+            });
+        });
+    };
+    QuestionProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__rest_rest__["a" /* RestProvider */]])
+    ], QuestionProvider);
+    return QuestionProvider;
+}());
+
+var Question = /** @class */ (function () {
+    function Question() {
+    }
+    return Question;
+}());
+
+//# sourceMappingURL=question.js.map
 
 /***/ }),
 
@@ -1598,80 +1064,130 @@ var RespondentProvider = /** @class */ (function () {
             });
         });
     };
-    RespondentProvider.prototype.updateRespondent = function (respondent) {
+    RespondentProvider.prototype.getRespondentByEmail = function (email) {
         var _this = this;
         return new Promise(function (resolve) {
-            var updatedAt = new Date().toISOString();
-            var token = _this.restProvider.cryptography(respondent.id + respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + updatedAt);
             var json = {
-                "id": respondent.id,
-                "cpf": respondent.cpf,
-                "email": respondent.email,
-                "residence_time_range": respondent.residenceTimeRange,
-                "residence_neighborhood_id": respondent.residenceNeighborhood.id,
-                "job_city_id": respondent.jobCity.id,
-                "job_neighborhood_id": respondent.jobNeighborhood.id,
-                "salary_range": respondent.salaryRange,
-                "updated_at": updatedAt,
-                "token": token,
-                //-----------------NOVOS CAMPOS-----------------
-                "age_range": respondent.ageRange,
-                "gender": respondent.gender,
-                "name": respondent.name,
-                "phone": respondent.phone,
-                "type": respondent.type,
-                "code": respondent.code
-                //-----------------NOVOS CAMPOS-----------------
+                "email": email
             };
             var data = JSON.stringify(json);
-            //-----------------INSERÇÃO API-----------------
-            _this.http.post(_this.restProvider.API_URL + "update-respondent.php", data, { headers: _this.restProvider.headers })
+            _this.http.post(_this.restProvider.API_URL + "get-respondent-by-email.php", data, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
-                //-----------------INSERÇÃO API-----------------
                 resolve(data);
-                //-----------------INSERÇÃO API-----------------
             }, function (error) {
-                console.log(error);
                 resolve(error);
             });
-            //-----------------INSERÇÃO API-----------------
+        });
+    };
+    RespondentProvider.prototype.getRespondentById = function (id) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var json = {
+                "id": id
+            };
+            var data = JSON.stringify(json);
+            _this.http.post(_this.restProvider.API_URL + "get-respondent-by-id.php", data, { headers: _this.restProvider.headers })
+                .subscribe(function (data) {
+                resolve(data);
+            }, function (error) {
+                resolve(error);
+            });
         });
     };
     RespondentProvider.prototype.insertRespondent = function (respondent) {
         var _this = this;
         return new Promise(function (resolve) {
             var createdAt = new Date().toISOString();
-            var token = _this.restProvider.cryptography(respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + createdAt);
+            // let token = this.restProvider.cryptography(respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + createdAt);
+            var token = _this.restProvider.cryptography(respondent.type + respondent.caseTest + createdAt);
             var json = {
-                "cpf": respondent.cpf,
-                "email": respondent.email,
-                "residence_time_range": respondent.residenceTimeRange,
-                "residence_neighborhood_id": respondent.residenceNeighborhood.id,
-                "job_city_id": respondent.jobCity.id,
-                "job_neighborhood_id": respondent.jobNeighborhood.id,
-                "salary_range": respondent.salaryRange,
-                "created_at": createdAt,
+                "cpf": respondent.cpf ? respondent.cpf : null,
+                "email": respondent.email ? respondent.email : null,
+                "residence_time_range": respondent.residenceTimeRange ? respondent.residenceTimeRange : null,
+                "residence_neighborhood_id": respondent.residenceNeighborhood ? respondent.residenceNeighborhood.id : null,
+                "job_city_id": respondent.jobCity ? respondent.jobCity.id : null,
+                "job_neighborhood_id": respondent.jobNeighborhood ? respondent.jobNeighborhood.id : null,
+                "salary_range": respondent.salaryRange ? respondent.salaryRange : null,
                 //-----------------NOVOS CAMPOS-----------------
-                "age_range": respondent.ageRange,
-                "gender": respondent.gender,
-                "name": respondent.name,
-                "phone": respondent.phone,
-                "type": respondent.type,
-                "code": respondent.code,
+                "name": respondent.name ? respondent.name : null,
+                "age_range": respondent.ageRange ? respondent.ageRange : null,
+                "gender": respondent.gender ? respondent.gender : null,
+                "phone": respondent.phone ? respondent.phone : null,
+                "code": respondent.code ? respondent.code : null,
+                "points": respondent.points ? respondent.points : null,
+                "course_entry": respondent.courseEntry ? respondent.courseEntry : null,
+                "course_left": respondent.courseLeft ? respondent.courseLeft : null,
+                "course_name": respondent.courseName ? respondent.courseName : null,
+                "residence_city_id": respondent.residenceCity ? respondent.residenceCity.id : null,
+                "job_address": respondent.jobAddress ? respondent.jobAddress : null,
+                "job_name": respondent.jobName ? respondent.jobName : null,
+                "whatsapp": respondent.whatsapp ? respondent.whatsapp : null,
                 //-----------------NOVOS CAMPOS-----------------
+                //-----------------CAMPOS OBRIGATÓRIOS-----------------
+                "type": respondent.type ? respondent.type : null,
+                "case_test": respondent.caseTest ? respondent.caseTest : null,
+                "created_at": createdAt ? createdAt : null,
                 "token": token
+                //-----------------CAMPOS OBRIGATÓRIOS-----------------
             };
             var data = JSON.stringify(json);
-            //-----------------INSERÇÃO API-----------------
+            //-----------------INSERÇÃO NA API-----------------
             _this.http.post(_this.restProvider.API_URL + "insert-respondent.php", data, { headers: _this.restProvider.headers })
                 .subscribe(function (data) {
-                //-----------------INSERÇÃO API-----------------
                 resolve(data);
-                //-----------------INSERÇÃO API-----------------
             }, function (error) {
                 resolve(error);
             });
-            //-----------------INSERÇÃO API-----------------
+            //-----------------INSERÇÃO NA API-----------------
+        });
+    };
+    RespondentProvider.prototype.updateRespondent = function (respondent) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var updatedAt = new Date().toISOString();
+            // let token = this.restProvider.cryptography(respondent.id + respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + updatedAt);
+            var token = _this.restProvider.cryptography(respondent.id + respondent.type + respondent.caseTest + updatedAt);
+            var json = {
+                "cpf": respondent.cpf ? respondent.cpf : null,
+                "email": respondent.email ? respondent.email : null,
+                "residence_time_range": respondent.residenceTimeRange ? respondent.residenceTimeRange : null,
+                "residence_neighborhood_id": respondent.residenceNeighborhood ? respondent.residenceNeighborhood.id : null,
+                "job_city_id": respondent.jobCity ? respondent.jobCity.id : null,
+                "job_neighborhood_id": respondent.jobNeighborhood ? respondent.jobNeighborhood.id : null,
+                "salary_range": respondent.salaryRange ? respondent.salaryRange : null,
+                //-----------------NOVOS CAMPOS-----------------
+                "name": respondent.name ? respondent.name : null,
+                "age_range": respondent.ageRange ? respondent.ageRange : null,
+                "gender": respondent.gender ? respondent.gender : null,
+                "phone": respondent.phone ? respondent.phone : null,
+                "code": respondent.code ? respondent.code : null,
+                "points": respondent.points ? respondent.points : null,
+                "course_entry": respondent.courseEntry ? respondent.courseEntry : null,
+                "course_left": respondent.courseLeft ? respondent.courseLeft : null,
+                "course_name": respondent.courseName ? respondent.courseName : null,
+                "residence_city_id": respondent.residenceCity ? respondent.residenceCity.id : null,
+                "job_address": respondent.jobAddress ? respondent.jobAddress : null,
+                "job_name": respondent.jobName ? respondent.jobName : null,
+                "whatsapp": respondent.whatsapp ? respondent.whatsapp : null,
+                //-----------------NOVOS CAMPOS-----------------
+                //-----------------CAMPOS OBRIGATÓRIOS-----------------
+                "type": respondent.type ? respondent.type : null,
+                "case_test": respondent.caseTest ? respondent.caseTest : null,
+                "updated_at": updatedAt ? updatedAt : null,
+                "id": respondent.id ? respondent.id : null,
+                "token": token
+                //-----------------CAMPOS OBRIGATÓRIOS-----------------
+            };
+            var data = JSON.stringify(json);
+            //-----------------ATUALIZAÇÃO NA API-----------------
+            _this.http.post(_this.restProvider.API_URL + "update-respondent.php", data, { headers: _this.restProvider.headers })
+                .subscribe(function (data) {
+                resolve(data);
+            }, function (error) {
+                console.log(error);
+                resolve(error);
+            });
+            //-----------------ATUALIZAÇÃO NA API-----------------
         });
     };
     RespondentProvider = __decorate([
@@ -1718,11 +1234,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_plan_plan__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_questionary_questionary__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_neighborhood_neighborhood__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_question_question__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_question_question__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_common_http__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_respondent_respondent__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_prioritization_prioritization__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_answer_answer__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_answer_answer__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_network__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_app_version__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_intro_intro__ = __webpack_require__(55);
@@ -1975,8 +1491,6 @@ var QuestionaryProvider = /** @class */ (function () {
     return QuestionaryProvider;
 }());
 
-//-------------------AJUSTE NO ÍCONE DO QUESTIONÁRIO---------------------
-//-----------------------------TEMPORÁRIO--------------------------------
 var Questionary = /** @class */ (function () {
     function Questionary() {
     }
@@ -2061,6 +1575,10 @@ var IntroPage = /** @class */ (function () {
     };
     IntroPage.prototype.checkTrigger = function () {
         var _this = this;
+        //temporário
+        // this.useGamification();
+        // this.dontuseGamification();
+        //Temporário
         this.storage.get('useGame').then(function (data) {
             console.log("checkTrigger");
             var trigger = document.getElementById("trigger");
@@ -2125,59 +1643,23 @@ var IntroPage = /** @class */ (function () {
             if (cities != null) {
                 _this.cities = cities;
                 _this.cities.forEach(function (c) {
-                    if (c.name == "Pouso Alegre") {
+                    //IMPORTANTE - SELEÇÃO DA CIDADE
+                    if (c.name == "Itajubá") {
                         _this.city = c;
                         _this.planProvider.getAllPlansByCity(_this.city)
                             .then(function (plans) {
                             if (plans != null) {
                                 _this.storage.set('city', _this.city).then(function () {
-                                    // Plano temporário [x]
-                                    //----------------------------TEMPORÁRIO---------------------------------
-                                    // let p: Plan = {
-                                    //   city: this.city,
-                                    //   id: 666,
-                                    //   name: "Plano de Mobilidade de Pouso Alegre",
-                                    //   usePrioritization: false
-                                    // }
-                                    // plans.push(p);
-                                    //----------------------------TEMPORÁRIO---------------------------------
                                     _this.plans = plans;
                                     _this.questionaries = [];
                                     _this.plans.forEach(function (p) {
-                                        if (p.name == "Plano de Mobilidade de Pouso Alegre") {
+                                        //IMPORTANTE - SELEÇÃO DO PLANO
+                                        if (p.name == "Avaliação POSCOMP") {
                                             _this.plan = p;
                                             _this.questionaryProvider.getAllQuestionariesByPlan(_this.plan)
                                                 .then(function (questionaries) {
                                                 if (questionaries != null) {
                                                     _this.storage.set('plan', _this.plan);
-                                                    // Questionário temporário [x]
-                                                    //----------------------------TEMPORÁRIO---------------------------------
-                                                    // let questionaryTemp1: Questionary = {
-                                                    //   id: 666,
-                                                    //   name: "Centro - Diagnóstico Geral",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // let questionaryTemp2: Questionary = {
-                                                    //   id: 661,
-                                                    //   name: "Centro - Diagnóstico Específico",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // let questionaryTemp3: Questionary = {
-                                                    //   id: 660,
-                                                    //   name: "Centro - Comerciante",
-                                                    //   answered: false,
-                                                    //   plan: this.plan,
-                                                    //   questions: null,
-                                                    // }
-                                                    // questionaries.push(questionaryTemp1);
-                                                    // questionaries.push(questionaryTemp2);
-                                                    // questionaries.push(questionaryTemp3);
-                                                    // this.questionaries = this.questionaryProvider.resolveQuestionaryIcon(questionaries);
-                                                    //----------------------------TEMPORÁRIO---------------------------------
                                                     _this.questionaries = questionaries;
                                                     _this.storage.set('questionaries', _this.questionaries);
                                                     var points = 0;
@@ -2226,22 +1708,22 @@ var IntroPage = /** @class */ (function () {
                 _this.storage.get('respondent')
                     .then(function (respondent) {
                     if (respondent != null) {
-                        var alert_1 = _this.alertCtrl.create({
-                            title: 'Já existe um usuário respondendo os questionários',
-                            message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
-                            buttons: [{
-                                    text: "Sim",
-                                    handler: function () {
-                                        _this.navigateQuestionaryList();
-                                    }
-                                }, {
-                                    text: "Não",
-                                    handler: function () {
-                                        _this.removeStoredData();
-                                    }
-                                }]
-                        });
-                        alert_1.present();
+                        // let alert = this.alertCtrl.create({
+                        //   title: 'Já existe um usuário respondendo os questionários',
+                        //   message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
+                        //   buttons: [{
+                        //     text: "Sim",
+                        //     handler: () => {
+                        _this.navigateQuestionaryList();
+                        //     }
+                        //   }, {
+                        //     text: "Não",
+                        //     handler: () => {
+                        //       this.removeStoredData();
+                        //     }
+                        //   }]
+                        // });
+                        // alert.present();
                     }
                     else {
                         _this.removeStoredData();
@@ -2286,19 +1768,19 @@ var IntroPage = /** @class */ (function () {
                                             .then(function () {
                                             _this.storage.remove('intro')
                                                 .then(function () {
-                                                // this.storage.remove('useGame')
-                                                //   .then(() => {
-                                                _this.storage.remove('helpHome')
+                                                _this.storage.remove('useGame')
                                                     .then(function () {
-                                                    console.log("Remoção de dados concluída");
+                                                    _this.storage.remove('helpHome')
+                                                        .then(function () {
+                                                        console.log("Remoção de dados concluída");
+                                                    })
+                                                        .catch(function (error) {
+                                                        console.log(error);
+                                                    });
                                                 })
                                                     .catch(function (error) {
                                                     console.log(error);
                                                 });
-                                                // })
-                                                // .catch((error) => {
-                                                //   console.log(error);
-                                                // });
                                             })
                                                 .catch(function (error) {
                                                 console.log(error);
@@ -2401,7 +1883,7 @@ var IntroPage = /** @class */ (function () {
     ], IntroPage.prototype, "slides", void 0);
     IntroPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 0 -->\n    <ion-slide padding *ngIf="!useGame">\n      <div class="slide-header">\n        <h1 class="title-box">Reurbanização do centro de Pouso Alegre</h1>\n      </div>\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Bem vindo a <strong>pesquisa de opinião</strong> sobre a reurbanização do centro de <strong>Pouso Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Responda os questionários para que nós possamos entender suas necessidades.\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 0 -->\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro1.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a reurbanização do centro de Pouso Alegre!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a reurbanização?\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">Você sabe o que é reurbanização?</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro2.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Com o crescimento da cidade a área central tem apresentado problemas:\n          </p>\n          <p class="text-dialog">\n            Desgaste da rua, calçadas estreitas e falta de semáforos e faixas de pedestres.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">A reurbanização da área central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro5.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A <strong>reurbanização</strong>\n            é um processo de organização da infraestrutura de uma região para garantir o desenvolvimento humano das\n            cidades.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h3 class="title-box">A reurbanização da áraea central</h3>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro6.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            A reurbanização pode tornar a área central mais atrativa para você trabalhar, fazer compras ou passear.\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="slide-header">\n        <h2 class="title-box">Sua opinião é importante!</h2>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua participação tem muita importância!\n          </p>\n          <p class="text-dialog">\n            Essa pesquisa de opinião possibilitará uma analise detalhada da sua necessidade como cidadão de Pouso Alegre\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 5 -->\n    <!-- Slide 6 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row>\n          <ion-col col-3>\n            <img src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h5 class="title-box-last">Consiga pontos para aumentar seu nível de\n              <strong>participação</strong>!</h5>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta pontos que refletem na sua participação!\n          </p>\n          <p class="text-dialog">\n            Envie sua <strong>opinião</strong> para nós!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 6 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
+            selector: 'page-intro',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/'<ion-header>\n  <div (ionChange)="checkTrigger()" id="trigger"></div>\n  <ion-navbar>\n    <div offset-3 col-6 text-center>\n      <img class="img-responsive" src="assets/imgs/header-logo.png" />\n    </div>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-slides pager (ionSlideTap)="nextSlide($event)">\n    <!-- Slide 0 - Sem gamificação-->\n    <ion-slide padding *ngIf="!useGame">\n      <div class="slide-header">\n        <!-- <h1 class="title-box-no-game">Reurbanização do centro de Pouso Alegre</h1> -->\n        <!------------------------ CASE POSCOMP ------------------------>\n        <h1 class="title-box-no-game">Autoavaliação do Programa de Mestrado em \n          Ciência e Tecnologia da Computação (POSCOMP)</h1>\n        <!------------------------ CASE POSCOMP ------------------------>\n      </div>\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <!-- <p class="text-dialog">\n            Bem vindo a <strong>pesquisa de opinião</strong> sobre a reurbanização do centro de <strong>Pouso\n              Alegre</strong>!\n          </p>\n          <p class="text-dialog">\n            Responda os questionários para que nós possamos entender suas necessidades.\n          </p> -->\n          <!------------------------ CASE POSCOMP ------------------------>\n          <p class="text-dialog">\n            Bem vindo! Esta é uma <strong>pesquisa de opinião</strong> para a autoavaliação do \n            <strong>POSCOMP</strong> da UNIFEI!\n          </p>\n          <p class="text-dialog">\n            Nos ajude a <strong>avaliar o programa</strong> contribuindo com sua participação nessa pesquisa!\n          </p>\n          <!------------------------ CASE POSCOMP ------------------------>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-not-game" class="text-button">\n          Participar\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 0 - Sem gamificação-->\n    <!-- Slide 1 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="arrow-right">\n        <ion-icon float-right name="ios-arrow-forward"></ion-icon>\n      </div>\n      <div class="slide-header">\n        <h1 class="title-box">Olá, seja bem vindo!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro10.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <!-- <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a reurbanização do centro de Pouso Alegre!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a reurbanização?\n          </p> -->\n          <!------------------------ CASE POSCOMP ------------------------>\n          <p class="text-dialog">\n            Olá! Que bom que você quer participar da pesquisa de opinião para a \n            <strong>autoavaliação do POSCOMP</strong>!\n          </p>\n          <p class="text-dialog">\n            Vamos entender o que é a <strong>autoavaliação</strong>?\n            <!------------------------ CASE POSCOMP ------------------------>\n          </p>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 1 -->\n    <!-- Slide 2 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="arrow-left">\n        <ion-icon float-left name="ios-arrow-back"></ion-icon>\n      </div>\n      <div class="arrow-right">\n        <ion-icon float-right name="ios-arrow-forward"></ion-icon>\n      </div>\n      <div class="slide-header">\n        <!-- <h1 class="title-box">Você sabe o que é reurbanização?</h1> -->\n        <!------------------------ CASE POSCOMP ------------------------>\n        <h1 class="title-box">Autoavaliação do POSCOMP</h1>\n        <!------------------------ CASE POSCOMP ------------------------>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro7.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <!-- <p class="text-dialog">\n            Com o crescimento da cidade a área central tem apresentado problemas:\n          </p>\n          <p class="text-dialog">\n            Desgaste da rua, calçadas estreitas e falta de semáforos e faixas de pedestres.\n          </p> -->\n          <!------------------------ CASE POSCOMP ------------------------>\n          <p class="text-dialog">\n            A <strong>autoavaliação</strong> é realizada para monitorar o <strong>desempenho</strong>\n            e melhorar a <strong>qualidade</strong> do programa de mestrado.\n          </p>\n          <!------------------------ CASE POSCOMP ------------------------>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 2 -->\n    <!-- Slide 3 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="arrow-left">\n        <ion-icon float-left name="ios-arrow-back"></ion-icon>\n      </div>\n      <div class="arrow-right">\n        <ion-icon float-right name="ios-arrow-forward"></ion-icon>\n      </div>\n      <div class="slide-header">\n        <!-- <h1 class="title-box">A reurbanização da área central</h1> -->\n        <!------------------------ CASE POSCOMP ------------------------>\n        <h1 class="title-box">Autoavaliação do POSCOMP</h1>\n        <!------------------------ CASE POSCOMP ------------------------>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro9.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <!-- <p class="text-dialog">\n            A <strong>reurbanização</strong>\n            é um processo de organização da infraestrutura de uma região para garantir o desenvolvimento humano das\n            cidades.\n          </p> -->\n          <!------------------------ CASE POSCOMP ------------------------>\n          <p class="text-dialog">\n           Um dos <strong>intrumentos</strong> que estamos utilizando são \n           <strong>questionários</strong> em colaboração com os alunos, ex-alunos e professores.\n          </p>\n          <!------------------------ CASE POSCOMP ------------------------>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 3 -->\n    <!-- Slide 4 -->\n    <ion-slide class="slide-img" padding *ngIf="useGame">\n      <div class="arrow-left">\n        <ion-icon float-left name="ios-arrow-back"></ion-icon>\n      </div>\n      <div class="arrow-right">\n        <ion-icon float-right name="ios-arrow-forward"></ion-icon>\n      </div>\n      <div class="slide-header">\n        <h1 class="title-box">Sua opinião é importante!</h1>\n      </div>\n      <img class="img-responsive" src="assets/imgs/intro3.jpg" />\n      <div class="dialogue-box">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Sua <strong>participação</strong> tem muita importância!\n          </p>\n          <!-- <p class="text-dialog">\n            Essa pesquisa de opinião possibilitará uma analise detalhada da sua necessidade como cidadão de Pouso Alegre\n          </p> -->\n          <!------------------------ CASE POSCOMP ------------------------>\n          <p class="text-dialog">\n            Essa pesquisa de opinião contribuirá com a \n            <strong>melhoria</strong> do <strong>programa de mestrado</strong>\n          </p>\n          <!------------------------ CASE POSCOMP ------------------------>\n        </div>\n      </div>\n      <div class="slide-header">\n        <div padding-bottom text-right>\n          <a class="button-skip-game" (click)="skip()">pular</a>\n          <ion-icon name="arrow-dropright"></ion-icon>\n        </div>\n      </div>\n    </ion-slide>\n    <!-- Slide 4 -->\n    <!-- Slide 5 -->\n    <ion-slide *ngIf="useGame" class="slide-img" padding>\n      <div class="arrow-left">\n        <ion-icon float-left name="ios-arrow-back"></ion-icon>\n      </div>\n      <!-- Pontuação -->\n      <ion-grid>\n        <ion-row class="title-last-row">\n          <ion-col col-3>\n            <img class="img-award" src="assets/imgs/premio1.png" />\n          </ion-col>\n          <ion-col text-justify col-9>\n            <h2 class="title-box-last">Consiga pontos para aumentar seu nível de\n              <strong>participação</strong>!</h2>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <!-- Pontuação -->\n      <img class="img-responsive-last" src="assets/imgs/intro4.jpg" />\n      <div class="dialogue-box-last">\n        <div class="tdialogue-box-text">\n          <p class="text-dialog">\n            Respondendo os questionários você coleta pontos que refletem na sua <strong>participação</strong>!\n          </p>\n          <p class="text-dialog">\n            Envie sua <strong>opinião</strong> para nós!\n          </p>\n        </div>\n      </div>\n      <button ion-button margin-bottom (click)="skip()">\n        <ion-icon id="button-participate-game" class="text-button">\n          Participar!\n        </ion-icon>\n      </button>\n    </ion-slide>\n    <!-- Slide 5 -->\n  </ion-slides>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\intro\intro.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_plan_plan__["b" /* PlanProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["d" /* QuestionaryProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */], __WEBPACK_IMPORTED_MODULE_7__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_8__providers_rest_rest__["a" /* RestProvider */]])
     ], IntroPage);
