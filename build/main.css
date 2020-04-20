@@ -27496,9 +27496,19 @@ page-questionary ion-col.context-area-container.col {
   page-questionary .context-area-container h1 {
     font-size: 1.4em;
   }
+  page-questionary textarea.text-input.text-input-md {
+    min-height: 5%;
+    min-width: 50%;
+  }
+  page-questionary .row-text-area.row {
+    height: 10%;
+  }
 }
 
 @media only screen and (min-device-width: 360px) {
+  page-questionary ion-item.item.item-block.item-md.item-input.item-textarea.ng-untouched.ng-pristine.ng-valid {
+    height: 10%;
+  }
   page-questionary img.img-responsive {
     margin-top: 10%;
   }
@@ -27539,6 +27549,9 @@ page-questionary ion-col.context-area-container.col {
 }
 
 @media only screen and (min-device-width: 500px) {
+  page-questionary ion-item.item.item-block.item-md.item-input.item-textarea.ng-untouched.ng-pristine.ng-valid {
+    height: 100%;
+  }
   page-questionary .question h1 {
     font-size: 2.1rem;
   }
@@ -27760,6 +27773,12 @@ page-respondent-profile .range-md .range-tick-active {
 }
 
 @media only screen and (min-device-width: 500px) {
+  page-respondent-profile img.img-responsive.img-not-game {
+    margin-left: 2% !important;
+  }
+  page-respondent-profile ion-col.menu-icon-col-not-game.col {
+    margin-left: 22%;
+  }
   page-respondent-profile .profile-title {
     font-size: 2em;
     margin-bottom: 0;
@@ -27781,7 +27800,7 @@ page-respondent-profile .range-md .range-tick-active {
   }
   page-respondent-profile .toolbar-content.toolbar-content-md img.img-responsive {
     max-width: 250px;
-    margin-left: 38%;
+    margin-left: 1%;
   }
   page-respondent-profile ion-icon.menu-icon.icon.icon-md.ion-md-menu {
     color: white;
@@ -27789,7 +27808,7 @@ page-respondent-profile .range-md .range-tick-active {
     margin-top: 55%;
   }
   page-respondent-profile ion-col.menu-icon-col.col {
-    margin-left: 5%;
+    margin-left: 22%;
   }
   page-respondent-profile ion-navbar.toolbar.toolbar-md ion-col.col {
     background-color: #176082;
@@ -28141,6 +28160,12 @@ page-thankyou .text-form-game.col {
 }
 
 @media only screen and (min-device-width: 500px) {
+  page-thankyou ion-col.col-button-help.col {
+    margin-left: -14%;
+  }
+  page-thankyou ion-col.menu-icon-col.col {
+    margin-left: 15% !important;
+  }
   page-thankyou img.img-responsive.img-center {
     max-width: 270px;
   }
@@ -28240,7 +28265,7 @@ page-thankyou .text-form-game.col {
   }
   page-thankyou .toolbar-content.toolbar-content-md img.img-responsive {
     max-width: 250px;
-    margin-left: 40%;
+    margin-left: 20%;
   }
   page-thankyou .context-area-container.col {
     margin-top: 25px;
