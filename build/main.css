@@ -25789,8 +25789,8 @@ ion-footer .toolbar-background {
 }
 
 img.img-alert {
-  max-width: 220px;
-  max-height: 220px;
+  max-width: 60%;
+  max-height: 100%;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -25798,8 +25798,8 @@ img.img-alert {
 
 .alert-align-center {
   text-align: center;
-  padding: 3px;
-  padding-top: 8px;
+  padding: 0;
+  padding-top: 0;
 }
 
 .toolbar-title-md {
@@ -25826,17 +25826,48 @@ ion-toast {
   position: relative;
   margin-bottom: 8px;
   margin-top: 3px;
+  font-size: 1.6rem;
+}
+
+@media only screen and (min-device-width: 320px) {
+  .dialogue-box {
+    font-size: 1.5rem;
+  }
+  img.img-alert.img-question {
+    max-width: 45%;
+  }
+}
+
+@media only screen and (min-device-width: 360px) {
+  img.img-alert {
+    max-width: 55%;
+  }
+  .dialogue-box {
+    font-size: 1.75rem;
+  }
+  .dialogue-box.box-question {
+    font-size: 1.65rem;
+  }
 }
 
 @media only screen and (min-device-width: 375px) {
   .alert-md .alert-message {
     font-size: 1.2em;
   }
+  .dialogue-box.box-question {
+    font-size: 1.65rem;
+  }
 }
 
 @media only screen and (min-device-width: 400px) {
   .alert-md .alert-message {
     font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-device-width: 480px) {
+  .dialogue-box.box-question {
+    font-size: 1.7rem;
   }
 }
 
@@ -25859,6 +25890,9 @@ ion-toast {
   }
   .menu-inner {
     width: 30%;
+  }
+  .dialogue-box {
+    font-size: 1.7rem;
   }
 }
 
@@ -27032,8 +27066,8 @@ page-questionaries-list .img-responsive.img-not-game {
 }
 
 page-questionaries-list .text-img {
-  max-width: 59px;
-  max-height: 72px;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 20%;
   margin-left: 9px;
 }
@@ -27087,7 +27121,14 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 1.4rem;
   }
   page-questionaries-list h5 {
-    font-size: 1.1em;
+    font-size: 1em;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
+    margin-left: 3%;
   }
 }
 
@@ -27108,6 +27149,9 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
   }
   page-questionaries-list .questionary-item-list h2 {
     font-size: 0.9em;
+  }
+  page-questionaries-list h5 {
+    font-size: 1.1em;
   }
 }
 
@@ -27148,7 +27192,7 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 1.9rem;
   }
   page-questionaries-list h5 {
-    font-size: 1.3em;
+    font-size: 1.35em;
   }
   page-questionaries-list .text-dialog {
     font-size: 2rem;

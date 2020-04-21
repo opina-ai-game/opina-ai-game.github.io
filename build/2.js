@@ -593,10 +593,10 @@ var QuestionaryPage = /** @class */ (function () {
     QuestionaryPage.prototype.help = function () {
         var alert = this.alertCtrl.create({
             title: '<div text-center>Então, vamos soltar a imaginação!</div>',
-            message: '<div class="dialogue-box"><div class="tdialogue-box-text">'
+            message: '<div class="dialogue-box box-question"><div class="tdialogue-box-text">'
                 + '<div text-center>' + this.currentQuestion.narrative + '</div>'
                 + '</div></div>'
-                + '<div class="alert-align-center"><img class="img-alert" src="assets/imgs/person2a.png" /></div>',
+                + '<div class="alert-align-center"><img class="img-alert img-question" src="assets/imgs/person5.png" /></div>',
             buttons: [{
                     text: "Ok!",
                     handler: function () {
