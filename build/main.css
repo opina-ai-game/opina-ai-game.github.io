@@ -25831,10 +25831,13 @@ ion-toast {
 
 @media only screen and (min-device-width: 320px) {
   .dialogue-box {
-    font-size: 1.5rem;
+    font-size: 0.9em;
   }
   img.img-alert.img-question {
     max-width: 45%;
+  }
+  .dialogue-box.box-question {
+    font-size: 0.85em;
   }
 }
 
@@ -25843,10 +25846,10 @@ ion-toast {
     max-width: 55%;
   }
   .dialogue-box {
-    font-size: 1.75rem;
+    font-size: 1em;
   }
   .dialogue-box.box-question {
-    font-size: 1.65rem;
+    font-size: 0.9em;
   }
 }
 
@@ -25867,7 +25870,7 @@ ion-toast {
 
 @media only screen and (min-device-width: 480px) {
   .dialogue-box.box-question {
-    font-size: 1.7rem;
+    font-size: 1em;
   }
 }
 
@@ -27121,10 +27124,11 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 1.4rem;
   }
   page-questionaries-list h5 {
-    font-size: 1em;
+    font-size: 0.9em;
     background: #fff;
     border: 1px solid #eee;
-    padding: 10px;
+    padding: 2.5%;
+    padding-left: 4%;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
     box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
@@ -27151,7 +27155,8 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 0.9em;
   }
   page-questionaries-list h5 {
-    font-size: 1.1em;
+    margin-top: 5%;
+    font-size: 1em;
   }
 }
 
@@ -27164,7 +27169,7 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 1.7rem;
   }
   page-questionaries-list h5 {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   page-questionaries-list .questionary-item-list h2.text-questionary {
     font-size: 1.6rem;
@@ -27192,7 +27197,7 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 1.9rem;
   }
   page-questionaries-list h5 {
-    font-size: 1.35em;
+    font-size: 1.25em;
   }
   page-questionaries-list .text-dialog {
     font-size: 2rem;
@@ -27231,7 +27236,7 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 2.2rem;
   }
   page-questionaries-list h5 {
-    font-size: 1.5em;
+    font-size: 1.45em;
   }
   page-questionaries-list .questionary-item-list h2.text-questionary {
     font-size: 2.1rem;
@@ -27305,14 +27310,12 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
     font-size: 30px;
   }
   page-questionaries-list .text-questionary-list-game h5 {
-    font-size: 2rem;
+    font-size: 1.22em;
+    text-align: justify;
   }
   page-questionaries-list .text-questionary-list h5 {
     text-align: center;
     margin-left: 8%;
-  }
-  page-questionaries-list .text-questionary-list-game h5 {
-    text-align: justify;
   }
   page-questionaries-list .questionary-item-list h2 {
     font-size: 1.8rem;
@@ -27331,16 +27334,6 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
 }
 
 @media only screen and (min-device-width: 1320px) {
-  page-questionaries-list .text-questionary-list-game.col h5 {
-    margin-top: 4%;
-    font-size: 1.25em;
-  }
-  page-questionaries-list .text-questionary-list.col h5 {
-    margin-top: 4%;
-  }
-  page-questionaries-list .text-questionary-list-game.col h5 {
-    margin-top: 4%;
-  }
   page-questionaries-list .text-img {
     margin-left: 45%;
     max-width: 90px;
@@ -27348,7 +27341,7 @@ page-questionaries-list ion-footer.footer-not-game.footer.footer-md {
   }
   page-questionaries-list h5 {
     width: 82%;
-    margin-top: 30%;
+    padding-left: 2%;
   }
 }
 
