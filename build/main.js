@@ -700,19 +700,19 @@ var map = {
 		5
 	],
 	"../pages/intro/intro.module": [
-		293,
+		294,
 		6
 	],
 	"../pages/prioritization/prioritization.module": [
-		296,
+		295,
 		4
 	],
 	"../pages/questionaries-list/questionaries-list.module": [
-		294,
+		293,
 		3
 	],
 	"../pages/questionary/questionary.module": [
-		295,
+		296,
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
@@ -1122,6 +1122,7 @@ var RespondentProvider = /** @class */ (function () {
                 "job_address": respondent.jobAddress ? respondent.jobAddress : null,
                 "job_name": respondent.jobName ? respondent.jobName : null,
                 "whatsapp": respondent.whatsapp ? respondent.whatsapp : null,
+                "game_type": respondent.gameType ? respondent.gameType : null,
                 //-----------------NOVOS CAMPOS-----------------
                 //-----------------CAMPOS OBRIGATÓRIOS-----------------
                 "type": respondent.type ? respondent.type : null,
@@ -1169,6 +1170,7 @@ var RespondentProvider = /** @class */ (function () {
                 "job_address": respondent.jobAddress ? respondent.jobAddress : null,
                 "job_name": respondent.jobName ? respondent.jobName : null,
                 "whatsapp": respondent.whatsapp ? respondent.whatsapp : null,
+                "game_type": respondent.gameType ? respondent.gameType : null,
                 //-----------------NOVOS CAMPOS-----------------
                 //-----------------CAMPOS OBRIGATÓRIOS-----------------
                 "type": respondent.type ? respondent.type : null,
@@ -1286,10 +1288,10 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
                     ]
                 }),

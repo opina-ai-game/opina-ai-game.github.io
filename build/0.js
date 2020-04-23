@@ -789,6 +789,13 @@ var RespondentProfilePage = /** @class */ (function () {
         var jobAddress = this.respondentForm.controls['jobAddress'];
         var jobName = this.respondentForm.controls['jobName'];
         var whatsapp = this.respondentForm.controls['whatsapp'];
+        var gameType = null;
+        if (this.useGame) {
+            gameType = "game";
+        }
+        else {
+            gameType = "not game";
+        }
         if (!this.respondentForm.valid) {
             if (!cpf.valid) {
                 cpf.markAsTouched();
@@ -822,6 +829,7 @@ var RespondentProfilePage = /** @class */ (function () {
             respondent_1.type = this.userType;
             respondent_1.caseTest = this.case_test;
             respondent_1.points = this.points;
+            respondent_1.gameType = gameType;
             //---------------------- VERIFICA SE O RESPONDENTE ESTÁ CADASTRADO -------------------------
             // this.respondentProvider.getRespondentByCPF(respondent.cpf).then((result: Respondent) => {
             this.respondentProvider.getRespondentById(this.respondentId).then(function (result) {
