@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 293:
+/***/ 295:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuestionariesListPageModule", function() { return QuestionariesListPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__questionaries_list__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__questionaries_list__ = __webpack_require__(303);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var QuestionariesListPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 302:
+/***/ 303:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85,6 +85,7 @@ var QuestionariesListPage = /** @class */ (function () {
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.priorizationProvider = priorizationProvider;
+        this.disciplineList = [];
         this.questionaries = [];
         this.questionary = new __WEBPACK_IMPORTED_MODULE_4__providers_questionary_questionary__["c" /* Questionary */]();
         this.btnContinueDisabled = true;
@@ -116,6 +117,7 @@ var QuestionariesListPage = /** @class */ (function () {
                 });
             }
         });
+        this.storage.get('disciplineSelected').then(function (data) { return _this.disciplineList = data; });
     }
     QuestionariesListPage.prototype.openMenu = function () {
         this.menuCtrl.open();
@@ -148,15 +150,34 @@ var QuestionariesListPage = /** @class */ (function () {
                             //--------------IMPORTANTE---------------
                             //-------SELEÇÃO DOS QUESTIONÁRIOS PELO TIPO DO RESPONDENTE-------
                             if (_this.respondent.type == "Discente evadido") {
-                                data = data.filter(function (item) { return item.name === "POSCOMP - Evasão Discente"; });
+                                data = data.filter(function (item) {
+                                    return item.name === "POSCOMP - Evasão Discente";
+                                });
                             }
                             else if (_this.respondent.type == "Discente formado") {
-                                data = data.filter(function (item) { return item.name === "POSCOMP - Discente Egresso"; });
-                            }
-                            else {
                                 data = data.filter(function (item) {
-                                    return (item.name !== "POSCOMP - Discente Egresso" && item.name !== "POSCOMP - Evasão Discente");
+                                    return item.name === "POSCOMP - Discente Egresso";
                                 });
+                            }
+                            else if (_this.respondent.type == "Discente") {
+                                var dataTemp_1 = [];
+                                _this.disciplineList.forEach(function (discipline) {
+                                    var questTemp = data.filter(function (quest) {
+                                        return quest.name.endsWith(discipline.name);
+                                    });
+                                    questTemp.forEach(function (q) {
+                                        dataTemp_1.push(q);
+                                    });
+                                });
+                                data = data.filter(function (item) { return (item.name === "POSCOMP - Avaliação da Secretaria" ||
+                                    item.name === "POSCOMP - Avaliação da Coordenação"); });
+                                dataTemp_1.forEach(function (dat) {
+                                    return data.push(dat);
+                                });
+                            }
+                            else if (_this.respondent.type == "Docente") {
+                                data = data.filter(function (item) { return (item.name === "POSCOMP - Avaliação da Secretaria" ||
+                                    item.name === "POSCOMP - Avaliação da Coordenação"); });
                             }
                             //-------SELEÇÃO DOS QUESTIONÁRIOS PELO TIPO DO RESPONDENTE-------
                             //--------------IMPORTANTE---------------
@@ -168,7 +189,6 @@ var QuestionariesListPage = /** @class */ (function () {
                             _this.answeredQuestionaries = _this.progress;
                             _this.progress = _this.progress / data.length;
                             _this.progress = _this.progress * 100;
-                            // this.questionaries = this.questionaryProvider.resolveQuestionaryIcon(data);
                             _this.questionaries = data;
                             _this.loader.dismiss();
                         }
@@ -242,8 +262,7 @@ var QuestionariesListPage = /** @class */ (function () {
             });
             alert.present();
         });
-        this.storage.get('points')
-            .then(function (data) { return _this.points = data; })
+        this.storage.get('points').then(function (data) { return _this.points = data; })
             .catch(function () { return console.log('error setting points'); });
     };
     //Seleciona o questionário

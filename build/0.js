@@ -572,6 +572,7 @@ BrMaskerIonicServices3.ctorParameters = function () { return []; };
 /* unused harmony export ResidenceTime */
 /* unused harmony export SalaryRange */
 /* unused harmony export AgeRange */
+/* unused harmony export Discipline */
 /* unused harmony export Respondent */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__intro_intro__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
@@ -623,10 +624,13 @@ var RespondentProfilePage = /** @class */ (function () {
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.respondentId = 0;
+        this.respondentCode = null;
         this.isCommerce = false;
         this.userType = "cidadão";
         this.case_test = "POSCOMP";
         this.ageRangeName = "";
+        this.disciplineList = [];
+        this.disciplineSelected = [];
         this.genderList = [];
         this.courseEntryList = [];
         this.courseLeftList = [];
@@ -651,14 +655,15 @@ var RespondentProfilePage = /** @class */ (function () {
         this.storage.get('useGame').then(function (data) { return _this.useGame = data; });
         this.storage.set('isRuralZone', false);
         this.createForm();
-        this.getAllCities();
-        this.loadMetrics();
-        this.loadResidenceTime();
-        this.loadSalaryRange();
-        this.loadAgeRange();
-        this.createGenderList();
+        this.createDisciplineList();
         this.createCourseList();
         this.createUserTypeList();
+        this.loadMetrics();
+        // this.getAllCities();
+        // this.loadResidenceTime();
+        // this.loadSalaryRange();
+        // this.loadAgeRange();
+        // this.createGenderList();
         this.loader = this.loadingCtrl.create();
         this.loader.present();
         setTimeout(function () {
@@ -667,13 +672,15 @@ var RespondentProfilePage = /** @class */ (function () {
     }
     RespondentProfilePage.prototype.createForm = function () {
         this.respondentForm = this.formBuilder.group({
-            // cpf: ['', [Validators.required], this.validateCPF.bind(this)],
-            // email: [''],
             code: [''],
             courseEntry: [''],
             courseLeft: [''],
-            // courseName: [''],
             userType: [''],
+            name: [''],
+            isDiscentConcluded: ['']
+            // cpf: ['', [Validators.required], this.validateCPF.bind(this)],
+            // email: [''],
+            // courseName: [''],
             // residenceCity: [''],
             // jobAddress: [''],
             // jobName: [''],
@@ -685,9 +692,8 @@ var RespondentProfilePage = /** @class */ (function () {
             // salaryRange: [''],
             // age: [''],
             // gender: [''],
-            name: [''],
             // phone: [''],
-            isDiscentConcluded: [''],
+            // isCommerce: ['']
         });
         // this.respondentForm.controls['residenceTimeRange'].setValue(0);
         // this.respondentForm.controls['salaryRange'].setValue(0);
@@ -700,6 +706,12 @@ var RespondentProfilePage = /** @class */ (function () {
             if (respondent != null) {
                 _this.editing = true;
                 _this.respondentId = respondent.id;
+                _this.respondentCode = respondent.code;
+                _this.respondentForm.controls['name'].setValue(respondent.name);
+                _this.respondentForm.controls['code'].setValue(respondent.code);
+                _this.respondentForm.controls['courseEntry'].setValue(respondent.courseEntry);
+                _this.respondentForm.controls['courseLeft'].setValue(respondent.courseLeft);
+                _this.respondentForm.controls['userType'].setValue(respondent.type);
                 // this.respondentForm.controls['cpf'].setValue(respondent.cpf);
                 // this.respondentForm.controls['email'].setValue(respondent.email);
                 // this.respondentForm.controls['residenceTimeRange'].setValue(respondent.residenceTimeRange);
@@ -708,58 +720,28 @@ var RespondentProfilePage = /** @class */ (function () {
                 // this.respondentForm.controls['jobCity'].setValue(respondent.jobCity);
                 // this.respondentForm.controls['age'].setValue(respondent.ageRange);
                 // this.respondentForm.controls['gender'].setValue(respondent.gender);
-                _this.respondentForm.controls['name'].setValue(respondent.name);
                 // this.respondentForm.controls['phone'].setValue(respondent.phone);
-                _this.respondentForm.controls['code'].setValue(respondent.code);
-                _this.respondentForm.controls['courseEntry'].setValue(respondent.courseEntry);
-                _this.respondentForm.controls['courseLeft'].setValue(respondent.courseLeft);
                 // this.respondentForm.controls['courseName'].setValue(respondent.courseName);
-                _this.respondentForm.controls['userType'].setValue(respondent.type);
                 // this.respondentForm.controls['residenceCity'].setValue(respondent.residenceCity);
                 // this.respondentForm.controls['jobAddress'].setValue(respondent.jobAddress);
                 // this.respondentForm.controls['jobName'].setValue(respondent.jobName);
                 // this.respondentForm.controls['whatsapp'].setValue(respondent.whatsapp);
                 _this.userType = respondent.type;
-                if (_this.userType == "Discente formado") {
-                    _this.isDiscent = true;
-                    _this.isDiscentConcluded = true;
-                    _this.isDiscentEvaded = true;
-                    _this.respondentForm.controls['isDiscentConcluded'].setValue(true);
-                    _this.respondentForm.controls['userType'].setValue("Ex-aluno");
-                }
-                else if (_this.userType == "Discente evadido") {
-                    _this.isDiscent = true;
-                    _this.isDiscentConcluded = false;
-                    _this.isDiscentEvaded = true;
-                    _this.respondentForm.controls['isDiscentConcluded'].setValue(false);
-                    _this.respondentForm.controls['userType'].setValue("Ex-aluno");
-                }
-                else if (_this.userType == "Discente") {
-                    _this.isDiscent = true;
-                    _this.isDiscentConcluded = false;
-                    _this.isDiscentEvaded = false;
-                    _this.respondentForm.controls['isDiscentConcluded'].setValue(false);
-                }
-                else if (_this.userType == "Docente") {
-                    _this.isDiscent = false;
-                    _this.isDiscentConcluded = false;
-                    _this.isDiscentEvaded = false;
-                    _this.respondentForm.controls['isDiscentConcluded'].setValue(false);
-                }
-                if (respondent.type == "comerciante") {
-                    // this.respondentForm.controls['isCommerce'].setValue(true);
-                    _this.isCommerce = true;
-                }
-                else {
-                    // this.respondentForm.controls['isCommerce'].setValue(false);
-                    _this.isCommerce = false;
-                }
-                if (respondent.jobNeighborhood != null) {
-                    // this.respondentForm.controls['jobNeighborhood'].setValue(respondent.jobNeighborhood);
-                    _this.jobCity = respondent.jobCity;
-                    _this.loadJobNeighborhoods();
-                    _this.isSameJobCity = "";
-                }
+                _this.resolveUsertype();
+                _this.resolveCheckBox();
+                // if (respondent.type == "comerciante") {
+                //   this.respondentForm.controls['isCommerce'].setValue(true);
+                //   this.isCommerce = true;
+                // } else {
+                //   this.respondentForm.controls['isCommerce'].setValue(false);
+                //   this.isCommerce = false;
+                // }
+                // if (respondent.jobNeighborhood != null) {
+                //   this.respondentForm.controls['jobNeighborhood'].setValue(respondent.jobNeighborhood);
+                //   this.jobCity = respondent.jobCity;
+                //   this.loadJobNeighborhoods();
+                //   this.isSameJobCity = "";
+                // }
             }
             else {
                 _this.isCommerce = false;
@@ -770,6 +752,7 @@ var RespondentProfilePage = /** @class */ (function () {
         var _this = this;
         this.loader = this.loadingCtrl.create();
         this.loader.present();
+        //-----------------------MANTER SEMPRE TODOS OS CAMPOS--------------------------
         var cpf = this.respondentForm.controls['cpf'];
         var email = this.respondentForm.controls['email'];
         var residenceNeighborhood = this.respondentForm.controls['residenceNeighborhood'];
@@ -789,6 +772,7 @@ var RespondentProfilePage = /** @class */ (function () {
         var jobAddress = this.respondentForm.controls['jobAddress'];
         var jobName = this.respondentForm.controls['jobName'];
         var whatsapp = this.respondentForm.controls['whatsapp'];
+        //-----------------------MANTER SEMPRE TODOS OS CAMPOS--------------------------
         var gameType = null;
         if (this.useGame) {
             gameType = "game";
@@ -830,42 +814,86 @@ var RespondentProfilePage = /** @class */ (function () {
             respondent_1.caseTest = this.case_test;
             respondent_1.points = this.points;
             respondent_1.gameType = gameType;
-            //---------------------- VERIFICA SE O RESPONDENTE ESTÁ CADASTRADO -------------------------
-            // this.respondentProvider.getRespondentByCPF(respondent.cpf).then((result: Respondent) => {
-            this.respondentProvider.getRespondentById(this.respondentId).then(function (result) {
-                //------------- RESPONDENTE JA ESTA CADASTRADO -------------
-                if (!!result) {
-                    respondent_1.id = result.id;
+            //---------------------- VERIFICA SE JA EXISTE UM ALUNO COM A MATRICULA -------------------------
+            this.respondentProvider.getRespondentByCode(respondent_1.code, this.respondentCode).then(function (repondentCode) {
+                if (!repondentCode) {
+                    //---------------------- VERIFICA SE O RESPONDENTE ESTÁ CADASTRADO -------------------------
+                    _this.respondentProvider.getRespondentById(_this.respondentId).then(function (result) {
+                        _this.storage.set("disciplineSelected", _this.disciplineSelected);
+                        if (!result) {
+                            //------------- INSERE O RESPONDENTE  -------------
+                            _this.respondentProvider.insertRespondent(respondent_1)
+                                .then(function (data) {
+                                respondent_1.id = data.id;
+                                _this.navigate(respondent_1);
+                            }).catch(function () {
+                                _this.tryAgainSaveRespondent();
+                            });
+                        }
+                        else {
+                            //------------- ATUALIZA O RESPONDENTE -------------
+                            respondent_1.id = result.id;
+                            _this.respondentProvider.updateRespondent(respondent_1)
+                                .then(function () {
+                                _this.navigate(respondent_1);
+                            }).catch(function () {
+                                _this.tryAgainSaveRespondent();
+                            });
+                        }
+                    }).catch(function () {
+                        _this.tryAgainSaveRespondent();
+                    });
+                }
+                else {
+                    //------------- ATUALIZA O RESPONDENTE -------------
+                    respondent_1.id = repondentCode.id;
                     _this.respondentProvider.updateRespondent(respondent_1)
                         .then(function () {
                         _this.navigate(respondent_1);
-                    })
-                        .catch(function () {
-                        _this.tryAgainSaveRespondent();
-                    });
-                    //------------- RESPONDENTE NÃO ESTA CADASTRADO -------------
-                }
-                else {
-                    _this.respondentProvider.insertRespondent(respondent_1)
-                        .then(function (data) {
-                        //------------------- RECUPERA O ID DO RESPONDENTE -------------------
-                        respondent_1.id = data.id;
-                        _this.navigate(respondent_1);
-                    })
-                        .catch(function () {
+                    }).catch(function () {
                         _this.tryAgainSaveRespondent();
                     });
                 }
-                //Ativar ou desativar a gamificação
-                if (respondent_1.id % 2 == 0) {
-                    //this.storage.set('useGame', true);
+            });
+        }
+    };
+    RespondentProfilePage.prototype.resolveUsertype = function () {
+        if (this.userType == "Discente formado") {
+            this.isDiscent = true;
+            this.isDiscentConcluded = true;
+            this.isDiscentEvaded = true;
+            this.respondentForm.controls['isDiscentConcluded'].setValue(true);
+            this.respondentForm.controls['userType'].setValue("Ex-aluno");
+        }
+        else if (this.userType == "Discente evadido") {
+            this.isDiscent = true;
+            this.isDiscentConcluded = false;
+            this.isDiscentEvaded = true;
+            this.respondentForm.controls['isDiscentConcluded'].setValue(false);
+            this.respondentForm.controls['userType'].setValue("Ex-aluno");
+        }
+        else if (this.userType == "Discente") {
+            this.isDiscent = true;
+            this.isDiscentConcluded = false;
+            this.isDiscentEvaded = false;
+            this.respondentForm.controls['isDiscentConcluded'].setValue(false);
+        }
+        else if (this.userType == "Docente") {
+            this.isDiscent = false;
+            this.isDiscentConcluded = false;
+            this.isDiscentEvaded = false;
+            this.respondentForm.controls['isDiscentConcluded'].setValue(false);
+        }
+    };
+    RespondentProfilePage.prototype.resolveCheckBox = function () {
+        var _this = this;
+        if (this.isDiscent && !this.isDiscentEvaded && !this.isDiscentConcluded) {
+            this.storage.get('disciplineSelected').then(function (data) {
+                if (data) {
+                    data.forEach(function (disc) {
+                        _this.checkBox.toArray()[disc.value].checked = true;
+                    });
                 }
-                else {
-                    //this.storage.set('useGame', false);
-                }
-            })
-                .catch(function () {
-                _this.tryAgainSaveRespondent();
             });
         }
     };
@@ -922,7 +950,7 @@ var RespondentProfilePage = /** @class */ (function () {
             this.respondentForm.controls['code'].disable();
             this.respondentForm.controls['isDiscentConcluded'].setValue(false);
         }
-        this.scrollToBottom();
+        // this.scrollToBottom();
     };
     RespondentProfilePage.prototype.changeUserType = function () {
         if (this.userType == "comerciante") {
@@ -953,14 +981,24 @@ var RespondentProfilePage = /** @class */ (function () {
         }
         this.scrollToBottom();
     };
+    RespondentProfilePage.prototype.updateDisciplineValue = function (disciplineSelect, checked) {
+        this.checkBox;
+        if (checked) {
+            this.disciplineSelected.push(disciplineSelect);
+        }
+        else {
+            this.disciplineSelected =
+                this.disciplineSelected.filter(function (discipline) { return !(discipline === disciplineSelect); });
+        }
+    };
     RespondentProfilePage.prototype.verifyLevel = function () {
-        if (this.points > 0 && this.points <= 7) {
+        if (this.points > 0 && this.points <= 12) {
             this.level = "Bronze";
         }
-        if (this.points > 7 && this.points <= 13) {
+        if (this.points > 12 && this.points <= 21) {
             this.level = "Prata";
         }
-        if (this.points > 13) {
+        if (this.points > 21) {
             this.level = "Ouro";
         }
     };
@@ -1342,6 +1380,44 @@ var RespondentProfilePage = /** @class */ (function () {
             value: "Física (mestrado)"
         };
         this.courseNameList.push(courseEntry18);
+    };
+    RespondentProfilePage.prototype.createDisciplineList = function () {
+        this.disciplineList = [];
+        var disc1 = {
+            value: 0,
+            name: "Algoritmos e Estruturas de Dados"
+        };
+        this.disciplineList.push(disc1);
+        var disc2 = {
+            value: 1,
+            name: "Empreendedorismo Tecnológico"
+        };
+        this.disciplineList.push(disc2);
+        var disc3 = {
+            value: 2,
+            name: "Introdução a Otimização Inteira"
+        };
+        this.disciplineList.push(disc3);
+        var disc4 = {
+            value: 3,
+            name: "Robótica Móvel II"
+        };
+        this.disciplineList.push(disc4);
+        var disc5 = {
+            value: 4,
+            name: "Sistemas Operacionais"
+        };
+        this.disciplineList.push(disc5);
+        var disc6 = {
+            value: 5,
+            name: "Tópicos em Engenharia de Software"
+        };
+        this.disciplineList.push(disc6);
+        var disc7 = {
+            value: 6,
+            name: "Visualização de Informação"
+        };
+        this.disciplineList.push(disc7);
     };
     RespondentProfilePage.prototype.setFormData = function () {
         var _this = this;
@@ -1736,9 +1812,13 @@ var RespondentProfilePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* Content */]),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* Content */])
     ], RespondentProfilePage.prototype, "content", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_10" /* ViewChildren */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Checkbox */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_core__["U" /* QueryList */])
+    ], RespondentProfilePage.prototype, "checkBox", void 0);
     RespondentProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-respondent-profile',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\respondent-profile\respondent-profile.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col offset-1 col-2 class="menu-icon-col-not-game" *ngIf="!useGame">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col offset-1 col-2 class="menu-icon-col" *ngIf="useGame">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 *ngIf="!useGame">\n        <img class="img-responsive img-not-game" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-6 *ngIf="useGame">\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2 *ngIf="useGame" class="profile-title profile-title-game" col-12 text-center>Perfil do respondente</h2>\n  <h2 *ngIf="!useGame" class="profile-title" col-12 text-center>Perfil do respondente</h2>\n  <!-- Pontuação -->\n  <div *ngIf="useGame" class="level-panel">\n    <!-- Com Pontuação -->\n    <ion-item *ngIf="points > 0" text-wrap>\n      <ion-thumbnail item-start>\n        <img *ngIf="level == \'Ouro\'" class="img-responsive" src="assets/imgs/level3.png" />\n        <img *ngIf="level == \'Prata\'" class="img-responsive" src="assets/imgs/level2.png" />\n        <img *ngIf="level == \'Bronze\'" class="img-responsive" src="assets/imgs/level1.png" />\n      </ion-thumbnail>\n      <ion-label>\n        <h2>Você está no nível <strong>{{level}}</strong> de Participação!</h2>\n        <p><b>Sua pontuação</b></p>\n        <ion-badge>{{points}} pontos</ion-badge>\n      </ion-label>\n    </ion-item>\n    <!-- Com Pontuação -->\n    <!-- Sem pontuação -->\n    <ion-item *ngIf="points == 0" text-wrap>\n      <ion-thumbnail item-start>\n        <img class="img-responsive" src="assets/imgs/level0.png" />\n      </ion-thumbnail>\n      <ion-label>\n        <h2>Responda os questionários para aumentar o <b>nível</b> de <b>Participação</b>!</h2>\n        <p><b>Sua pontuação</b></p>\n        <ion-badge>{{points}} pontos</ion-badge>\n      </ion-label>\n    </ion-item>\n    <!-- Sem pontuação -->\n  </div>\n  <!-- Pontuação -->\n  <h3 *ngIf="useGame" class="subtitle subtitle-game" col-12 text-center>Por favor informe os seus dados</h3>\n  <h3 *ngIf="!useGame" class="subtitle" col-12 text-center>Por favor informe os seus dados</h3>\n  <form [formGroup]="respondentForm">\n    <!-----------------------CASE POSCOMP----------------------->\n    <!-- Nome -->\n    <ion-item>\n      <ion-label floating>Nome</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'name\']" required (ionFocus)="scrollToBottom()"></ion-input>\n    </ion-item>\n    <!-- Nome -->\n    <!-- Tipo de Respondente -->\n    <ion-item>\n      <!-- Pontuação -->\n      <ion-label floating>Por favor, selecione a formação</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'userType\']" required>\n        <ion-option *ngFor="let userType of userTypeList" [value]="userType.value"\n          (ionSelect)="selectUserType(userType)">\n          {{userType.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Tipo de Respondente -->\n    <!-- Discente formado ou evadido -->\n    <ion-item *ngIf="isDiscent && isDiscentEvaded">\n      <ion-label>você se formou no curso?</ion-label>\n      <ion-checkbox item-end (ionChange)="changeDiscentType()"\n        [formControl]="respondentForm.controls[\'isDiscentConcluded\']"></ion-checkbox>\n    </ion-item>\n    <!-- Discente formado ou evadido -->\n    <!-- Ano e semestre de ingresso -->\n    <ion-item *ngIf="isDiscent">\n      <ion-label floating>Por favor, selecione o ano e semestre de ingresso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseEntry\']" required>\n        <ion-option *ngFor="let courseEntry of courseEntryList" [value]="courseEntry.value">\n          {{courseEntry.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Ano e semestre de ingresso -->\n    <!-- Ano e semestre de conclusão -->\n    <ion-item *ngIf="isDiscent && isDiscentConcluded">\n      <ion-label floating>Por favor, selecione o ano e semestre de conclusão</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseLeft\']" required>\n        <ion-option *ngFor="let courseLeft of courseLeftList" [value]="courseLeft.value">\n          {{courseLeft.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Ano e semestre de conclusão -->\n    <!-- Número de matricula -->\n    <ion-item *ngIf="isDiscent && !isDiscentEvaded && !isDiscentConcluded">\n      <ion-label floating>Número de matrícula</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'code\']"\n        [brmasker]="{mask: \'000000000000\', type:\'num\', len: 12}" type="text" required (ionFocus)="scrollToBottom()">\n      </ion-input>\n    </ion-item>\n    <!-- Número de matricula -->\n    <!-----------------------CASE POSCOMP----------------------->\n    <!------------------------ TODOS OS CAMPOS ------------------------->\n    <!-----------------------INFORMAÇÕES PESSOAIS----------------------->\n    <!-- CPF -->\n    <!-- <ion-item>\n      <ion-label floating>CPF</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'cpf\']" type="text"\n        [brmasker]="{mask: \'000.000.000-00\', type:\'num\', len: 14}" required>\n      </ion-input>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'cpf\'].hasError(\'required\') && respondentForm.controls[\'cpf\'].touched">* CPF é\n        obrigatório!\n      </div>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'cpf\'].hasError(\'invalid\') && respondentForm.controls[\'cpf\'].touched">* CPF é\n        inválido!\n      </div>\n    </ion-item> -->\n    <!-- CPF -->\n    <!-- Nome -->\n    <!-- <ion-item>\n      <ion-label floating>Nome</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'name\']"></ion-input>\n    </ion-item> -->\n    <!-- Nome -->\n    <!-- Genero -->\n    <!-- <ion-item>\n      <ion-label floating>Gênero</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'gender\']">\n        <ion-option *ngFor="let gender of genderList" [value]="gender.value">\n          {{gender.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Genero -->\n    <!-- Email -->\n    <!-- <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input [email]="true" [formControl]="respondentForm.controls[\'email\']" type="email"></ion-input>\n    </ion-item> -->\n    <!-- Email -->\n    <!-- Telefone -->\n    <!-- <ion-item>\n      <ion-label floating>Telefone</ion-label>\n      <ion-input [brmasker]="{mask: \'(00)00000-0000\', type:\'num\', len: 15}"\n        [formControl]="respondentForm.controls[\'phone\']"></ion-input>\n    </ion-item> -->\n    <!-- Telefone -->\n    <!-- WhatsApp -->\n    <!-- <ion-item>\n      <ion-label floating>WhatsApp</ion-label>\n      <ion-input [brmasker]="{mask: \'(00)00000-0000\', type:\'num\', len: 15}"\n        [formControl]="respondentForm.controls[\'whatsapp\']"></ion-input>\n    </ion-item> -->\n    <!-- WhatsApp -->\n    <!-- Cidade de residência -->\n    <!-- <ion-item>\n      <ion-label floating>Cidade de Residência</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'residenceCity\']">\n        <ion-option *ngFor="let residenceCity of cities" [value]="residenceCity">\n          {{residenceCity.name}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Cidade de residência -->\n    <!-- Bairro de residencia -->\n    <!-- <ion-item>\n      <ion-label floating>Bairro de Residência</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'residenceNeighborhood\']" [compareWith]="compareFn">\n        <ion-option *ngFor="let residenceNeighborhood of residenceNeighborhoods" [value]="residenceNeighborhood">\n          {{residenceNeighborhood.name}}\n        </ion-option>\n      </ion-select>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'residenceNeighborhood\'].hasError(\'required\') && respondentForm.controls[\'residenceNeighborhood\'].touched">\n        * Bairro de Residência é obrigatório!\n      </div>\n    </ion-item> -->\n    <!-- Bairro de residencia -->\n    <!-----------------------INFORMAÇÕES PESSOAIS----------------------->\n    <!-----------------------INFORMAÇÕES DE TRABALHO----------------------->\n    <!-- Comerciante ou não -->\n    <!-- <ion-item>\n    <ion-label>Possui comércio no centro?</ion-label>\n    <ion-checkbox item-end (ionChange)="changeUserType()" [(ngModel)]="isCommerce"></ion-checkbox>\n  </ion-item> -->\n    <!-- Comerciante ou não -->\n    <!-- Cidade de trabalho -->\n    <!-- <ion-item>\n      <ion-label floating>Cidade de Trabalho</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'jobCity\']" (ionChange)="loadJobNeighborhoods()"\n        [compareWith]="compareFn">\n        <ion-option *ngFor="let jobCity of cities" [value]="jobCity" (ionSelect)="selectCity(jobCity)">\n          {{jobCity.name}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Cidade de trabalho -->\n    <!-- Nome da Empresa -->\n    <!-- <ion-item>\n      <ion-label floating>Nome da empresa</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'jobName\']"></ion-input>\n    </ion-item> -->\n    <!-- Nome da Empresa -->\n    <!-- Endereço da Empresa -->\n    <!-- <ion-item>\n      <ion-label floating>Endereço da empresa</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'jobAddress\']"></ion-input>\n    </ion-item> -->\n    <!-- Endereço da Empresa -->\n    <!-- Bairro de trabalho -->\n    <!-- <div class="{{isSameJobCity}}">\n      <ion-item>\n        <ion-label floating>Bairro de Trabalho</ion-label>\n        <ion-select [formControl]="respondentForm.controls[\'jobNeighborhood\']" [disabled]="jobNeighborhoodDisabled"\n          [compareWith]="compareFn">\n          <ion-option *ngFor="let jobNeighborhood of jobNeighborhoods" [value]="jobNeighborhood">\n            {{jobNeighborhood.name}}\n          </ion-option>\n        </ion-select>\n      </ion-item>\n    </div> -->\n    <!-- Bairro de trabalho -->\n    <!-----------------------INFORMAÇÕES DE TRABALHO----------------------->\n    <!-----------------------INFORMAÇÕES ACADÊMICAS----------------------->\n    <!-- Tipo de Respondente -->\n    <!-- <ion-item>\n      <ion-label floating>Nível</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'userType\']">\n        <ion-option *ngFor="let userType of userTypeList" [value]="userType.value"\n          (ionSelect)="selectUserType(userType)">\n          {{userType.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Tipo de Respondente -->\n    <!-- Discente formado ou evadido -->\n    <!-- <ion-item *ngIf="isDiscent">\n      <ion-label>Formou no curso?</ion-label>\n      <ion-checkbox item-end (ionChange)="changeDiscentType()"></ion-checkbox>\n    </ion-item> -->\n    <!-- Discente formado ou evadido -->\n    <!-- Número de matricula -->\n    <!-- <ion-item>\n      <ion-label floating>Número de matrícula</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'code\']"\n        [brmasker]="{mask: \'000000000000\', type:\'num\', len: 12}" type ="text" required>\n      </ion-input>\n    </ion-item> -->\n    <!-- Número de matricula -->\n    <!-- Curso -->\n    <!-- <ion-item>\n      <ion-label floating>Curso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseName\']" [disabled]="courseDisabled">\n        <ion-option *ngFor="let courseName of courseNameList" [value]="courseName.value">\n          {{courseName.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Curso -->\n    <!-- Ano e semestre de ingresso -->\n    <!-- <ion-item *ngIf="isDiscent">\n      <ion-label floating>Ano e semestre de ingresso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseEntry\']" [disabled]="courseDisabled">\n        <ion-option *ngFor="let courseEntry of courseEntryList" [value]="courseEntry.value">\n          {{courseEntry.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Ano e semestre de ingresso -->\n    <!-- Ano e semestre de conclusão -->\n    <!-- <ion-item *ngIf="isDiscent && isDiscentEvaded">\n      <ion-label floating>Ano e semestre de conclusão</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseLeft\']">\n        <ion-option *ngFor="let courseLeft of courseLeftList" [value]="courseLeft.value">\n          {{courseLeft.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Ano e semestre de conclusão -->\n    <!-- Idade -->\n    <!-- <ion-item>\n      <ion-label>Idade</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getAgeRangeByValue($event)"\n        [formControl]="respondentForm.controls[\'age\']">\n      </ion-range>\n      <ion-label>{{ageRangeName}}</ion-label>\n    </ion-item> -->\n    <!-- Idade -->\n    <!-----------------------INFORMAÇÕES ACADÊMICAS----------------------->\n    <!-------------------------------RANGES-------------------------------->\n    <!-- Tempo de residência -->\n    <!-- <ion-item>\n      <ion-label>Tempo de Residência</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getResidenceTimeNameByValue($event)"\n        [formControl]="respondentForm.controls[\'residenceTimeRange\']">\n      </ion-range>\n      <ion-label>{{residenceTimeName}}</ion-label>\n    </ion-item> -->\n    <!-- Tempo de residência -->\n    <!-- Renda -->\n    <!-- <ion-item>\n      <ion-label>Renda</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getSalaryRangeNameByValue($event)"\n        [formControl]="respondentForm.controls[\'salaryRange\']">\n      </ion-range>\n      <ion-label>{{salaryRangeName}}</ion-label>\n    </ion-item> -->\n    <!-- Renda -->\n    <!-------------------------------RANGES-------------------------------->\n    <!------------------------ TODOS OS CAMPOS ------------------------->\n    <ion-grid>\n      <ion-row *ngIf="editing && useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-update-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="!editing && useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-register-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="editing && !useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-update-not-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="!editing && !useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-register-not-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\respondent-profile\respondent-profile.html"*/,
+            selector: 'page-respondent-profile',template:/*ion-inline-start:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\respondent-profile\respondent-profile.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-row>\n      <ion-col offset-1 col-2 class="menu-icon-col-not-game" *ngIf="!useGame">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col offset-1 col-2 class="menu-icon-col" *ngIf="useGame">\n        <button ion-button clear (click)="openMenu()">\n          <ion-icon name="md-menu" class="menu-icon"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 *ngIf="!useGame">\n        <img class="img-responsive img-not-game" src="assets/imgs/header-logo.png" />\n      </ion-col>\n      <ion-col col-6 *ngIf="useGame">\n        <img class="img-responsive" src="assets/imgs/header-logo.png" />\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2 *ngIf="useGame" class="profile-title profile-title-game" col-12 text-center>Perfil do respondente</h2>\n  <h2 *ngIf="!useGame" class="profile-title" col-12 text-center>Perfil do respondente</h2>\n  <!-- Pontuação -->\n  <div *ngIf="useGame" class="level-panel">\n    <!-- Com Pontuação -->\n    <ion-item *ngIf="points > 0" text-wrap>\n      <ion-thumbnail item-start>\n        <img *ngIf="level == \'Ouro\'" class="img-responsive" src="assets/imgs/level3.png" />\n        <img *ngIf="level == \'Prata\'" class="img-responsive" src="assets/imgs/level2.png" />\n        <img *ngIf="level == \'Bronze\'" class="img-responsive" src="assets/imgs/level1.png" />\n      </ion-thumbnail>\n      <ion-label>\n        <h2>Você está no nível <strong>{{level}}</strong> de Participação!</h2>\n        <p><b>Sua pontuação</b></p>\n        <ion-badge>{{points}} pontos</ion-badge>\n      </ion-label>\n    </ion-item>\n    <!-- Com Pontuação -->\n    <!-- Sem pontuação -->\n    <ion-item *ngIf="points == 0" text-wrap>\n      <ion-thumbnail item-start>\n        <img class="img-responsive" src="assets/imgs/level0.png" />\n      </ion-thumbnail>\n      <ion-label>\n        <h2>Responda os questionários para aumentar o <b>nível</b> de <b>Participação</b>!</h2>\n        <p><b>Sua pontuação</b></p>\n        <ion-badge>{{points}} pontos</ion-badge>\n      </ion-label>\n    </ion-item>\n    <!-- Sem pontuação -->\n  </div>\n  <!-- Pontuação -->\n  <h3 *ngIf="useGame" class="subtitle subtitle-game" col-12 text-center>Por favor informe os seus dados</h3>\n  <h3 *ngIf="!useGame" class="subtitle" col-12 text-center>Por favor informe os seus dados</h3>\n  <form [formGroup]="respondentForm">\n    <!-----------------------CASE POSCOMP----------------------->\n    <!-- Nome -->\n    <ion-item>\n      <ion-label floating>Nome</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'name\']" required (ionFocus)="scrollToBottom()"></ion-input>\n    </ion-item>\n    <!-- Nome -->\n    <!-- Tipo de Respondente -->\n    <ion-item>\n      <!-- Pontuação -->\n      <ion-label floating>Por favor, selecione a formação</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'userType\']" required>\n        <ion-option *ngFor="let userType of userTypeList" [value]="userType.value"\n          (ionSelect)="selectUserType(userType)">\n          {{userType.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Tipo de Respondente -->\n    <!-- Discente formado ou evadido -->\n    <ion-item *ngIf="isDiscent && isDiscentEvaded">\n      <ion-label>você se formou no curso?</ion-label>\n      <ion-checkbox item-end (ionChange)="changeDiscentType()"\n        [formControl]="respondentForm.controls[\'isDiscentConcluded\']"></ion-checkbox>\n    </ion-item>\n    <!-- Discente formado ou evadido -->\n    <!-- Ano e semestre de ingresso -->\n    <ion-item *ngIf="isDiscent">\n      <ion-label floating>Por favor, selecione o ano e semestre de ingresso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseEntry\']" required>\n        <ion-option *ngFor="let courseEntry of courseEntryList" [value]="courseEntry.value">\n          {{courseEntry.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Ano e semestre de ingresso -->\n    <!-- Ano e semestre de conclusão -->\n    <ion-item *ngIf="isDiscent && isDiscentConcluded">\n      <ion-label floating>Por favor, selecione o ano e semestre de conclusão</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseLeft\']" required>\n        <ion-option *ngFor="let courseLeft of courseLeftList" [value]="courseLeft.value">\n          {{courseLeft.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <!-- Ano e semestre de conclusão -->\n    <!-- Número de matricula -->\n    <ion-item *ngIf="isDiscent && !isDiscentEvaded && !isDiscentConcluded">\n      <ion-label floating>Número de matrícula</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'code\']"\n        [brmasker]="{mask: \'000000000000\', type:\'num\', len: 12}" type="text" required (ionFocus)="scrollToBottom()">\n      </ion-input>\n    </ion-item>\n    <!-- Número de matricula -->\n    <!-- Disciplinas -->\n    <ion-row class="metric-row" *ngIf="isDiscent && !isDiscentEvaded && !isDiscentConcluded">\n      <ion-col col-12>\n        <h3 class="subtitle check-box-subtitle" col-12 text-center>Quais disciplinas você cursou no 2º semestre de 2019?</h3>\n        <ion-list radio-group>\n          <ion-item *ngFor="let discipline of disciplineList" class="item-checkbox">\n            <ion-label text-wrap text-left class="item-checkbox-text">{{discipline.name}}</ion-label>\n            <ion-checkbox (ionChange)="updateDisciplineValue(discipline,$event.checked)"></ion-checkbox>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <!-- Disciplinas -->\n    <!-----------------------CASE POSCOMP----------------------->\n    <!------------------------ TODOS OS CAMPOS ------------------------->\n    <!-----------------------INFORMAÇÕES PESSOAIS----------------------->\n    <!-- CPF -->\n    <!-- <ion-item>\n      <ion-label floating>CPF</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'cpf\']" type="text"\n        [brmasker]="{mask: \'000.000.000-00\', type:\'num\', len: 14}" required>\n      </ion-input>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'cpf\'].hasError(\'required\') && respondentForm.controls[\'cpf\'].touched">* CPF é\n        obrigatório!\n      </div>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'cpf\'].hasError(\'invalid\') && respondentForm.controls[\'cpf\'].touched">* CPF é\n        inválido!\n      </div>\n    </ion-item> -->\n    <!-- CPF -->\n    <!-- Nome -->\n    <!-- <ion-item>\n      <ion-label floating>Nome</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'name\']"></ion-input>\n    </ion-item> -->\n    <!-- Nome -->\n    <!-- Genero -->\n    <!-- <ion-item>\n      <ion-label floating>Gênero</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'gender\']">\n        <ion-option *ngFor="let gender of genderList" [value]="gender.value">\n          {{gender.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Genero -->\n    <!-- Email -->\n    <!-- <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input [email]="true" [formControl]="respondentForm.controls[\'email\']" type="email"></ion-input>\n    </ion-item> -->\n    <!-- Email -->\n    <!-- Telefone -->\n    <!-- <ion-item>\n      <ion-label floating>Telefone</ion-label>\n      <ion-input [brmasker]="{mask: \'(00)00000-0000\', type:\'num\', len: 15}"\n        [formControl]="respondentForm.controls[\'phone\']"></ion-input>\n    </ion-item> -->\n    <!-- Telefone -->\n    <!-- WhatsApp -->\n    <!-- <ion-item>\n      <ion-label floating>WhatsApp</ion-label>\n      <ion-input [brmasker]="{mask: \'(00)00000-0000\', type:\'num\', len: 15}"\n        [formControl]="respondentForm.controls[\'whatsapp\']"></ion-input>\n    </ion-item> -->\n    <!-- WhatsApp -->\n    <!-- Cidade de residência -->\n    <!-- <ion-item>\n      <ion-label floating>Cidade de Residência</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'residenceCity\']">\n        <ion-option *ngFor="let residenceCity of cities" [value]="residenceCity">\n          {{residenceCity.name}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Cidade de residência -->\n    <!-- Bairro de residencia -->\n    <!-- <ion-item>\n      <ion-label floating>Bairro de Residência</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'residenceNeighborhood\']" [compareWith]="compareFn">\n        <ion-option *ngFor="let residenceNeighborhood of residenceNeighborhoods" [value]="residenceNeighborhood">\n          {{residenceNeighborhood.name}}\n        </ion-option>\n      </ion-select>\n      <div class="validator-error"\n        *ngIf="respondentForm.controls[\'residenceNeighborhood\'].hasError(\'required\') && respondentForm.controls[\'residenceNeighborhood\'].touched">\n        * Bairro de Residência é obrigatório!\n      </div>\n    </ion-item> -->\n    <!-- Bairro de residencia -->\n    <!-----------------------INFORMAÇÕES PESSOAIS----------------------->\n    <!-----------------------INFORMAÇÕES DE TRABALHO----------------------->\n    <!-- Comerciante ou não -->\n    <!-- <ion-item>\n    <ion-label>Possui comércio no centro?</ion-label>\n    <ion-checkbox item-end (ionChange)="changeUserType()" [(ngModel)]="isCommerce"></ion-checkbox>\n  </ion-item> -->\n    <!-- Comerciante ou não -->\n    <!-- Cidade de trabalho -->\n    <!-- <ion-item>\n      <ion-label floating>Cidade de Trabalho</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'jobCity\']" (ionChange)="loadJobNeighborhoods()"\n        [compareWith]="compareFn">\n        <ion-option *ngFor="let jobCity of cities" [value]="jobCity" (ionSelect)="selectCity(jobCity)">\n          {{jobCity.name}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Cidade de trabalho -->\n    <!-- Nome da Empresa -->\n    <!-- <ion-item>\n      <ion-label floating>Nome da empresa</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'jobName\']"></ion-input>\n    </ion-item> -->\n    <!-- Nome da Empresa -->\n    <!-- Endereço da Empresa -->\n    <!-- <ion-item>\n      <ion-label floating>Endereço da empresa</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'jobAddress\']"></ion-input>\n    </ion-item> -->\n    <!-- Endereço da Empresa -->\n    <!-- Bairro de trabalho -->\n    <!-- <div class="{{isSameJobCity}}">\n      <ion-item>\n        <ion-label floating>Bairro de Trabalho</ion-label>\n        <ion-select [formControl]="respondentForm.controls[\'jobNeighborhood\']" [disabled]="jobNeighborhoodDisabled"\n          [compareWith]="compareFn">\n          <ion-option *ngFor="let jobNeighborhood of jobNeighborhoods" [value]="jobNeighborhood">\n            {{jobNeighborhood.name}}\n          </ion-option>\n        </ion-select>\n      </ion-item>\n    </div> -->\n    <!-- Bairro de trabalho -->\n    <!-----------------------INFORMAÇÕES DE TRABALHO----------------------->\n    <!-----------------------INFORMAÇÕES ACADÊMICAS----------------------->\n    <!-- Tipo de Respondente -->\n    <!-- <ion-item>\n      <ion-label floating>Nível</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'userType\']">\n        <ion-option *ngFor="let userType of userTypeList" [value]="userType.value"\n          (ionSelect)="selectUserType(userType)">\n          {{userType.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Tipo de Respondente -->\n    <!-- Discente formado ou evadido -->\n    <!-- <ion-item *ngIf="isDiscent">\n      <ion-label>Formou no curso?</ion-label>\n      <ion-checkbox item-end (ionChange)="changeDiscentType()"></ion-checkbox>\n    </ion-item> -->\n    <!-- Discente formado ou evadido -->\n    <!-- Número de matricula -->\n    <!-- <ion-item>\n      <ion-label floating>Número de matrícula</ion-label>\n      <ion-input [formControl]="respondentForm.controls[\'code\']"\n        [brmasker]="{mask: \'000000000000\', type:\'num\', len: 12}" type ="text" required>\n      </ion-input>\n    </ion-item> -->\n    <!-- Número de matricula -->\n    <!-- Curso -->\n    <!-- <ion-item>\n      <ion-label floating>Curso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseName\']" [disabled]="courseDisabled">\n        <ion-option *ngFor="let courseName of courseNameList" [value]="courseName.value">\n          {{courseName.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Curso -->\n    <!-- Ano e semestre de ingresso -->\n    <!-- <ion-item *ngIf="isDiscent">\n      <ion-label floating>Ano e semestre de ingresso</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseEntry\']" [disabled]="courseDisabled">\n        <ion-option *ngFor="let courseEntry of courseEntryList" [value]="courseEntry.value">\n          {{courseEntry.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Ano e semestre de ingresso -->\n    <!-- Ano e semestre de conclusão -->\n    <!-- <ion-item *ngIf="isDiscent && isDiscentEvaded">\n      <ion-label floating>Ano e semestre de conclusão</ion-label>\n      <ion-select [formControl]="respondentForm.controls[\'courseLeft\']">\n        <ion-option *ngFor="let courseLeft of courseLeftList" [value]="courseLeft.value">\n          {{courseLeft.value}}\n        </ion-option>\n      </ion-select>\n    </ion-item> -->\n    <!-- Ano e semestre de conclusão -->\n    <!-- Idade -->\n    <!-- <ion-item>\n      <ion-label>Idade</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getAgeRangeByValue($event)"\n        [formControl]="respondentForm.controls[\'age\']">\n      </ion-range>\n      <ion-label>{{ageRangeName}}</ion-label>\n    </ion-item> -->\n    <!-- Idade -->\n    <!-----------------------INFORMAÇÕES ACADÊMICAS----------------------->\n    <!-------------------------------RANGES-------------------------------->\n    <!-- Tempo de residência -->\n    <!-- <ion-item>\n      <ion-label>Tempo de Residência</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getResidenceTimeNameByValue($event)"\n        [formControl]="respondentForm.controls[\'residenceTimeRange\']">\n      </ion-range>\n      <ion-label>{{residenceTimeName}}</ion-label>\n    </ion-item> -->\n    <!-- Tempo de residência -->\n    <!-- Renda -->\n    <!-- <ion-item>\n      <ion-label>Renda</ion-label>\n      <ion-range snaps="true" [min]="0" [max]="4" [step]="1" (ionChange)="getSalaryRangeNameByValue($event)"\n        [formControl]="respondentForm.controls[\'salaryRange\']">\n      </ion-range>\n      <ion-label>{{salaryRangeName}}</ion-label>\n    </ion-item> -->\n    <!-- Renda -->\n    <!-------------------------------RANGES-------------------------------->\n    <!------------------------ TODOS OS CAMPOS ------------------------->\n    <ion-grid>\n      <ion-row *ngIf="editing && useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-update-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="!editing && useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-register-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="editing && !useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-update-not-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="!editing && !useGame">\n        <ion-col text-center>\n          <button ion-button block class="button-background" type="submit" (click)="saveRespondentInfo()"\n            [disabled]="!respondentForm.valid">\n            <ion-icon id="button-profile-register-not-game" class="text-button">\n              Salvar\n            </ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>'/*ion-inline-end:"D:\IONIC Projects\neiru_surveys_app-develop\src\pages\respondent-profile\respondent-profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* MenuController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_8__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_city_city__["a" /* CityProvider */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_9__providers_respondent_respondent__["a" /* RespondentProvider */], __WEBPACK_IMPORTED_MODULE_7__providers_neighborhood_neighborhood__["a" /* NeighborhoodProvider */], __WEBPACK_IMPORTED_MODULE_10__providers_prioritization_prioritization__["a" /* PrioritizationProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_11__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* LoadingController */]])
     ], RespondentProfilePage);
@@ -1761,6 +1841,12 @@ var AgeRange = /** @class */ (function () {
     function AgeRange() {
     }
     return AgeRange;
+}());
+
+var Discipline = /** @class */ (function () {
+    function Discipline() {
+    }
+    return Discipline;
 }());
 
 var Respondent = /** @class */ (function () {

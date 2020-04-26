@@ -27815,6 +27815,16 @@ page-respondent-profile .range-md .range-tick-active {
 }
 
 @media only screen and (min-device-width: 320px) {
+  page-respondent-profile .item.item-md .checkbox-md {
+    margin-right: 5%;
+  }
+  page-respondent-profile .item-checkbox.item.item-block.item-md {
+    font-size: 1.1em;
+  }
+  page-respondent-profile h3.subtitle.check-box-subtitle {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
   page-respondent-profile .level-panel {
     margin-top: -4%;
     margin-bottom: -4%;
@@ -27836,6 +27846,9 @@ page-respondent-profile .range-md .range-tick-active {
 }
 
 @media only screen and (min-device-width: 360px) {
+  page-respondent-profile .item-checkbox.item.item-block.item-md {
+    font-size: 1.2em;
+  }
   page-respondent-profile .profile-title {
     font-size: 1.8em;
   }
@@ -27867,6 +27880,9 @@ page-respondent-profile .range-md .range-tick-active {
 }
 
 @media only screen and (min-device-width: 500px) {
+  page-respondent-profile .item-checkbox.item.item-block.item-md {
+    font-size: 1.1em;
+  }
   page-respondent-profile img.img-responsive.img-not-game {
     margin-left: 2% !important;
   }

@@ -84,7 +84,18 @@ var ThankyouPage = /** @class */ (function () {
             else {
                 _this.form_url = "https://forms.gle/fZAvFbkccgsijG5v8";
             }
-            _this.showForm();
+            _this.storage.get('showForm').then(function (data) {
+                if (!data) {
+                    var showFormCont = 1;
+                    _this.storage.set('showForm', showFormCont);
+                    _this.showForm();
+                }
+                else if (data < 3) {
+                    data++;
+                    _this.storage.set('showForm', data);
+                    _this.showForm();
+                }
+            });
         });
         this.getUserType();
         this.points = navParams.get('points');
@@ -98,13 +109,13 @@ var ThankyouPage = /** @class */ (function () {
         this.verifyLevel();
     }
     ThankyouPage.prototype.verifyLevel = function () {
-        if (this.points > 0 && this.points <= 7) {
+        if (this.points > 0 && this.points <= 12) {
             this.level = "Bronze";
         }
-        if (this.points > 7 && this.points <= 13) {
+        if (this.points > 12 && this.points <= 21) {
             this.level = "Prata";
         }
-        if (this.points > 13) {
+        if (this.points > 21) {
             this.level = "Ouro";
         }
     };
@@ -120,6 +131,7 @@ var ThankyouPage = /** @class */ (function () {
                 + '<div class="dialogue-box"><div class="tdialogue-box-text">'
                 + '<div text-center><strong>Ainda não acabou!</strong></div>'
                 // + '<div text-center>Você pode responder outros <strong>questionários</strong> e continuar contribuindo!</div>'
+                + '<div text-center>Por favor, nos ajude a avaliar a <strong>usabilidade do aplicativo</strong> respondendo o <strong>formulário: <a style="font-size:1.5rem" href="' + this.form_url + '"><strong>Avaliação da usabilidade</strong></a></div>'
                 + '<div text-center>Você pode responder outros <strong>questionários</strong> e continuar contribuindo com a <strong>Autoavaliação</strong>!</div>'
                 + '</div></div>',
             //----------------------MENSAGEM------------------

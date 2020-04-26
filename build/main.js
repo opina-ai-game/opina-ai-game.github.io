@@ -700,19 +700,19 @@ var map = {
 		5
 	],
 	"../pages/intro/intro.module": [
-		294,
+		293,
 		6
 	],
 	"../pages/prioritization/prioritization.module": [
-		296,
+		294,
 		4
 	],
 	"../pages/questionaries-list/questionaries-list.module": [
-		293,
+		295,
 		3
 	],
 	"../pages/questionary/questionary.module": [
-		295,
+		296,
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
@@ -1049,20 +1049,27 @@ var RespondentProvider = /** @class */ (function () {
             });
         });
     };
-    RespondentProvider.prototype.getRespondentByCode = function (code) {
+    RespondentProvider.prototype.getRespondentByCode = function (code, oldCode) {
         var _this = this;
-        return new Promise(function (resolve) {
-            var json = {
-                "code": code
-            };
-            var data = JSON.stringify(json);
-            _this.http.post(_this.restProvider.API_URL + "get-respondent-by-code.php", data, { headers: _this.restProvider.headers })
-                .subscribe(function (data) {
-                resolve(data);
-            }, function (error) {
-                resolve(error);
+        if (code === null || code === oldCode) {
+            return new Promise(function (resolve) {
+                resolve(null);
             });
-        });
+        }
+        else {
+            return new Promise(function (resolve) {
+                var json = {
+                    "code": code
+                };
+                var data = JSON.stringify(json);
+                _this.http.post(_this.restProvider.API_URL + "get-respondent-by-code.php", data, { headers: _this.restProvider.headers })
+                    .subscribe(function (data) {
+                    resolve(data);
+                }, function (error) {
+                    resolve(error);
+                });
+            });
+        }
     };
     RespondentProvider.prototype.getRespondentByEmail = function (email) {
         var _this = this;
@@ -1288,10 +1295,10 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
                     ]
                 }),
