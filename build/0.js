@@ -937,6 +937,7 @@ var RespondentProfilePage = /** @class */ (function () {
             this.respondentForm.controls['courseLeft'].setValue(null);
             this.respondentForm.controls['code'].setValue(null);
             this.respondentForm.controls['code'].disable();
+            this.respondentForm.controls['isDiscentConcluded'].setValue(false);
         }
         else {
             this.isDiscent = false;
