@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 294:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuestionaryPageModule", function() { return QuestionaryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__questionary__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__questionary__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var QuestionaryPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 302:
+/***/ 304:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -362,7 +362,8 @@ var QuestionaryPage = /** @class */ (function () {
         answer.question = currentQuestion;
         answer.respondent = respondent;
         answer.answer = questionAnswer;
-        answer.created_at = new Date().toISOString();
+        var dateTime = new Date();
+        answer.created_at = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
         answer.isCompleted = false;
         answer.answer_text = this.answerText;
         this.answers.push(answer);
@@ -377,7 +378,8 @@ var QuestionaryPage = /** @class */ (function () {
                 answerNeighborhood.question = _this.currentQuestion;
                 answerNeighborhood.respondent = _this.respondent;
                 answerNeighborhood.neighborhood = neighborhood;
-                answerNeighborhood.created_at = new Date().toISOString();
+                var dateTime = new Date();
+                answerNeighborhood.created_at = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
                 _this.answersNeighborhoods.push(answerNeighborhood);
             });
         }

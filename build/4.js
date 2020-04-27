@@ -1,6 +1,6 @@
 webpackJsonp([4],{
 
-/***/ 295:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrioritizationPageModule", function() { return PrioritizationPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prioritization__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prioritization__ = __webpack_require__(302);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var PrioritizationPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 303:
+/***/ 302:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -405,7 +405,8 @@ var PrioritizationPage = /** @class */ (function () {
         prioritization.respondent = this.respondent;
         prioritization.metricItem = this.currentMetricItem;
         prioritization.metricValue = metricValue;
-        prioritization.created_at = new Date().toISOString();
+        var dateTime = new Date();
+        prioritization.created_at = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
         this.prioritizations.push(prioritization);
         this.btnContinueDisabled = false;
     };
@@ -444,7 +445,8 @@ var PrioritizationPage = /** @class */ (function () {
         prioritization.respondent = this.respondent;
         prioritization.metricItem = this.currentMetricItem;
         prioritization.metricValue = this.selectedMetricValue;
-        prioritization.created_at = new Date().toISOString();
+        var dateTime = new Date();
+        prioritization.created_at = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
         this.prioritizations.push(prioritization);
     };
     PrioritizationPage.prototype.deletePrioritization = function () {
@@ -465,7 +467,8 @@ var PrioritizationPage = /** @class */ (function () {
         answer.question = currentQuestion;
         answer.respondent = respondent;
         answer.answer = questionAnswer;
-        answer.created_at = new Date().toISOString();
+        var dateTime = new Date();
+        answer.created_at = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
         answer.isCompleted = false;
         this.answers.push(answer);
     };

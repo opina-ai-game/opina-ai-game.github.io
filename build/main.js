@@ -704,15 +704,15 @@ var map = {
 		6
 	],
 	"../pages/prioritization/prioritization.module": [
-		295,
+		294,
 		4
 	],
 	"../pages/questionaries-list/questionaries-list.module": [
-		296,
+		295,
 		3
 	],
 	"../pages/questionary/questionary.module": [
-		294,
+		296,
 		2
 	],
 	"../pages/respondent-profile/respondent-profile.module": [
@@ -1104,7 +1104,8 @@ var RespondentProvider = /** @class */ (function () {
     RespondentProvider.prototype.insertRespondent = function (respondent) {
         var _this = this;
         return new Promise(function (resolve) {
-            var createdAt = new Date().toISOString();
+            var dateTime = new Date();
+            var createdAt = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
             // let token = this.restProvider.cryptography(respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + createdAt);
             var token = _this.restProvider.cryptography(respondent.type + respondent.caseTest + createdAt);
             var json = {
@@ -1152,7 +1153,8 @@ var RespondentProvider = /** @class */ (function () {
     RespondentProvider.prototype.updateRespondent = function (respondent) {
         var _this = this;
         return new Promise(function (resolve) {
-            var updatedAt = new Date().toISOString();
+            var dateTime = new Date();
+            var updatedAt = new Date(dateTime.valueOf() - dateTime.getTimezoneOffset() * 60000).toISOString();
             // let token = this.restProvider.cryptography(respondent.id + respondent.email + respondent.residenceTimeRange + respondent.residenceNeighborhood.id + respondent.salaryRange + updatedAt);
             var token = _this.restProvider.cryptography(respondent.id + respondent.type + respondent.caseTest + updatedAt);
             var json = {
@@ -1296,9 +1298,9 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/thankyou/thankyou.module#ThankyouPageModule', name: 'ThankyouPage', segment: 'thankyou', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/intro/intro.module#IntroPageModule', name: 'IntroPage', segment: 'intro', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/prioritization/prioritization.module#PrioritizationPageModule', name: 'PrioritizationPage', segment: 'prioritization', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/questionaries-list/questionaries-list.module#QuestionariesListPageModule', name: 'QuestionariesListPage', segment: 'questionaries-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/questionary/questionary.module#QuestionaryPageModule', name: 'QuestionaryPage', segment: 'questionary', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/respondent-profile/respondent-profile.module#RespondentProfilePageModule', name: 'RespondentProfilePage', segment: 'respondent-profile', priority: 'low', defaultHistory: [] }
                     ]
                 }),
