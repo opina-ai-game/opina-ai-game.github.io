@@ -132,7 +132,7 @@ var ThankyouPage = /** @class */ (function () {
                 + '<div text-center><strong>Ainda não acabou!</strong></div>'
                 // + '<div text-center>Você pode responder outros <strong>questionários</strong> e continuar contribuindo!</div>'
                 + '<div text-center>Por favor, nos ajude a avaliar a <strong>usabilidade do aplicativo</strong> respondendo o <strong>formulário: <a style="font-size:1.5rem" href="' + this.form_url + '"><strong>Avaliação da usabilidade</strong></a></div>'
-                + '<div text-center>Você pode responder outros <strong>questionários</strong> e continuar contribuindo com a <strong>Autoavaliação</strong>!</div>'
+                + '<div text-center>Você pode responder outros <strong>questionários</strong> e continuar contribuindo com a <strong>autoavaliação</strong>!</div>'
                 + '</div></div>',
             //----------------------MENSAGEM------------------
             buttons: [{
@@ -217,7 +217,7 @@ var ThankyouPage = /** @class */ (function () {
                 + '</div></div>',
             //----------------------MENSAGEM------------------
             buttons: [{
-                    text: "Tudo bem!",
+                    text: "Ok!",
                     handler: function () { }
                 }]
         });
