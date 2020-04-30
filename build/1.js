@@ -136,7 +136,7 @@ var ThankyouPage = /** @class */ (function () {
                 + '</div></div>',
             //----------------------MENSAGEM------------------
             buttons: [{
-                    text: "Ok!",
+                    text: "sair",
                     handler: function () {
                     }
                 }]
@@ -217,7 +217,7 @@ var ThankyouPage = /** @class */ (function () {
                 + '</div></div>',
             //----------------------MENSAGEM------------------
             buttons: [{
-                    text: "Ok!",
+                    text: "sair",
                     handler: function () { }
                 }]
         });
