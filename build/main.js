@@ -1721,7 +1721,7 @@ var IntroPage = /** @class */ (function () {
                     if (respondent != null) {
                         // let alert = this.alertCtrl.create({
                         //   title: 'Já existe um usuário respondendo os questionários',
-                        //   message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.cpf + '?',
+                        //   message: 'Você gostaria de continuar respondendo os questionários com o usuário: <br/> CPF - ' + respondent.name + '?',
                         //   buttons: [{
                         //     text: "Sim",
                         //     handler: () => {
@@ -1850,7 +1850,7 @@ var IntroPage = /** @class */ (function () {
         var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            message: 'Não foi possível acessar os dados referentes as cidades. Por favor, tente novamente.',
             buttons: [{
                     text: "Tentar novamente",
                     handler: function () {
@@ -1864,7 +1864,7 @@ var IntroPage = /** @class */ (function () {
         var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            message: 'Não foi possível acessar os dados referentes aos planos. Por favor, tente novamente.',
             buttons: [{
                     text: "Tentar novamente",
                     handler: function () {
@@ -1878,7 +1878,7 @@ var IntroPage = /** @class */ (function () {
         var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Oops!',
-            message: 'Não foi possível acessar os dados do servidor. Por favor, tente novamente.',
+            message: 'Não foi possível acessar os dados referentes aos questionários. Por favor, tente novamente.',
             buttons: [{
                     text: "Tentar novamente",
                     handler: function () {
