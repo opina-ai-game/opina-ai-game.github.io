@@ -834,6 +834,7 @@ var RespondentProfilePage = /** @class */ (function () {
                         else {
                             //------------- ATUALIZA O RESPONDENTE -------------
                             respondent_1.id = result.id;
+                            respondent_1.type = result.type;
                             _this.respondentProvider.updateRespondent(respondent_1)
                                 .then(function () {
                                 _this.navigate(respondent_1);
@@ -848,6 +849,7 @@ var RespondentProfilePage = /** @class */ (function () {
                 else {
                     //------------- ATUALIZA O RESPONDENTE -------------
                     respondent_1.id = repondentCode.id;
+                    respondent_1.type = repondentCode.type;
                     _this.respondentProvider.updateRespondent(respondent_1)
                         .then(function () {
                         _this.navigate(respondent_1);
